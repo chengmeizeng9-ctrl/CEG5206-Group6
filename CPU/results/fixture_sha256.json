@@ -1,0 +1,12 @@
+{
+  "fixture_0.Q.f32": "7472a1a3ade1c12f2ffe2837ae401d69022dc0504bcf8274b4f49b9ad8b248c4",
+  "fixture_0.X.f32": "bd611cba8c8845d32208c61aa05b117d0a01ab74ee2f80b63ae92243bdd7d13b",
+  "fixture_0.labels.i32": "6ed244e0fb08653342cfad052e036a2100c8324abbc8a78722fedb85ce0b7703",
+  "fixture_0.oracle.csv": "54598a33408627fb2bbc4c8c2588bd9127fdca758d0c35edabe126bce6c4fc66",
+  "fixture_0.txt": "47b45e8b9f0b5567bf6c9a3a4b1366a7b05642891f0c6116959d279f73befd35",
+  "fixture_1.Q.f32": "834a709ba2534ebe3ee1397fd4f7bd288b2acc1d20a08d6c862dcd99b6f04400",
+  "fixture_1.X.f32": "dae43edfdf05761799474abf76c5d3dedb44e1071f3a65006d7865816b46e8e5",
+  "fixture_1.labels.i32": "ff1f6ee5d67458cfac950f62e93042e21fcb867e2234dcc8721801231064ad40",
+  "fixture_1.oracle.csv": "5a7bdcbbc28b35870abf0efb078961e84b928ca007bc76fe46868f98b581968d",
+  "fixture_1.txt": "6157a7ca2cb9924566c020a0d9ffde00979faddd87d1950c63fa3fe68d31b9b1"
+}

@@ -1,0 +1,27 @@
+{
+  "experiment_date": "2026-10-09",
+  "contract_version": "1.1",
+  "operating_system": "openEuler 24.03 LTS",
+  "kernel": "6.6.0-28.0.0.34.oe2403.x86_64",
+  "architecture": "x86_64",
+  "virtualization": "VMware guest",
+  "cpu_model": "Intel Core Ultra 5 125H (guest-reported)",
+  "visible_vcpus": 2,
+  "simd_features": [
+    "AVX2",
+    "AVX",
+    "FMA"
+  ],
+  "host_frequency_and_physical_core": "not observable from the guest",
+  "compiler": "GCC 12.3.1",
+  "cmake": "3.27.9",
+  "python": "3.11.6",
+  "numpy": "2.4.6",
+  "matplotlib": "3.11.1",
+  "threads_per_search": 1,
+  "affinity": "guest vCPU 1; verified during the recorded run",
+  "generator": "synthetic-v1 (standard MT19937; seed 5206)",
+  "warmup_calls": 10,
+  "measured_calls_per_group": 20,
+  "note": "Per-process and /proc snapshots, host details, and local paths are excluded from this public copy."
+}
