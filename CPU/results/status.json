@@ -1,0 +1,9 @@
+{
+  "CPU_implementation": "complete",
+  "correctness": "286 cases and 11350 checks; Release, ASan/UBSan and clean build passed",
+  "main_experiments": "11 configurations; 3400 complete-search timings and 660 selection timings",
+  "main_verification": "88 records; required checks and FP64 IDs agree",
+  "GPU_validation_and_crossovers": "pending actual GPU hardware and outputs in our group experiments",
+  "report": "docs/report.md",
+  "entry": "README.md"
+}

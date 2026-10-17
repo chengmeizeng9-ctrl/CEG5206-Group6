@@ -1,0 +1,439 @@
+{
+  "input_files": 33,
+  "correctness_rows": 88,
+  "all_required_checks_pass": true,
+  "FP64_ID_mismatches": 0,
+  "noisy_groups": [
+    {
+      "case": "0",
+      "route": "R4_avx2_heap",
+      "group": "0"
+    },
+    {
+      "case": "0",
+      "route": "R7_early_heap",
+      "group": "0"
+    },
+    {
+      "case": "0",
+      "route": "R3_scalar_heap",
+      "group": "1"
+    },
+    {
+      "case": "0",
+      "route": "R4_avx2_heap",
+      "group": "1"
+    },
+    {
+      "case": "0",
+      "route": "R7_early_heap",
+      "group": "1"
+    },
+    {
+      "case": "1",
+      "route": "R0_scalar_sort",
+      "group": "0"
+    },
+    {
+      "case": "1",
+      "route": "R1_tiled_scalar_sort",
+      "group": "0"
+    },
+    {
+      "case": "1",
+      "route": "R2_avx2_sort",
+      "group": "0"
+    },
+    {
+      "case": "1",
+      "route": "R3_scalar_heap",
+      "group": "0"
+    },
+    {
+      "case": "1",
+      "route": "R4_avx2_heap",
+      "group": "0"
+    },
+    {
+      "case": "1",
+      "route": "R5_scalar_bitonic",
+      "group": "0"
+    },
+    {
+      "case": "1",
+      "route": "R6_avx2_bitonic",
+      "group": "0"
+    },
+    {
+      "case": "1",
+      "route": "R7_early_heap",
+      "group": "0"
+    },
+    {
+      "case": "1",
+      "route": "R2_avx2_sort",
+      "group": "1"
+    },
+    {
+      "case": "1",
+      "route": "R3_scalar_heap",
+      "group": "1"
+    },
+    {
+      "case": "1",
+      "route": "R4_avx2_heap",
+      "group": "1"
+    },
+    {
+      "case": "1",
+      "route": "R5_scalar_bitonic",
+      "group": "1"
+    },
+    {
+      "case": "1",
+      "route": "R6_avx2_bitonic",
+      "group": "1"
+    },
+    {
+      "case": "1",
+      "route": "R7_early_heap",
+      "group": "1"
+    },
+    {
+      "case": "2",
+      "route": "R1_tiled_scalar_sort",
+      "group": "0"
+    },
+    {
+      "case": "2",
+      "route": "R4_avx2_heap",
+      "group": "0"
+    },
+    {
+      "case": "2",
+      "route": "R7_early_heap",
+      "group": "0"
+    },
+    {
+      "case": "2",
+      "route": "R2_avx2_sort",
+      "group": "1"
+    },
+    {
+      "case": "2",
+      "route": "R3_scalar_heap",
+      "group": "1"
+    },
+    {
+      "case": "2",
+      "route": "R4_avx2_heap",
+      "group": "1"
+    },
+    {
+      "case": "3",
+      "route": "R4_avx2_heap",
+      "group": "0"
+    },
+    {
+      "case": "3",
+      "route": "R4_avx2_heap",
+      "group": "1"
+    },
+    {
+      "case": "3",
+      "route": "R7_early_heap",
+      "group": "1"
+    },
+    {
+      "case": "4",
+      "route": "R0_scalar_sort",
+      "group": "0"
+    },
+    {
+      "case": "4",
+      "route": "R1_tiled_scalar_sort",
+      "group": "0"
+    },
+    {
+      "case": "4",
+      "route": "R2_avx2_sort",
+      "group": "0"
+    },
+    {
+      "case": "4",
+      "route": "R3_scalar_heap",
+      "group": "0"
+    },
+    {
+      "case": "4",
+      "route": "R4_avx2_heap",
+      "group": "0"
+    },
+    {
+      "case": "4",
+      "route": "R5_scalar_bitonic",
+      "group": "0"
+    },
+    {
+      "case": "4",
+      "route": "R6_avx2_bitonic",
+      "group": "0"
+    },
+    {
+      "case": "4",
+      "route": "R7_early_heap",
+      "group": "0"
+    },
+    {
+      "case": "4",
+      "route": "R0_scalar_sort",
+      "group": "1"
+    },
+    {
+      "case": "4",
+      "route": "R1_tiled_scalar_sort",
+      "group": "1"
+    },
+    {
+      "case": "4",
+      "route": "R2_avx2_sort",
+      "group": "1"
+    },
+    {
+      "case": "4",
+      "route": "R3_scalar_heap",
+      "group": "1"
+    },
+    {
+      "case": "4",
+      "route": "R4_avx2_heap",
+      "group": "1"
+    },
+    {
+      "case": "4",
+      "route": "R5_scalar_bitonic",
+      "group": "1"
+    },
+    {
+      "case": "4",
+      "route": "R6_avx2_bitonic",
+      "group": "1"
+    },
+    {
+      "case": "5",
+      "route": "R4_avx2_heap",
+      "group": "0"
+    },
+    {
+      "case": "5",
+      "route": "R4_avx2_heap",
+      "group": "1"
+    },
+    {
+      "case": "5",
+      "route": "R7_early_heap",
+      "group": "1"
+    },
+    {
+      "case": "6",
+      "route": "R3_scalar_heap",
+      "group": "0"
+    },
+    {
+      "case": "6",
+      "route": "R4_avx2_heap",
+      "group": "0"
+    },
+    {
+      "case": "6",
+      "route": "R7_early_heap",
+      "group": "0"
+    },
+    {
+      "case": "6",
+      "route": "R3_scalar_heap",
+      "group": "1"
+    },
+    {
+      "case": "6",
+      "route": "R4_avx2_heap",
+      "group": "1"
+    },
+    {
+      "case": "7",
+      "route": "R3_scalar_heap",
+      "group": "0"
+    },
+    {
+      "case": "7",
+      "route": "R4_avx2_heap",
+      "group": "0"
+    },
+    {
+      "case": "7",
+      "route": "R3_scalar_heap",
+      "group": "1"
+    },
+    {
+      "case": "7",
+      "route": "R4_avx2_heap",
+      "group": "1"
+    },
+    {
+      "case": "8",
+      "route": "R3_scalar_heap",
+      "group": "0"
+    },
+    {
+      "case": "8",
+      "route": "R4_avx2_heap",
+      "group": "0"
+    },
+    {
+      "case": "8",
+      "route": "R5_scalar_bitonic",
+      "group": "0"
+    },
+    {
+      "case": "8",
+      "route": "R6_avx2_bitonic",
+      "group": "0"
+    },
+    {
+      "case": "8",
+      "route": "R7_early_heap",
+      "group": "0"
+    },
+    {
+      "case": "8",
+      "route": "R2_avx2_sort",
+      "group": "1"
+    },
+    {
+      "case": "8",
+      "route": "R3_scalar_heap",
+      "group": "1"
+    },
+    {
+      "case": "8",
+      "route": "R4_avx2_heap",
+      "group": "1"
+    },
+    {
+      "case": "9",
+      "route": "R3_scalar_heap",
+      "group": "0"
+    },
+    {
+      "case": "9",
+      "route": "R4_avx2_heap",
+      "group": "0"
+    },
+    {
+      "case": "9",
+      "route": "R7_early_heap",
+      "group": "0"
+    },
+    {
+      "case": "9",
+      "route": "R1_tiled_scalar_sort",
+      "group": "1"
+    },
+    {
+      "case": "9",
+      "route": "R3_scalar_heap",
+      "group": "1"
+    },
+    {
+      "case": "9",
+      "route": "R4_avx2_heap",
+      "group": "1"
+    },
+    {
+      "case": "9",
+      "route": "R6_avx2_bitonic",
+      "group": "1"
+    },
+    {
+      "case": "9",
+      "route": "R7_early_heap",
+      "group": "1"
+    },
+    {
+      "case": "10",
+      "route": "R2_avx2_sort",
+      "group": "0"
+    },
+    {
+      "case": "10",
+      "route": "R3_scalar_heap",
+      "group": "0"
+    },
+    {
+      "case": "10",
+      "route": "R4_avx2_heap",
+      "group": "0"
+    },
+    {
+      "case": "10",
+      "route": "R4_avx2_heap",
+      "group": "1"
+    },
+    {
+      "case": "10",
+      "route": "R7_early_heap",
+      "group": "1"
+    }
+  ],
+  "baseline_median_seconds": 0.2171206375,
+  "base_case": [
+    {
+      "route": "R0_scalar_sort",
+      "median_seconds": 0.2171206375,
+      "speedup_vs_R0": 1.0,
+      "aux_bytes": 800000
+    },
+    {
+      "route": "R1_tiled_scalar_sort",
+      "median_seconds": 0.2225535395,
+      "speedup_vs_R0": 0.9755883370257519,
+      "aux_bytes": 800000
+    },
+    {
+      "route": "R2_avx2_sort",
+      "median_seconds": 0.1813977715,
+      "speedup_vs_R0": 1.1969311183075917,
+      "aux_bytes": 800000
+    },
+    {
+      "route": "R3_scalar_heap",
+      "median_seconds": 0.080475986,
+      "speedup_vs_R0": 2.6979556050422295,
+      "aux_bytes": 80
+    },
+    {
+      "route": "R4_avx2_heap",
+      "median_seconds": 0.043639326,
+      "speedup_vs_R0": 4.975343512408968,
+      "aux_bytes": 80
+    },
+    {
+      "route": "R5_scalar_bitonic",
+      "median_seconds": 0.2458557035,
+      "speedup_vs_R0": 0.8831222314921809,
+      "aux_bytes": 1184
+    },
+    {
+      "route": "R6_avx2_bitonic",
+      "median_seconds": 0.207800072,
+      "speedup_vs_R0": 1.0448535239198569,
+      "aux_bytes": 1184
+    },
+    {
+      "route": "R7_early_heap",
+      "median_seconds": 0.091271374,
+      "speedup_vs_R0": 2.378847035873482,
+      "aux_bytes": 80
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+cpu=1
+threads=1
+contract=1.1
+team_execution_rules=1.1
+seed=5206
+generator=synthetic-v1
+warmup=10
+repeats=20
+window_calls=1
+timing=prevalidated steady-state complete CPU search
+FTZ_DAZ=off
+rounding=nearest
+FMA_contraction=off
