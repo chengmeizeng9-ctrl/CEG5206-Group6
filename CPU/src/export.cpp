@@ -40,26 +40,25 @@ static void save(const std::string &file, const std::vector<T> &values) {
 }
 int main(int argc, char **argv) {
   try {
-    if (argc != 9 && argc != 10) {
-      std::cerr << "Usage: knn_export INPUT_PREFIX N d q k T route "
+    if (argc != 8 && argc != 9) {
+      std::cerr << "Usage: knn_export INPUT_PREFIX N d q k route "
                    "OUTPUT_PREFIX [--full]\n";
       return 2;
     }
     uint32_t endian = 1;
     if (*reinterpret_cast<unsigned char *>(&endian) != 1)
       throw Error(ErrorCode::UNSUPPORTED_CONFIGURATION, "little endian export");
-    std::string prefix = argv[1], out = argv[8];
+    std::string prefix = argv[1], out = argv[7];
     size_t n = number(argv[2]), d = number(argv[3]), q = number(argv[4]);
-    size_t route = number(argv[7]);
-    if (route > 7)
+    size_t route_value = number(argv[6]);
+    if (route_value > 1)
       throw Error(ErrorCode::INVALID_ARGUMENT, "route");
-    size_t k = number(argv[5]), t = number(argv[6]);
-    if (!n || !d || !q || !k || k > n ||
-        (route && t != 32 && t != 64 && t != 128 && t != 256))
-      throw Error(ErrorCode::INVALID_ARGUMENT, "shape, k or T");
+    size_t k = number(argv[5]);
+    if (!n || !d || !q || !k || k > n)
+      throw Error(ErrorCode::INVALID_ARGUMENT, "shape or k");
     if (n > UINT32_MAX || d > INT32_MAX)
       throw Error(ErrorCode::SIZE_OVERFLOW, "N/d representation");
-    if (argc == 10 && std::string(argv[9]) != "--full")
+    if (argc == 9 && std::string(argv[8]) != "--full")
       throw Error(ErrorCode::INVALID_ARGUMENT, "expected --full");
     Input input{n,
                 d,
@@ -67,17 +66,18 @@ int main(int argc, char **argv) {
                 load<float>(prefix + ".X.f32", checked_product(n, d)),
                 load<float>(prefix + ".Q.f32", checked_product(q, d)),
                 load<int32_t>(prefix + ".labels.i32", n)};
-    Config config{k, t, int(route)};
+    Route route = static_cast<Route>(route_value);
+    Config config{k, route};
     auto result = search(input, config);
     save(out + ".ids.u32", result.ids);
     save(out + ".distances.f32", result.distances);
     save(out + ".labels.i32", result.labels);
-    if (argc == 10) {
+    if (argc == 9) {
       std::ofstream stream(out + ".full.f32", std::ios::binary);
       std::vector<float> distances(n);
       for (size_t qi = 0; qi < q; ++qi) {
         for (size_t id = 0; id < n; ++id)
-          distances[id] = (route == 2 || route == 4 || route == 6)
+          distances[id] = route == Route::Avx2TopKHeap
                               ? simd_distance(input.queries.data() + qi * d,
                                               input.x.data() + id * d, d)
                               : scalar_distance(input.queries.data() + qi * d,
@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
       if (!stream)
         throw Error(ErrorCode::EXECUTION_FAILURE, "write full distance table");
     }
-    std::cout << route_name(int(route)) << " exported " << q << " queries x "
+    std::cout << route_name(route) << " exported " << q << " queries x "
               << config.k << " neighbours\n";
     return 0;
   } catch (const std::exception &e) {

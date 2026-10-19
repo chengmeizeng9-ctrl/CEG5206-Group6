@@ -1,16 +1,36 @@
 # Three-Member Shared Contract
 
-Version: 1.1  
-Date: 2026-10-09  
+Version: 1.2
+Date: 2026-10-19
 Project: Algorithmic and Memory Optimisation of Exact kNN Search on CPUs and GPUs.
 
 ## 1. Scope and Relationship to Other Documents
 
-This document is the sole shared contract that all three members must follow. It is based on `GP6_Project Proposal.pdf` and the user's authorization. Mandatory tasks in the proposal must not be omitted because of this document.
+This document is the sole shared contract that all three members must follow. The Required/Optional algorithm scope below is the agreed project scope and takes precedence over broader algorithm lists in the proposal. Optional methods may be explored, but are not required for completion or acceptance.
 
-The proposal defines distances, ties, mandatory algorithms, and deliverables. The supported input domain, data generation method, tolerances, label type, and measurement counts defined here are team choices and must be explained in the report.
+The proposal informs the project, while the algorithm requirements in this contract define the agreed scope. The supported input domain, data generation method, tolerances, label type, and measurement counts defined here are team choices and must be explained in the report.
 
 Changes to this contract must update the version, explain the reason and affected modules, and notify all three members. When changes affect numerical results or measurements, rerun the relevant data. Results produced under different contract versions must not be combined.
+
+### 1.1 Algorithm Scope
+
+**Required**
+
+- CPU scalar full-sort baseline and independent FP64 oracle.
+- CPU SIMD distance computation with a Top-K heap.
+- Materialised CUDA baseline.
+- Fused tiled CUDA with local Bitonic selection.
+- One correct candidate-merging method, validated against the total order and reference results.
+
+**Optional**
+
+- CPU Bitonic selection route.
+- Radix selection and scan compaction.
+- GEMM-based reference.
+- Early abandonment / early termination.
+- Out-of-core double buffering.
+
+The required fused CUDA route includes local Bitonic selection; this does not make a separate CPU Bitonic route required. Any optional route that is not implemented is reported as “not implemented,” not as a failed required item. All required routes use the shared input, distance, ordering, output, and measurement rules below.
 
 ## 2. Inputs and Parameters
 
@@ -43,7 +63,7 @@ The scalar reference performs FP32 subtraction, squaring, and accumulation in in
 
 SIMD, warp, and GEMM implementations may use different reduction orders; bitwise agreement is not required. Computation configurations must be recorded. The CPU defaults to round-to-nearest with FTZ/DAZ disabled. Record the GPU FTZ configuration, and use settings that do not actively flush tiny values to zero for the main comparison. Third-party library behavior that cannot be controlled individually must be explained separately and must not be claimed to be fully equivalent.
 
-GEMM uses a cuBLAS FP32 reference. Core comparisons prohibit reduced-precision input computation such as TF32 and FP16/BF16. Record the compute type, math mode, and library version. Negative reconstructed distances are clamped to positive zero. Retain the count and minimum value of negative results before clamping, along with error diagnostics. Non-finite results constitute numerical failure. Report database-norm preparation separately; query norms, GEMM, reconstruction, and Top-k are included in call time.
+If the optional GEMM-based reference is implemented, use a cuBLAS FP32 configuration, prohibit reduced-precision input computation such as TF32 and FP16/BF16 in core comparisons, and record compute type, math mode, and library version. Clamp negative reconstructed distances to positive zero and retain the pre-clamp negative count and minimum with error diagnostics. Report database-norm preparation separately; query norms, GEMM, reconstruction, and Top-K are included in call time. These GEMM-specific requirements do not apply when GEMM is omitted.
 
 ### 3.2 Total Order and Output
 
@@ -58,18 +78,16 @@ Each query outputs exactly k distinct valid IDs, their corresponding FP32 distan
 | Module | Input semantics | Output semantics |
 |---|---|---|
 | Distance | Validated matrices, ranges, layout, and computation configuration | FP32 distances, IDs, and valid count |
-| Local selection | Candidates, capacity, valid count, k, and T | Sorted local candidates and actual count |
+| Local selection | Candidates, capacity, valid count, k, and T where applicable | Sorted local candidates and actual count |
 | Merge | Sorted candidate lists, their valid lengths, and k | First min(k,total candidate count) sorted candidates |
 | Complete search | Validated inputs, configuration, workspace, and output capacity | Complete q×k results and execution status |
 | Validation | Same original inputs, implementation under test, and reference | Separate check results and difference diagnostics |
 
 The caller owns the inputs, outputs, and reusable workspace. Capacity and valid count are separate. Necessary state must be reset for each call, and this reset is timed; Top-k state from previous queries must not be retained. GPU interfaces must specify the device, stream, lifetime, and completion conditions. Asynchronous results must not be read before completion.
 
-Each block retains min(k,valid sample count) candidates. When k>T, retain all valid entries in the block. Pad the final block to T, but do not compute real distances for padding or output padding entries. Local selection, merging, and final sorting are all timed.
+For the required fused tiled CUDA route, each block retains min(k,valid sample count) candidates using local Bitonic selection. When k>T, retain all valid entries in the block. Pad the final block to T, but do not compute real distances for padding or output padding entries. T is not applicable to non-blocked CPU routes. Local selection, merging, and final sorting are all timed.
 
-The heap root is the worst candidate; sort before output. Resolve radix threshold ties by ID. Refinement, flagging, exclusive scan, compaction, and final sorting are all included in timing.
-
-The core CPU early-termination approach is the scalar heap. Once Top-k is full, terminate only when the partial distance computed under the same rules is strictly greater than the worst distance tau; continue when it equals tau. Partial distances must not be output. Results must exactly match the full heap implementation using the same rules. Combining this with SIMD requires separate safe bounds and validation evidence.
+The CPU Top-K heap root is the worst candidate and its retained results must be sorted before output. The required merging method must preserve the shared total order, return the first min(k,total candidate count) entries, and never emit duplicate IDs for a valid complete search. If optional Radix/Scan is implemented, resolve threshold ties by ID and include refinement, flagging, exclusive scan, compaction, and final sorting in timing. If optional early abandonment is implemented, it must preserve exact selection semantics; partial distances must not be output, and the stopping rule and validation evidence must be documented.
 
 ## 5. Shared Correctness Criteria
 
@@ -83,7 +101,7 @@ Record separate checks for structure, labels, sorting, fixed-distance selection,
 
 Explained numerical limitations may be reported as research findings, with difference statistics, but must not be labeled as strict agreement. Unexplained differences and structural or selection errors cannot support credible speedup claims.
 
-Shared cases must cover at least zero/identical vectors, duplicate samples, exact/near ties, k=1, k=N, k>T, invalid k, final partial blocks, SIMD tails, multiple queries, repeated calls, and early termination when the partial distance equals or exceeds tau or the heap is not yet full. The three members must use the same basic expected results.
+Shared cases must cover at least zero/identical vectors, duplicate samples, exact/near ties, k=1, k=N, k>T, invalid k, final partial blocks, SIMD tails, multiple queries, and repeated calls. Tests specific to optional methods (including early-abandonment boundary tests) apply only when those methods are implemented. The three members must use the same basic expected results.
 
 ## 6. Main Experimental Inputs and Parameters
 
@@ -99,7 +117,7 @@ For each parameter combination, reinitialize the same seed, generate X row by ro
 | k | 10 | 5, 10, 32 |
 | T | 128 | 32, 64, 128, 256 |
 
-Change only one main factor at a time, yielding 11 main combinations after deduplication. A full Cartesian product is not required. Correctness boundary cases and additional distributions are listed separately and do not replace the main experiments.
+Change only one main factor at a time, yielding 11 shared project combinations after deduplication. A full Cartesian product is not required. CPU routes do not vary T, so their distinct required runs cover the eight N/d/q/k combinations; CUDA blocked routes also cover the T sweep, giving the shared 11-combination set. Correctness boundary cases and additional distributions are listed separately and do not replace the main experiments.
 
 ## 7. Measurement and Statistics
 
@@ -127,18 +145,19 @@ Distinguish not applicable from not measured; do not substitute zero for either.
 
 | Member | Primary responsibilities | Deliverables to other members |
 |---|---|---|
-| 1 | Scalar/FP64, CPU blocking/SIMD, sort/heap, early termination, correctness | Shared cases, reference distances/results, CPU validation and analysis |
-| 2 | CUDA thread/warp, materialised approach, layout reuse, direct/GEMM, GPU timing | Distance modules, computation configurations, GPU environment and numerical data |
-| 3 | CPU/GPU Bitonic, Radix/Scan, sequential/tree merging, benchmark automation, memory summaries | Selection/merge modules, input data, raw records and summaries |
+| 1 | Scalar full-sort/FP64 oracle, CPU SIMD distance with Top-K heap, correctness | Shared cases, reference distances/results, CPU validation and analysis |
+| 2 | Materialised CUDA baseline, fused tiled CUDA distance/loading, GPU timing | CUDA distance modules, computation configurations, GPU environment and numerical data |
+| 3 | Fused CUDA local Bitonic selection, one candidate-merging method, benchmark automation, memory summaries | Selection/merge modules, input data, raw records and summaries |
 
-Member 3 delivers CPU Bitonic, and Member 1 integrates it. For fused CUDA, Member 2 handles distance computation/loading and Member 3 handles local selection/merging; both integrate it together.
+CPU Bitonic and Radix/Scan routes are optional and have no required integration dependency. For fused CUDA, Member 2 handles distance computation/loading and Member 3 handles local Bitonic selection and the agreed merging method; both integrate it together. GEMM and early abandonment are optional and may be omitted without blocking required integration.
 
 Each integration proceeds in this order: fixed-distance selection validation, complete-search validation, and performance measurement. All three members share responsibility for experimental interpretation, the report, presentation, and contribution records. Testing and reporting must not all be assigned to one member.
 
-Mandatory work includes proposal Tasks 1–8: three CPU approaches, two CUDA mappings, materialised/fused approaches, two merging methods, Radix/Scan, GEMM, early termination, ablation studies, and crossover analysis. Double buffering for data exceeding GPU memory is an optional extension once the core implementation is stable. Approximate search, multiple GPUs, and training are out of scope.
+Required algorithm work is limited to the five items in Section 1.1. Ablation studies and crossover analysis should compare the required routes where applicable; they do not make optional algorithms mandatory. CPU Bitonic, Radix/Scan, GEMM, early abandonment, and out-of-core double buffering remain optional. Approximate search, multiple GPUs, and training are out of scope.
 
 Final deliverables are source code, build/run instructions, fixed seeds and raw results, plotting scripts, environment information and representative reproduction commands, a technical report, a presentation, and contribution records for all three members. Member 1 has already received user authorization to enter implementation. Actual validation and experimental records are in member1/results and member1/docs.
 
 ## 10. Version History
 
-2026-10-09, 1.1: Corrected the one-factor-at-a-time sweep count to 11 combinations (the baseline plus 1+2+2+2+3 variations). Parameter ranges, computation rules, and timing rules are unchanged. This affects the shared benchmark list; Members 2 and 3 must use this version during handoff. The current CPU experiments start from the corrected list, so no old performance records require rerunning.
+2026-10-09, 1.1: Corrected the one-factor-at-a-time sweep count to 11 combinations (the baseline plus 1+2+2+2+3 variations).
+2026-10-19, 1.2: Clarified the agreed Required/Optional algorithm scope; made CPU Bitonic, Radix/Scan, GEMM, early abandonment, and out-of-core double buffering optional; retained Bitonic as required within the fused tiled CUDA route; clarified that CPU runs cover eight unique non-T configurations while the shared CUDA set includes the T sweep. Updated responsibilities and removed optional-method requirements from shared correctness criteria. Affected modules: algorithm scope, interfaces, correctness cases, main experiment interpretation, and member responsibilities. Members should use this version going forward. Existing CPU runs for the eight N/d/q/k combinations remain applicable; CUDA members must follow the required materialised and fused routes and the shared 11-combination sweep.

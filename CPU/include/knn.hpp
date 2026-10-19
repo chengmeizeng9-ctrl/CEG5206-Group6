@@ -36,8 +36,6 @@ struct Input {
   std::vector<float> x, queries;
   std::vector<int32_t> labels;
 };
-// Borrows immutable input: do not modify or destroy Input while using this
-// token.
 class Validated {
   const Input *input_;
   explicit Validated(const Input &i) : input_(&i) {}
@@ -46,9 +44,10 @@ class Validated {
 public:
   const Input &get() const { return *input_; }
 };
+enum class Route { ScalarFullSort = 0, Avx2TopKHeap = 1 };
 struct Config {
-  size_t k, t = 128;
-  int route = 0;
+  size_t k;
+  Route route = Route::ScalarFullSort;
 };
 struct Result {
   std::vector<uint32_t> ids;
@@ -56,11 +55,11 @@ struct Result {
   std::vector<int32_t> labels;
 };
 struct Workspace {
-  std::vector<Candidate> all, heap, tile, merged;
+  std::vector<Candidate> all, heap;
   size_t bytes() const;
 };
 struct Diagnostics {
-  uint64_t dimensions = 0, candidates = 0, abandoned = 0;
+  uint64_t dimensions = 0, candidates = 0;
 };
 struct Oracle {
   std::vector<double> distances;
@@ -80,22 +79,16 @@ size_t checked_product(size_t, size_t);
 void floating_environment();
 Validated validate(const Input &);
 void prepare(const Validated &, Config, Workspace &, Result &);
-// Prepared search excludes full input validation; caller owns buffers and
-// lifetime.
 void search(const Validated &, Config, Workspace &, Result &,
             Diagnostics * = nullptr);
 Result search(const Input &, Config);
 float scalar_distance(const float *, const float *, size_t);
-bool abandoned_distance(const float *, const float *, size_t, float, float &,
-                        size_t &);
 float simd_distance(const float *, const float *, size_t);
-void bitonic(Candidate *, size_t);
 size_t merge_topk(const Candidate *, size_t, const Candidate *, size_t,
                   Candidate *, size_t);
-std::vector<Candidate> select_fixed(std::vector<Candidate>, size_t, int,
-                                    size_t = 128);
+std::vector<Candidate> select_topk_heap(const std::vector<Candidate> &, size_t);
 Oracle oracle(const Input &);
 Verification verify(const Input &, Config, const Result &, const Oracle &);
 Input synthetic(size_t, size_t, size_t, uint32_t = 5206);
-const char *route_name(int);
+const char *route_name(Route);
 } // namespace knn

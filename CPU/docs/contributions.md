@@ -1,17 +1,12 @@
-# Our CPU Implementation Summary
+# Required CPU Work Summary
 
-Date: 2026-10-09. This document summarises the CPU portion of our group project. Recorded source hashes, compiler settings, inputs, and results provide the reproducibility evidence.
+Our retained CPU work covers the scalar full-sort baseline, an independent FP64 oracle, AVX2 distance computation with a Top-K max-heap, and one sorted candidate-list merge method. We include the shared inputs, correctness checks, raw CPU measurements, plots, reproducibility commands, and environment summary needed to review those methods.
 
-| Project work | Our implementation and evidence |
+| Required item | Implementation and evidence |
 |---|---|
-| Task 1: Reference and correctness | Scalar full sort; independent FP64 distances/ranking; separate validation checks; shared fixtures and boundary tests |
-| Task 2: CPU tiling and SIMD | R0-R6 comparisons; four tile sizes; AVX2 with eight lanes, unaligned loads, scalar tails, and instruction evidence |
-| Task 2: Selection integration | Max-heap and final sorting; replaceable Bitonic network and streaming merge; fixed-distance selection validation |
-| Task 7: Early abandonment | Matching scalar heap rule; strict partial-distance threshold; mean-dimension/abandonment diagnostics; R3/R7 ablation |
-| Task 8: CPU experiments | Eleven single-factor combinations; warm-ups and repeated measurements; alternating route order; IQR and retained reruns; plots and analysis |
-| Reproducibility | CMake; Release, sanitizer, and clean-build checks; CPU affinity; raw records; hashes; build flags and environment |
-| Group integration materials | Independent CPU/GPU output verifier; shared interfaces and fixtures; technical report and demonstration guide |
+| Scalar baseline and FP64 oracle | Complete scalar distances, full-sort ranking, independent FP64 ranking, correctness records, and boundary fixtures |
+| SIMD distance with Top-K heap | AVX2 eight-lane distance calculation, scalar tail, max-heap selection, and instruction evidence |
+| Candidate merging | `merge_topk` merges two sorted lists with deterministic ID tie-breaking; unit tests compare it with a full sort |
+| CPU evaluation | Eight single-factor configurations, raw timing repetitions, summaries, and plots |
 
-Our replaceable CPU selection and benchmark modules support integration with the rest of the group project. This summary describes implemented work, rather than assigning individual authorship or duplicating credit for shared modules.
-
-GPU kernels, real GPU measurements, GEMM comparisons, and CPU/GPU crossover conclusions are not included in our current CPU results. We have prepared validation interfaces and reference data for those experiments.
+The source and artifacts describe only these CPU requirements. Shared testing and report review remain group work.

@@ -1,9 +1,8 @@
 {
-  "CPU_implementation": "complete",
-  "correctness": "286 cases and 11350 checks; Release, ASan/UBSan and clean build passed",
-  "main_experiments": "11 configurations; 3400 complete-search timings and 660 selection timings",
-  "main_verification": "88 records; required checks and FP64 IDs agree",
-  "GPU_validation_and_crossovers": "pending actual GPU hardware and outputs in our group experiments",
+  "CPU_scope": "scalar full sort and FP64 oracle; AVX2 distance with Top-K heap; sorted candidate-list merge",
+  "unit_tests": "111 cases and 1145 checks passed in Release, clean-build, and sanitizer builds",
+  "main_experiments": "8 configurations; 600 complete-search timing records; 16 correctness records",
+  "main_verification": "required structural, ordering, fixed-distance selection, tolerance, and determinism checks pass; 0 FP64 ID-position differences",
   "report": "docs/report.md",
-  "entry": "README.md"
+  "guide": "CPU_Guide.md"
 }
