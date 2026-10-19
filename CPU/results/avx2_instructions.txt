@@ -1,5 +1,5 @@
 
-build/CMakeFiles/knn.dir/src/simd.cpp.o:     file format elf64-x86-64
+/root/final/CEG5206-Group6/CPU/build/CMakeFiles/knn.dir/src/simd.cpp.o:     file format elf64-x86-64
 
 
 Disassembly of section .text:

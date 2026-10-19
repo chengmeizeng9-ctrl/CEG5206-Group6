@@ -6,6 +6,11 @@ Group repository for the CEG5206 team project (Group 6).
 
 Maintain the group's project code, documentation, and reports, with regular commits throughout the project.
 
+## Required CPU work
+
+- [CPU implementation guide](CPU/CPU_Guide.md)
+- [CPU rules](CPU_rules.md)
+
 ## Collaboration workflow
 
 1. Clone this repository and pull the latest changes before starting work.

@@ -1,7 +1,5 @@
-# Public CPU Results
+# Required CPU Results
 
-This directory contains the retained CPU timing records, summary statistics, correctness results, plots, compact environment description, instruction evidence, and small shared fixtures.
+This directory contains the required CPU route timings, correctness records, plots, compact environment summary, instruction evidence, and shared fixtures. `main/` includes all eight main configurations and their input arrays. `main/input_sha256.json` records array hashes; `main/inputs.csv` records shapes.
 
-The full generated database and query arrays are included in `main/`. `main/input_sha256.json` records their hashes; `main/inputs.csv` records their shapes. The generator in `src/knn.cpp` and the `synthetic-v1` rule in the report reproduce the inputs.
-
-We exclude process and `/proc` snapshots, machine-specific build directories and compiler databases, temporary smoke runs, and language-archive files. Compiled targets are retained separately under `../artifacts/`.
+The retained routes are scalar full sort and AVX2 distance with a Top-K heap. The independently tested candidate-list merge implementation is documented in the CPU integration guide. Machine-local process snapshots and CMake caches are not included; compiled targets are under `../artifacts/`.

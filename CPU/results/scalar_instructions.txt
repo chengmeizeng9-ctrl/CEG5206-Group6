@@ -1,5 +1,5 @@
 
-build/CMakeFiles/knn.dir/src/scalar.cpp.o:     file format elf64-x86-64
+/root/final/CEG5206-Group6/CPU/build/CMakeFiles/knn.dir/src/scalar.cpp.o:     file format elf64-x86-64
 
 
 Disassembly of section .text:
@@ -31,40 +31,3 @@ Disassembly of section .text:
   50:	66 0f ef c9          	pxor   %xmm1,%xmm1
   54:	0f 28 c1             	movaps %xmm1,%xmm0
   57:	c3                   	ret
-  58:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
-  5f:	00 
-
-0000000000000060 <knn::abandoned_distance(float const*, float const*, unsigned long, float, float&, unsigned long&)>:
-  60:	49 c7 00 00 00 00 00 	movq   $0x0,(%r8)
-  67:	31 c0                	xor    %eax,%eax
-  69:	66 0f ef d2          	pxor   %xmm2,%xmm2
-  6d:	48 85 d2             	test   %rdx,%rdx
-  70:	75 0b                	jne    7d <knn::abandoned_distance(float const*, float const*, unsigned long, float, float&, unsigned long&)+0x1d>
-  72:	eb 4c                	jmp    c0 <knn::abandoned_distance(float const*, float const*, unsigned long, float, float&, unsigned long&)+0x60>
-  74:	0f 1f 40 00          	nopl   0x0(%rax)
-  78:	48 39 d0             	cmp    %rdx,%rax
-  7b:	74 2b                	je     a8 <knn::abandoned_distance(float const*, float const*, unsigned long, float, float&, unsigned long&)+0x48>
-  7d:	f3 0f 10 0c 87       	movss  (%rdi,%rax,4),%xmm1
-  82:	f3 0f 5c 0c 86       	subss  (%rsi,%rax,4),%xmm1
-  87:	48 83 c0 01          	add    $0x1,%rax
-  8b:	f3 0f 59 c9          	mulss  %xmm1,%xmm1
-  8f:	f3 0f 58 d1          	addss  %xmm1,%xmm2
-  93:	0f 2f d0             	comiss %xmm0,%xmm2
-  96:	76 e0                	jbe    78 <knn::abandoned_distance(float const*, float const*, unsigned long, float, float&, unsigned long&)+0x18>
-  98:	49 89 00             	mov    %rax,(%r8)
-  9b:	b8 01 00 00 00       	mov    $0x1,%eax
-  a0:	c3                   	ret
-  a1:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
-  a8:	66 0f ef c0          	pxor   %xmm0,%xmm0
-  ac:	49 89 00             	mov    %rax,(%r8)
-  af:	0f 2e d0             	ucomiss %xmm0,%xmm2
-  b2:	7a 02                	jp     b6 <knn::abandoned_distance(float const*, float const*, unsigned long, float, float&, unsigned long&)+0x56>
-  b4:	74 0a                	je     c0 <knn::abandoned_distance(float const*, float const*, unsigned long, float, float&, unsigned long&)+0x60>
-  b6:	f3 0f 11 11          	movss  %xmm2,(%rcx)
-  ba:	31 c0                	xor    %eax,%eax
-  bc:	c3                   	ret
-  bd:	0f 1f 00             	nopl   (%rax)
-  c0:	66 0f ef d2          	pxor   %xmm2,%xmm2
-  c4:	31 c0                	xor    %eax,%eax
-  c6:	f3 0f 11 11          	movss  %xmm2,(%rcx)
-  ca:	c3                   	ret

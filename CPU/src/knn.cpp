@@ -32,153 +32,121 @@ Validated validate(const Input &i) {
                     "component outside finite [-1,1]");
   return Validated(i);
 }
-static void config(const Input &i, Config c) {
-  if (!c.k || c.k > i.n || c.route < 0 || c.route > 7)
-    throw Error(ErrorCode::INVALID_ARGUMENT, "k or route");
-  if (c.route && c.t != 32 && c.t != 64 && c.t != 128 && c.t != 256)
-    throw Error(ErrorCode::INVALID_ARGUMENT, "T");
-  checked_product(checked_product(i.q, c.k), sizeof(float));
-  if ((c.route == 2 || c.route == 4 || c.route == 6) &&
-      !__builtin_cpu_supports("avx2"))
+static void check_config(const Input &i, Config c) {
+  if (!c.k || c.k > i.n)
+    throw Error(ErrorCode::INVALID_ARGUMENT, "k");
+  if (c.route != Route::ScalarFullSort && c.route != Route::Avx2TopKHeap)
+    throw Error(ErrorCode::INVALID_ARGUMENT, "route");
+  if (c.route == Route::Avx2TopKHeap && !__builtin_cpu_supports("avx2"))
     throw Error(ErrorCode::UNSUPPORTED_CONFIGURATION, "AVX2 unavailable");
+  checked_product(checked_product(i.q, c.k), sizeof(float));
 }
 size_t Workspace::bytes() const {
-  return (all.capacity() + heap.capacity() + tile.capacity() +
-          merged.capacity()) *
-         sizeof(Candidate);
+  return (all.capacity() + heap.capacity()) * sizeof(Candidate);
 }
 void prepare(const Validated &v, Config c, Workspace &w, Result &r) {
   const auto &i = v.get();
-  config(i, c);
+  check_config(i, c);
   try {
     size_t out = checked_product(i.q, c.k);
     r.ids.resize(out);
     r.distances.resize(out);
     r.labels.resize(out);
-    w.all.resize(c.route <= 2 ? i.n : 0);
-    w.heap.clear();
-    w.heap.reserve(c.route >= 3 ? c.k : 0);
-    w.tile.resize(c.route == 5 || c.route == 6 ? c.t : 0);
-    w.merged.resize(c.route == 5 || c.route == 6 ? c.k : 0);
+    if (c.route == Route::ScalarFullSort) {
+      w.all.resize(i.n);
+      w.heap.clear();
+    } else {
+      w.all.clear();
+      w.heap.clear();
+      w.heap.reserve(c.k);
+    }
   } catch (const std::bad_alloc &) {
     throw Error(ErrorCode::RESOURCE_EXHAUSTED, "prepare allocation");
   } catch (const std::length_error &) {
     throw Error(ErrorCode::RESOURCE_EXHAUSTED, "prepare capacity");
   }
 }
-// Our replaceable CPU selection implementation supports shared integration.
-void bitonic(Candidate *a, size_t n) {
-  if (!n || (n & (n - 1)))
-    throw Error(ErrorCode::INVALID_ARGUMENT,
-                "Bitonic capacity must be power of two");
-  Better better;
-  for (size_t width = 2; width <= n; width *= 2) {
-    for (size_t stride = width / 2; stride; stride /= 2)
-      for (size_t i = 0; i < n; ++i) {
-        size_t j = i ^ stride;
-        if (j > i) {
-          bool asc = (i & width) == 0;
-          if (asc ? better(a[j], a[i]) : better(a[i], a[j]))
-            std::swap(a[i], a[j]);
-        }
-      }
-    if (width == n)
-      break;
-  }
-}
 size_t merge_topk(const Candidate *a, size_t na, const Candidate *b, size_t nb,
                   Candidate *out, size_t k) {
+  if ((na && !a) || (nb && !b) || (k && !out))
+    throw Error(ErrorCode::INVALID_ARGUMENT, "null candidate merge buffer");
   size_t x = 0, y = 0, z = 0;
   Better better;
-  while (z < k && (x < na || y < nb)) {
+  while (z < k && (x < na || y < nb))
     out[z++] = (y == nb || (x < na && better(a[x], b[y]))) ? a[x++] : b[y++];
-  }
   return z;
+}
+static void heap_insert(std::vector<Candidate> &heap, const Candidate &candidate,
+                        size_t k) {
+  Better better;
+  if (heap.size() < k) {
+    heap.push_back(candidate);
+    std::push_heap(heap.begin(), heap.end(), better);
+  } else if (better(candidate, heap.front())) {
+    std::pop_heap(heap.begin(), heap.end(), better);
+    heap.back() = candidate;
+    std::push_heap(heap.begin(), heap.end(), better);
+  }
+}
+std::vector<Candidate> select_topk_heap(const std::vector<Candidate> &candidates,
+                                       size_t k) {
+  if (k > candidates.size())
+    throw Error(ErrorCode::INVALID_ARGUMENT, "heap k exceeds candidate count");
+  if (!k)
+    return {};
+  std::vector<Candidate> heap;
+  heap.reserve(k);
+  for (const auto &candidate : candidates)
+    heap_insert(heap, candidate, k);
+  std::sort(heap.begin(), heap.end(), Better{});
+  return heap;
 }
 void search(const Validated &v, Config c, Workspace &w, Result &r,
             Diagnostics *diag) {
   const auto &i = v.get();
-  config(i, c);
+  check_config(i, c);
   size_t out = checked_product(i.q, c.k);
   if (r.ids.size() != out || r.distances.size() != out ||
-      r.labels.size() != out || (c.route <= 2 && w.all.size() < i.n) ||
-      (c.route >= 3 && w.heap.capacity() < c.k) ||
-      ((c.route == 5 || c.route == 6) &&
-       (w.tile.size() < c.t || w.merged.size() < c.k)))
+      r.labels.size() != out ||
+      (c.route == Route::ScalarFullSort && w.all.size() < i.n) ||
+      (c.route == Route::Avx2TopKHeap && w.heap.capacity() < c.k))
     throw Error(ErrorCode::INVALID_SHAPE,
                 "prepare workspace/output before search");
   floating_environment();
   if (diag)
     *diag = {};
   Better better;
-  bool simd = c.route == 2 || c.route == 4 || c.route == 6;
   for (size_t qi = 0; qi < i.q; ++qi) {
     w.heap.clear();
-    size_t kept = 0;
     const float *q = i.queries.data() + qi * i.d;
-    size_t tile_size = c.route == 0 ? i.n : c.t;
-    for (size_t base = 0; base < i.n;) {
-      size_t count = std::min(tile_size, i.n - base);
-      for (size_t j = 0; j < count; ++j) {
-        size_t id = base + j;
-        float distance = 0;
-        size_t used = i.d;
-        bool skipped = false;
-        const float *x = i.x.data() + id * i.d;
-        if (c.route == 7 && w.heap.size() == c.k)
-          skipped = abandoned_distance(q, x, i.d, w.heap.front().distance,
-                                       distance, used);
-        else
-          distance =
-              simd ? simd_distance(q, x, i.d) : scalar_distance(q, x, i.d);
-        if (diag) {
-          ++diag->candidates;
-          diag->dimensions += used;
-          diag->abandoned += skipped;
-        }
-        if (skipped)
-          continue;
-        Candidate cand{distance, static_cast<uint32_t>(id)};
-        if (c.route <= 2)
-          w.all[id] = cand;
-        else if (c.route == 5 || c.route == 6)
-          w.tile[j] = cand;
-        else if (w.heap.size() < c.k) {
-          w.heap.push_back(cand);
-          std::push_heap(w.heap.begin(), w.heap.end(), better);
-        } else if (better(cand, w.heap.front())) {
-          std::pop_heap(w.heap.begin(), w.heap.end(), better);
-          w.heap.back() = cand;
-          std::push_heap(w.heap.begin(), w.heap.end(), better);
-        }
+    for (size_t id = 0; id < i.n; ++id) {
+      float distance = c.route == Route::Avx2TopKHeap
+                           ? simd_distance(q, i.x.data() + id * i.d, i.d)
+                           : scalar_distance(q, i.x.data() + id * i.d, i.d);
+      if (diag) {
+        ++diag->candidates;
+        diag->dimensions += i.d;
       }
-      if (c.route == 5 || c.route == 6) {
-        std::fill(w.tile.begin() + count, w.tile.begin() + c.t,
-                  Candidate{INFINITY, invalid_id});
-        bitonic(w.tile.data(), c.t);
-        size_t local = std::min(c.k, count);
-        size_t total = merge_topk(w.heap.data(), kept, w.tile.data(), local,
-                                  w.merged.data(), c.k);
-        w.heap.assign(w.merged.begin(), w.merged.begin() + total);
-        kept = total;
-      }
-      base += count;
+      Candidate candidate{distance, static_cast<uint32_t>(id)};
+      if (c.route == Route::ScalarFullSort)
+        w.all[id] = candidate;
+      else
+        heap_insert(w.heap, candidate, c.k);
     }
     const Candidate *selected;
-    if (c.route <= 2) {
+    if (c.route == Route::ScalarFullSort) {
       std::sort(w.all.begin(), w.all.begin() + i.n, better);
       selected = w.all.data();
     } else {
-      if (c.route != 5 && c.route != 6)
-        std::sort(w.heap.begin(), w.heap.end(), better);
+      std::sort(w.heap.begin(), w.heap.end(), better);
       selected = w.heap.data();
     }
     for (size_t rank = 0; rank < c.k; ++rank) {
       size_t idx = qi * c.k + rank;
-      auto cand = selected[rank];
-      r.ids[idx] = cand.id;
-      r.distances[idx] = cand.distance;
-      r.labels[idx] = i.labels[cand.id];
+      const auto candidate = selected[rank];
+      r.ids[idx] = candidate.id;
+      r.distances[idx] = candidate.distance;
+      r.labels[idx] = i.labels[candidate.id];
     }
   }
 }
@@ -189,46 +157,6 @@ Result search(const Input &i, Config c) {
   prepare(v, c, w, r);
   search(v, c, w, r);
   return r;
-}
-std::vector<Candidate> select_fixed(std::vector<Candidate> a, size_t k,
-                                    int route, size_t t) {
-  if (!k || k > a.size() || route < 0 || route > 2)
-    throw Error(ErrorCode::INVALID_ARGUMENT, "fixed selection");
-  Better b;
-  std::vector<Candidate> out;
-  if (route == 0) {
-    std::sort(a.begin(), a.end(), b);
-    a.resize(k);
-    return a;
-  }
-  if (route == 1) {
-    out.reserve(k);
-    for (auto c : a) {
-      if (out.size() < k) {
-        out.push_back(c);
-        std::push_heap(out.begin(), out.end(), b);
-      } else if (b(c, out.front())) {
-        std::pop_heap(out.begin(), out.end(), b);
-        out.back() = c;
-        std::push_heap(out.begin(), out.end(), b);
-      }
-    }
-    std::sort(out.begin(), out.end(), b);
-    return out;
-  }
-  if (t != 32 && t != 64 && t != 128 && t != 256)
-    throw Error(ErrorCode::INVALID_ARGUMENT, "fixed T");
-  std::vector<Candidate> tile(t), merged(k);
-  for (size_t base = 0; base < a.size(); base += t) {
-    size_t n = std::min(t, a.size() - base);
-    std::copy_n(a.begin() + base, n, tile.begin());
-    std::fill(tile.begin() + n, tile.end(), Candidate{INFINITY, invalid_id});
-    bitonic(tile.data(), t);
-    auto count = merge_topk(out.data(), out.size(), tile.data(), std::min(k, n),
-                            merged.data(), k);
-    out.assign(merged.begin(), merged.begin() + count);
-  }
-  return out;
 }
 Input synthetic(size_t n, size_t d, size_t q, uint32_t seed) {
   Input i{n, d, q, {}, {}, {}};
@@ -245,11 +173,13 @@ Input synthetic(size_t n, size_t d, size_t q, uint32_t seed) {
     i.labels[j] = j % 10;
   return i;
 }
-const char *route_name(int r) {
-  static const char *names[] = {"R0_scalar_sort",  "R1_tiled_scalar_sort",
-                                "R2_avx2_sort",    "R3_scalar_heap",
-                                "R4_avx2_heap",    "R5_scalar_bitonic",
-                                "R6_avx2_bitonic", "R7_early_heap"};
-  return r >= 0 && r < 8 ? names[r] : "invalid";
+const char *route_name(Route route) {
+  switch (route) {
+  case Route::ScalarFullSort:
+    return "R0_scalar_full_sort";
+  case Route::Avx2TopKHeap:
+    return "R1_avx2_topk_heap";
+  }
+  return "invalid";
 }
 } // namespace knn
