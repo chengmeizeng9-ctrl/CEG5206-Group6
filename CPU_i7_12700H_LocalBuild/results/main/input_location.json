@@ -1,0 +1,101 @@
+{
+  "note": "Reuse existing shared input arrays; all 24 hashes match.",
+  "files": {
+    "input_0.Q.f32": {
+      "repository_path": "CPU/results/main/input_0.Q.f32",
+      "sha256": "7dfb123934ba457f1cbaad62fba1bd231b95ac570627d4d210495a6120d8f55e"
+    },
+    "input_0.X.f32": {
+      "repository_path": "CPU/results/main/input_0.X.f32",
+      "sha256": "c1dc74b4c8ef6feef70866af9918707c01df688847726bfb09a8932239f66330"
+    },
+    "input_1.Q.f32": {
+      "repository_path": "CPU/results/main/input_1.Q.f32",
+      "sha256": "829c60dbace2ccc3ba330a9a9653524ed94bf968ffecb7d32ed3e2f8e288b58c"
+    },
+    "input_1.X.f32": {
+      "repository_path": "CPU/results/main/input_1.X.f32",
+      "sha256": "1ca03f770605a8541258c73c1de5da7626cf29f71e9387f7693d0185065d9637"
+    },
+    "input_2.Q.f32": {
+      "repository_path": "CPU/results/main/input_2.Q.f32",
+      "sha256": "7ade675bda3ee2f2a7b7322ceb4bb4867c849a33d2ca8379426a43fa0984709a"
+    },
+    "input_2.X.f32": {
+      "repository_path": "CPU/results/main/input_2.X.f32",
+      "sha256": "a6ffef364ff9334322c57e062cf8956aeeffcbed258473e368a57876430ed74c"
+    },
+    "input_3.Q.f32": {
+      "repository_path": "CPU/results/main/input_3.Q.f32",
+      "sha256": "d014fd5abe6627aa4786a909716d9dcbd56a4047e7d074da2aaf78bde8832c18"
+    },
+    "input_3.X.f32": {
+      "repository_path": "CPU/results/main/input_3.X.f32",
+      "sha256": "555ff46498dc7ace3952e488a54b839be7c2d8c14884831d89b929f4fe2d7ffc"
+    },
+    "input_4.Q.f32": {
+      "repository_path": "CPU/results/main/input_4.Q.f32",
+      "sha256": "ddc7e7eee8d3bf2a17c5b083e221c3bb35523b913af0e98f3b5dc6efc9d9e6d8"
+    },
+    "input_4.X.f32": {
+      "repository_path": "CPU/results/main/input_4.X.f32",
+      "sha256": "c1dc74b4c8ef6feef70866af9918707c01df688847726bfb09a8932239f66330"
+    },
+    "input_5.Q.f32": {
+      "repository_path": "CPU/results/main/input_5.Q.f32",
+      "sha256": "f4b5332abfc7af17e2570d87920f72d10f127fbf3db6898e731260a3199cac6a"
+    },
+    "input_5.X.f32": {
+      "repository_path": "CPU/results/main/input_5.X.f32",
+      "sha256": "c1dc74b4c8ef6feef70866af9918707c01df688847726bfb09a8932239f66330"
+    },
+    "input_6.Q.f32": {
+      "repository_path": "CPU/results/main/input_6.Q.f32",
+      "sha256": "7dfb123934ba457f1cbaad62fba1bd231b95ac570627d4d210495a6120d8f55e"
+    },
+    "input_6.X.f32": {
+      "repository_path": "CPU/results/main/input_6.X.f32",
+      "sha256": "c1dc74b4c8ef6feef70866af9918707c01df688847726bfb09a8932239f66330"
+    },
+    "input_7.Q.f32": {
+      "repository_path": "CPU/results/main/input_7.Q.f32",
+      "sha256": "7dfb123934ba457f1cbaad62fba1bd231b95ac570627d4d210495a6120d8f55e"
+    },
+    "input_7.X.f32": {
+      "repository_path": "CPU/results/main/input_7.X.f32",
+      "sha256": "c1dc74b4c8ef6feef70866af9918707c01df688847726bfb09a8932239f66330"
+    },
+    "input_0.labels.i32": {
+      "repository_path": "CPU/results/main/input_0.labels.i32",
+      "sha256": "05ec8d0aa79677b96d3aab1c3e249624624ddb089bb2b3dca2022ba87c949e26"
+    },
+    "input_1.labels.i32": {
+      "repository_path": "CPU/results/main/input_1.labels.i32",
+      "sha256": "78aad6ae179dbb55719b38218cabbd53345bb174c6f33d21fcda64301ff77126"
+    },
+    "input_2.labels.i32": {
+      "repository_path": "CPU/results/main/input_2.labels.i32",
+      "sha256": "05ec8d0aa79677b96d3aab1c3e249624624ddb089bb2b3dca2022ba87c949e26"
+    },
+    "input_3.labels.i32": {
+      "repository_path": "CPU/results/main/input_3.labels.i32",
+      "sha256": "05ec8d0aa79677b96d3aab1c3e249624624ddb089bb2b3dca2022ba87c949e26"
+    },
+    "input_4.labels.i32": {
+      "repository_path": "CPU/results/main/input_4.labels.i32",
+      "sha256": "05ec8d0aa79677b96d3aab1c3e249624624ddb089bb2b3dca2022ba87c949e26"
+    },
+    "input_5.labels.i32": {
+      "repository_path": "CPU/results/main/input_5.labels.i32",
+      "sha256": "05ec8d0aa79677b96d3aab1c3e249624624ddb089bb2b3dca2022ba87c949e26"
+    },
+    "input_6.labels.i32": {
+      "repository_path": "CPU/results/main/input_6.labels.i32",
+      "sha256": "05ec8d0aa79677b96d3aab1c3e249624624ddb089bb2b3dca2022ba87c949e26"
+    },
+    "input_7.labels.i32": {
+      "repository_path": "CPU/results/main/input_7.labels.i32",
+      "sha256": "05ec8d0aa79677b96d3aab1c3e249624624ddb089bb2b3dca2022ba87c949e26"
+    }
+  }
+}

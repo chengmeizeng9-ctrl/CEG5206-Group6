@@ -1,0 +1,1 @@
+PASS controlled floating point flags, scalar instructions, AVX2 and absence of FMA

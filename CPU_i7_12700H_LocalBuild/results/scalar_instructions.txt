@@ -1,0 +1,34 @@
+
+/home/lenovo/ceg5206-experiments/local-build-main-20261023/CPU/build/CMakeFiles/knn.dir/src/scalar.cpp.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <knn::scalar_distance(float const*, float const*, unsigned long)>:
+   0:	f3 0f 1e fa          	endbr64
+   4:	48 85 d2             	test   %rdx,%rdx
+   7:	74 47                	je     50 <knn::scalar_distance(float const*, float const*, unsigned long)+0x50>
+   9:	31 c0                	xor    %eax,%eax
+   b:	66 0f ef c9          	pxor   %xmm1,%xmm1
+   f:	90                   	nop
+  10:	f3 0f 10 04 87       	movss  (%rdi,%rax,4),%xmm0
+  15:	f3 0f 5c 04 86       	subss  (%rsi,%rax,4),%xmm0
+  1a:	48 83 c0 01          	add    $0x1,%rax
+  1e:	f3 0f 59 c0          	mulss  %xmm0,%xmm0
+  22:	f3 0f 58 c8          	addss  %xmm0,%xmm1
+  26:	48 39 c2             	cmp    %rax,%rdx
+  29:	75 e5                	jne    10 <knn::scalar_distance(float const*, float const*, unsigned long)+0x10>
+  2b:	66 0f ef c0          	pxor   %xmm0,%xmm0
+  2f:	0f 2e c8             	ucomiss %xmm0,%xmm1
+  32:	7a 0f                	jp     43 <knn::scalar_distance(float const*, float const*, unsigned long)+0x43>
+  34:	66 0f 7e c8          	movd   %xmm1,%eax
+  38:	66 0f 7e c1          	movd   %xmm0,%ecx
+  3c:	0f 44 c1             	cmove  %ecx,%eax
+  3f:	66 0f 6e c8          	movd   %eax,%xmm1
+  43:	0f 28 c1             	movaps %xmm1,%xmm0
+  46:	c3                   	ret
+  47:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+  4e:	00 00 
+  50:	66 0f ef c9          	pxor   %xmm1,%xmm1
+  54:	0f 28 c1             	movaps %xmm1,%xmm0
+  57:	c3                   	ret

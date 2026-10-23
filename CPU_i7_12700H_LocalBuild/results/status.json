@@ -1,0 +1,85 @@
+{
+  "main_experiment_invocations": 1,
+  "configuration_count": 8,
+  "raw_timing_records": 560,
+  "correctness_records": 16,
+  "all_required_correctness_checks_pass": true,
+  "FP64_ID_position_differences": 0,
+  "all_24_input_hashes_match_upstream": true,
+  "source_revision": "063769a4d6b04f6f572aa01d119c3092e4e5577d",
+  "source_files_unchanged": true,
+  "Release_tests": "111 cases / 1145 checks passed",
+  "clean_Release_tests": "111 cases / 1145 checks passed",
+  "ASan_UBSan_tests": "111 cases / 1145 checks passed",
+  "unit_test_FP64_ID_boundary_differences": 16,
+  "local_instruction_checks_pass": true,
+  "repeat_rule_verified": "20 samples per route/group; at most one extra group iff either route exceeds 10% IQR/median",
+  "report_selection": "original report case=0, group=0; no aggregation across complete experiments",
+  "variable_groups": [
+    {
+      "case": "0",
+      "route": "R1_avx2_topk_heap",
+      "group": "0"
+    },
+    {
+      "case": "0",
+      "route": "R1_avx2_topk_heap",
+      "group": "1"
+    },
+    {
+      "case": "1",
+      "route": "R1_avx2_topk_heap",
+      "group": "0"
+    },
+    {
+      "case": "2",
+      "route": "R1_avx2_topk_heap",
+      "group": "0"
+    },
+    {
+      "case": "2",
+      "route": "R1_avx2_topk_heap",
+      "group": "1"
+    },
+    {
+      "case": "3",
+      "route": "R1_avx2_topk_heap",
+      "group": "0"
+    },
+    {
+      "case": "5",
+      "route": "R0_scalar_full_sort",
+      "group": "0"
+    },
+    {
+      "case": "5",
+      "route": "R0_scalar_full_sort",
+      "group": "1"
+    },
+    {
+      "case": "5",
+      "route": "R1_avx2_topk_heap",
+      "group": "1"
+    },
+    {
+      "case": "6",
+      "route": "R0_scalar_full_sort",
+      "group": "0"
+    },
+    {
+      "case": "6",
+      "route": "R1_avx2_topk_heap",
+      "group": "0"
+    },
+    {
+      "case": "6",
+      "route": "R0_scalar_full_sort",
+      "group": "1"
+    },
+    {
+      "case": "6",
+      "route": "R1_avx2_topk_heap",
+      "group": "1"
+    }
+  ]
+}

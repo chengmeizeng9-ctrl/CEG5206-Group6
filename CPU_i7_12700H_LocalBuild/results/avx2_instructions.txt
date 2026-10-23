@@ -1,0 +1,68 @@
+
+/home/lenovo/ceg5206-experiments/local-build-main-20261023/CPU/build/CMakeFiles/knn.dir/src/simd.cpp.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <knn::simd_distance(float const*, float const*, unsigned long)>:
+   0:	f3 0f 1e fa          	endbr64
+   4:	48 83 fa 07          	cmp    $0x7,%rdx
+   8:	0f 86 d2 00 00 00    	jbe    e0 <knn::simd_distance(float const*, float const*, unsigned long)+0xe0>
+   e:	48 8d 42 f8          	lea    -0x8(%rdx),%rax
+  12:	c5 f0 57 c9          	vxorps %xmm1,%xmm1,%xmm1
+  16:	48 89 c1             	mov    %rax,%rcx
+  19:	48 c1 e9 03          	shr    $0x3,%rcx
+  1d:	4c 8d 04 cd 08 00 00 	lea    0x8(,%rcx,8),%r8
+  24:	00 
+  25:	31 c9                	xor    %ecx,%ecx
+  27:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+  2e:	00 00 
+  30:	c5 fc 10 24 8f       	vmovups (%rdi,%rcx,4),%ymm4
+  35:	c5 dc 5c 04 8e       	vsubps (%rsi,%rcx,4),%ymm4,%ymm0
+  3a:	48 83 c1 08          	add    $0x8,%rcx
+  3e:	c5 fc 59 c0          	vmulps %ymm0,%ymm0,%ymm0
+  42:	c5 f4 58 c8          	vaddps %ymm0,%ymm1,%ymm1
+  46:	4c 39 c1             	cmp    %r8,%rcx
+  49:	75 e5                	jne    30 <knn::simd_distance(float const*, float const*, unsigned long)+0x30>
+  4b:	48 83 e0 f8          	and    $0xfffffffffffffff8,%rax
+  4f:	48 83 c0 08          	add    $0x8,%rax
+  53:	c5 e0 57 db          	vxorps %xmm3,%xmm3,%xmm3
+  57:	c5 f0 c6 c1 ff       	vshufps $0xff,%xmm1,%xmm1,%xmm0
+  5c:	c5 f2 58 d3          	vaddss %xmm3,%xmm1,%xmm2
+  60:	c5 f0 c6 d9 55       	vshufps $0x55,%xmm1,%xmm1,%xmm3
+  65:	c5 e2 58 da          	vaddss %xmm2,%xmm3,%xmm3
+  69:	c5 f0 15 d1          	vunpckhps %xmm1,%xmm1,%xmm2
+  6d:	c4 e3 7d 19 c9 01    	vextractf128 $0x1,%ymm1,%xmm1
+  73:	c5 ea 58 d3          	vaddss %xmm3,%xmm2,%xmm2
+  77:	c5 fa 58 c2          	vaddss %xmm2,%xmm0,%xmm0
+  7b:	c5 f0 c6 d1 55       	vshufps $0x55,%xmm1,%xmm1,%xmm2
+  80:	c5 f2 58 c0          	vaddss %xmm0,%xmm1,%xmm0
+  84:	c5 ea 58 d0          	vaddss %xmm0,%xmm2,%xmm2
+  88:	c5 f0 15 c1          	vunpckhps %xmm1,%xmm1,%xmm0
+  8c:	c5 f0 c6 c9 ff       	vshufps $0xff,%xmm1,%xmm1,%xmm1
+  91:	c5 fa 58 c2          	vaddss %xmm2,%xmm0,%xmm0
+  95:	c5 f2 58 c8          	vaddss %xmm0,%xmm1,%xmm1
+  99:	48 39 d0             	cmp    %rdx,%rax
+  9c:	73 1d                	jae    bb <knn::simd_distance(float const*, float const*, unsigned long)+0xbb>
+  9e:	66 90                	xchg   %ax,%ax
+  a0:	c5 fa 10 04 87       	vmovss (%rdi,%rax,4),%xmm0
+  a5:	c5 fa 5c 04 86       	vsubss (%rsi,%rax,4),%xmm0,%xmm0
+  aa:	48 83 c0 01          	add    $0x1,%rax
+  ae:	c5 fa 59 c0          	vmulss %xmm0,%xmm0,%xmm0
+  b2:	c5 f2 58 c8          	vaddss %xmm0,%xmm1,%xmm1
+  b6:	48 39 c2             	cmp    %rax,%rdx
+  b9:	75 e5                	jne    a0 <knn::simd_distance(float const*, float const*, unsigned long)+0xa0>
+  bb:	c5 f8 57 c0          	vxorps %xmm0,%xmm0,%xmm0
+  bf:	c5 f8 2e c8          	vucomiss %xmm0,%xmm1
+  c3:	7a 0f                	jp     d4 <knn::simd_distance(float const*, float const*, unsigned long)+0xd4>
+  c5:	c5 f9 7e c8          	vmovd  %xmm1,%eax
+  c9:	c5 f9 7e c2          	vmovd  %xmm0,%edx
+  cd:	0f 44 c2             	cmove  %edx,%eax
+  d0:	c5 f9 6e c8          	vmovd  %eax,%xmm1
+  d4:	c5 f8 28 c1          	vmovaps %xmm1,%xmm0
+  d8:	c5 f8 77             	vzeroupper
+  db:	c3                   	ret
+  dc:	0f 1f 40 00          	nopl   0x0(%rax)
+  e0:	31 c0                	xor    %eax,%eax
+  e2:	c5 f0 57 c9          	vxorps %xmm1,%xmm1,%xmm1
+  e6:	e9 68 ff ff ff       	jmp    53 <knn::simd_distance(float const*, float const*, unsigned long)+0x53>

@@ -1,0 +1,43 @@
+{
+  "platform": {
+    "os": "Ubuntu 26.04 LTS",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "architecture": "x86_64",
+    "reported_cpu": "12th Gen Intel(R) Core(TM) i7-12700H",
+    "logical_cpus": "20",
+    "hypervisor": "unavailable",
+    "features": {
+      "avx": true,
+      "avx2": true,
+      "fma": true
+    }
+  },
+  "toolchain": {
+    "compiler": "g++-12 (Ubuntu 12.5.0-9ubuntu1) 12.5.0",
+    "cmake": "cmake version 4.2.3",
+    "python": "3.14.4",
+    "numpy": "2.3.5",
+    "matplotlib": "3.10.7+dfsg1",
+    "installed_default_compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0"
+  },
+  "experiment": {
+    "contract": "1.1",
+    "generator": "synthetic-v1",
+    "seed": 5206,
+    "threads": 1,
+    "warmups_per_route": 10,
+    "measured_calls_per_route": 20,
+    "host_frequency_and_physical_core": "not_observable_from_guest"
+  },
+  "build_provenance": {
+    "locally_compiled": true,
+    "source_revision": "063769a4d6b04f6f572aa01d119c3092e4e5577d",
+    "build_type": "Release",
+    "benchmark_sha256": "a0055c680b02644d9e0ecf56f19d54e27bebd8acfb0817e29519b556bc54aa59",
+    "verification_builds": [
+      "separate clean Release",
+      "Debug ASan/UBSan"
+    ],
+    "timing_build": "Release only"
+  }
+}
