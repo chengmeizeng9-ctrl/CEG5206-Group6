@@ -1,0 +1,4 @@
+
+String dump of section '.comment':
+  [     0]  GCC: (Ubuntu 12.5.0-9ubuntu1) 12.5.0
+

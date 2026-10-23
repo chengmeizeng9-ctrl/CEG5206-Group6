@@ -1,0 +1,7 @@
+Test project ${SOURCE_ROOT}/build-sanitizer
+    Start 1: correctness
+1/1 Test #1: correctness ......................   Passed    0.19 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.19 sec

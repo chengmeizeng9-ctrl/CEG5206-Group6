@@ -1,0 +1,66 @@
+{
+  "source_revision": "063769a4d6b04f6f572aa01d119c3092e4e5577d",
+  "compiler": "g++-12 (Ubuntu 12.5.0-9ubuntu1) 12.5.0",
+  "cmake": "cmake version 4.2.3",
+  "build_type": "Release",
+  "locally_compiled": true,
+  "source_sha256": {
+    "CMakeLists.txt": "02faac2c549f0f60e7505e49a8c5476ee1935ce67b79d2d491e7f1ab3556fe8e",
+    "include/knn.hpp": "e677d8f7779250ed783dc4cf11f3e93abc4b83b3ec22ae61eb8be5d083a381dc",
+    "src/bench.cpp": "ccec5967976b51f95ad87db8d56241a418adff5bbc612a8d71c7301528b6375f",
+    "src/export.cpp": "6a2ce2bbb33e6e50fe92a4a635f764b39a5c2edbe76a84bb647b1b4c9e7d6bd6",
+    "src/knn.cpp": "292862d235bdcf0c4fbb6166d1980c72eec3f6d35c26ae4c9c626d983e44f3d0",
+    "src/oracle.cpp": "4f0602443264ceed7e9a3ca1fc4419a9bba272a75e6f09dc38a490658ff01103",
+    "src/scalar.cpp": "65a77112fb4a11dd3ddfe2a35dd34457e75f0fe07065d3683c6cfe1a0fa73024",
+    "src/simd.cpp": "6f47e3f2a17c2562cf338603ef4926a7453b83b565ec6a004776092e3594c8a9",
+    "tests/test.cpp": "beae87e5e577d632015c65c773c629fb49f449ee144152ac050f7ba5281fef58"
+  },
+  "compilation_units": [
+    {
+      "file": "src/knn.cpp",
+      "command": "/usr/bin/g++-12  -I${SOURCE_ROOT}/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -ffp-contract=off -fno-fast-math -o CMakeFiles/knn.dir/src/knn.cpp.o -c ${SOURCE_ROOT}/src/knn.cpp"
+    },
+    {
+      "file": "src/scalar.cpp",
+      "command": "/usr/bin/g++-12  -I${SOURCE_ROOT}/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -ffp-contract=off -fno-fast-math -fno-tree-vectorize -fno-tree-slp-vectorize -o CMakeFiles/knn.dir/src/scalar.cpp.o -c ${SOURCE_ROOT}/src/scalar.cpp"
+    },
+    {
+      "file": "src/simd.cpp",
+      "command": "/usr/bin/g++-12  -I${SOURCE_ROOT}/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -ffp-contract=off -fno-fast-math -mavx2 -fno-tree-vectorize -fno-tree-slp-vectorize -o CMakeFiles/knn.dir/src/simd.cpp.o -c ${SOURCE_ROOT}/src/simd.cpp"
+    },
+    {
+      "file": "src/oracle.cpp",
+      "command": "/usr/bin/g++-12  -I${SOURCE_ROOT}/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -ffp-contract=off -fno-fast-math -fno-tree-vectorize -fno-tree-slp-vectorize -o CMakeFiles/knn.dir/src/oracle.cpp.o -c ${SOURCE_ROOT}/src/oracle.cpp"
+    },
+    {
+      "file": "tests/test.cpp",
+      "command": "/usr/bin/g++-12  -I${SOURCE_ROOT}/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -ffp-contract=off -fno-fast-math -o CMakeFiles/knn_tests.dir/tests/test.cpp.o -c ${SOURCE_ROOT}/tests/test.cpp"
+    },
+    {
+      "file": "src/bench.cpp",
+      "command": "/usr/bin/g++-12  -I${SOURCE_ROOT}/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -ffp-contract=off -fno-fast-math -o CMakeFiles/knn_bench.dir/src/bench.cpp.o -c ${SOURCE_ROOT}/src/bench.cpp"
+    },
+    {
+      "file": "src/export.cpp",
+      "command": "/usr/bin/g++-12  -I${SOURCE_ROOT}/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -ffp-contract=off -fno-fast-math -o CMakeFiles/knn_export.dir/src/export.cpp.o -c ${SOURCE_ROOT}/src/export.cpp"
+    }
+  ],
+  "artifacts": {
+    "knn_bench": {
+      "sha256": "a0055c680b02644d9e0ecf56f19d54e27bebd8acfb0817e29519b556bc54aa59",
+      "bytes": 93640
+    },
+    "knn_tests": {
+      "sha256": "f9a99382ede9c5adc7a6e5e000f6bc7a95b7f018e73ae8cf54dad3ffc837d755",
+      "bytes": 105456
+    },
+    "knn_export": {
+      "sha256": "ab81e4083e280e762f19ac7b3a06072dbf9b884caadcf04e7a126de253fd233f",
+      "bytes": 61496
+    },
+    "libknn.a": {
+      "sha256": "8d46bf5e169267d7b05c0fe54ffd1e8a5c6a9f65dea2da6872713a678c409dce",
+      "bytes": 75560
+    }
+  }
+}

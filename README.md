@@ -45,3 +45,4 @@ Create these folders as the project develops. Do not commit passwords, API keys,
 |---|---|
 | [CPU/](CPU/) | Member 1's original implementation, executables and experiment results |
 | [CPU_i7_12700H_OriginalRelease/](CPU_i7_12700H_OriginalRelease/) | Local i7-12700H experiment using Member 1's original Release executable, with comparison results |
+| [CPU_i7_12700H_LocalBuild/](CPU_i7_12700H_LocalBuild/) | Local i7-12700H build from Member 1's unchanged source, with experiment and comparison results |
