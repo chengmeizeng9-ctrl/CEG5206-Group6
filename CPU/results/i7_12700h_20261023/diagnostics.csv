@@ -1,0 +1,17 @@
+case,route,candidates,dimensions
+0,R0_scalar_full_sort,1600000,102400000
+0,R1_avx2_topk_heap,1600000,102400000
+1,R0_scalar_full_sort,160000,10240000
+1,R1_avx2_topk_heap,160000,10240000
+2,R0_scalar_full_sort,1600000,51200000
+2,R1_avx2_topk_heap,1600000,51200000
+3,R0_scalar_full_sort,1600000,204800000
+3,R1_avx2_topk_heap,1600000,204800000
+4,R0_scalar_full_sort,100000,6400000
+4,R1_avx2_topk_heap,100000,6400000
+5,R0_scalar_full_sort,6400000,409600000
+5,R1_avx2_topk_heap,6400000,409600000
+6,R0_scalar_full_sort,1600000,102400000
+6,R1_avx2_topk_heap,1600000,102400000
+7,R0_scalar_full_sort,1600000,102400000
+7,R1_avx2_topk_heap,1600000,102400000

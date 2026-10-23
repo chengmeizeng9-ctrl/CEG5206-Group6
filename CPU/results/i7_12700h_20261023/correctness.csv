@@ -1,0 +1,17 @@
+case,route,structure,labels,sorted,fixed_distance_selection,distance_tolerance,FP64_ID_agreement,ID_mismatches,max_abs_error,deterministic
+0,R0_scalar_full_sort,1,1,1,1,1,1,0,3.12406366447e-05,1
+0,R1_avx2_topk_heap,1,1,1,1,1,1,0,1.31026222903e-05,1
+1,R0_scalar_full_sort,1,1,1,1,1,1,0,2.61122267347e-05,1
+1,R1_avx2_topk_heap,1,1,1,1,1,1,0,9.98146032316e-06,1
+2,R0_scalar_full_sort,1,1,1,1,1,1,0,1.36665617134e-05,1
+2,R1_avx2_topk_heap,1,1,1,1,1,1,0,6.99365607204e-06,1
+3,R0_scalar_full_sort,1,1,1,1,1,1,0,7.85854888647e-05,1
+3,R1_avx2_topk_heap,1,1,1,1,1,1,0,2.13332102419e-05,1
+4,R0_scalar_full_sort,1,1,1,1,1,1,0,2.5615478819e-05,1
+4,R1_avx2_topk_heap,1,1,1,1,1,1,0,1.02935801038e-05,1
+5,R0_scalar_full_sort,1,1,1,1,1,1,0,3.15153852171e-05,1
+5,R1_avx2_topk_heap,1,1,1,1,1,1,0,1.31026222903e-05,1
+6,R0_scalar_full_sort,1,1,1,1,1,1,0,3.12406366447e-05,1
+6,R1_avx2_topk_heap,1,1,1,1,1,1,0,1.31026222903e-05,1
+7,R0_scalar_full_sort,1,1,1,1,1,1,0,3.12406366447e-05,1
+7,R1_avx2_topk_heap,1,1,1,1,1,1,0,1.31026222903e-05,1

@@ -1,0 +1,5 @@
+
+String dump of section '.comment':
+  [     0]  GCC: (GNU) 12.3.1 (openEuler 12.3.1-30.oe2403)
+  [    2f]  GCC: (GNU) 12.3.1 (openEuler 12.3.1-38.oe2403)
+
