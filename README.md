@@ -46,3 +46,7 @@ Create these folders as the project develops. Do not commit passwords, API keys,
 | [CPU/](CPU/) | Member 1's original implementation, executables and experiment results |
 | [CPU_i7_12700H_OriginalRelease/](CPU_i7_12700H_OriginalRelease/) | Local i7-12700H experiment using Member 1's original Release executable, with comparison results |
 | [CPU_i7_12700H_LocalBuild/](CPU_i7_12700H_LocalBuild/) | Local i7-12700H build from Member 1's unchanged source, with experiment and comparison results |
+
+## Project Reports
+
+- [Three CPU experiments comparison in Chinese Word format](docs/CEG5206%E4%B8%89%E7%BB%84CPU%E5%AE%9E%E9%AA%8C%E5%8C%BA%E5%88%AB%E4%B8%8E%E5%AE%8C%E6%95%B4%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94.docx)
