@@ -39,8 +39,9 @@ git push -u origin feature/your-task
 
 Create these folders as the project develops. Do not commit passwords, API keys, private student information, or course materials that are not permitted for public sharing.
 
+## CPU Experiment Folders
 
-## Local CPU reproduction
-
-- [i7-12700H experiment](CPU/docs/i7_12700h_20261023.md)
-- [Comparison with Member 1](CPU/docs/comparison_i7_12700h_20261023.md)
+| Folder | Contents |
+|---|---|
+| [CPU/](CPU/) | Member 1's original implementation, executables and experiment results |
+| [CPU_i7_12700H_OriginalRelease/](CPU_i7_12700H_OriginalRelease/) | Local i7-12700H experiment using Member 1's original Release executable, with comparison results |
