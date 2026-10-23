@@ -1,0 +1,43 @@
+{
+  "platform": {
+    "os": "Ubuntu 26.04 LTS",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "architecture": "x86_64",
+    "reported_cpu": "12th Gen Intel(R) Core(TM) i7-12700H",
+    "logical_cpus": "20",
+    "hypervisor": "unavailable",
+    "features": {
+      "avx": true,
+      "avx2": true,
+      "fma": true
+    }
+  },
+  "toolchain": {
+    "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+    "cmake": "cmake version 4.2.3",
+    "python": "3.14.4",
+    "numpy": "2.3.5",
+    "matplotlib": "3.10.7+dfsg1"
+  },
+  "experiment": {
+    "contract": "1.1",
+    "generator": "synthetic-v1",
+    "seed": 5206,
+    "threads": 1,
+    "warmups_per_route": 10,
+    "measured_calls_per_route": 20,
+    "host_frequency_and_physical_core": "not_observable_from_guest"
+  },
+  "binary_provenance": {
+    "mode": "upstream Release executable; no local compilation",
+    "upstream_compiler": "GCC 12.3.1 / openEuler",
+    "toolchain_field_meaning": "installed local tools; not the build compiler of the executable",
+    "source_commit": "063769a4d6b04f6f572aa01d119c3092e4e5577d",
+    "sha256": {
+      "knn_bench": "411c23a1e664db5070be8b9e82b8d9c8c8666f4d0a3435280b0294f049f7d3b0",
+      "knn_tests": "5393502a36293e4fd04801c62a989731169ac26e51fe16126cc07a90b2e78af2",
+      "knn_export": "5eed9a71e5dd24bc99b473d5b54d038c9558eb694148e67b70c23527661a0b1c",
+      "libknn.a": "35b0ad602955c51a880d39cf48bf10ea2983109641b0b90914e10bcb3eca3a65"
+    }
+  }
+}

@@ -38,3 +38,9 @@ git push -u origin feature/your-task
 - `data/`: only datasets permitted for public redistribution
 
 Create these folders as the project develops. Do not commit passwords, API keys, private student information, or course materials that are not permitted for public sharing.
+
+
+## Local CPU reproduction
+
+- [i7-12700H experiment](CPU/docs/i7_12700h_20261023.md)
+- [Comparison with Member 1](CPU/docs/comparison_i7_12700h_20261023.md)

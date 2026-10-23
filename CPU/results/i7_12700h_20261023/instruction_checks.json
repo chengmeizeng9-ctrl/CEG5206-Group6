@@ -1,0 +1,10 @@
+{
+  "scalar": {
+    "required_instructions": true,
+    "no_FMA": true
+  },
+  "avx2": {
+    "required_instructions": true,
+    "no_FMA": true
+  }
+}

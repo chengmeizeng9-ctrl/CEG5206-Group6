@@ -1,0 +1,63 @@
+000000000040b9f0 <knn::simd_distance(float const*, float const*, unsigned long)>:
+  40b9f0:	48 83 fa 07          	cmp    $0x7,%rdx
+  40b9f4:	0f 86 d6 00 00 00    	jbe    40bad0 <knn::simd_distance(float const*, float const*, unsigned long)+0xe0>
+  40b9fa:	48 8d 42 f8          	lea    -0x8(%rdx),%rax
+  40b9fe:	c5 f0 57 c9          	vxorps %xmm1,%xmm1,%xmm1
+  40ba02:	48 89 c1             	mov    %rax,%rcx
+  40ba05:	48 c1 e9 03          	shr    $0x3,%rcx
+  40ba09:	4c 8d 04 cd 08 00 00 	lea    0x8(,%rcx,8),%r8
+  40ba10:	00 
+  40ba11:	31 c9                	xor    %ecx,%ecx
+  40ba13:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  40ba18:	c5 fc 10 24 8f       	vmovups (%rdi,%rcx,4),%ymm4
+  40ba1d:	c5 dc 5c 04 8e       	vsubps (%rsi,%rcx,4),%ymm4,%ymm0
+  40ba22:	48 83 c1 08          	add    $0x8,%rcx
+  40ba26:	c5 fc 59 c0          	vmulps %ymm0,%ymm0,%ymm0
+  40ba2a:	c5 f4 58 c8          	vaddps %ymm0,%ymm1,%ymm1
+  40ba2e:	4c 39 c1             	cmp    %r8,%rcx
+  40ba31:	75 e5                	jne    40ba18 <knn::simd_distance(float const*, float const*, unsigned long)+0x28>
+  40ba33:	48 83 e0 f8          	and    $0xfffffffffffffff8,%rax
+  40ba37:	48 83 c0 08          	add    $0x8,%rax
+  40ba3b:	c5 e0 57 db          	vxorps %xmm3,%xmm3,%xmm3
+  40ba3f:	c5 f0 c6 c1 ff       	vshufps $0xff,%xmm1,%xmm1,%xmm0
+  40ba44:	c5 f2 58 d3          	vaddss %xmm3,%xmm1,%xmm2
+  40ba48:	c5 f0 c6 d9 55       	vshufps $0x55,%xmm1,%xmm1,%xmm3
+  40ba4d:	c5 e2 58 da          	vaddss %xmm2,%xmm3,%xmm3
+  40ba51:	c5 f0 15 d1          	vunpckhps %xmm1,%xmm1,%xmm2
+  40ba55:	c4 e3 7d 19 c9 01    	vextractf128 $0x1,%ymm1,%xmm1
+  40ba5b:	c5 ea 58 d3          	vaddss %xmm3,%xmm2,%xmm2
+  40ba5f:	c5 fa 58 c2          	vaddss %xmm2,%xmm0,%xmm0
+  40ba63:	c5 f0 c6 d1 55       	vshufps $0x55,%xmm1,%xmm1,%xmm2
+  40ba68:	c5 f2 58 c0          	vaddss %xmm0,%xmm1,%xmm0
+  40ba6c:	c5 ea 58 d0          	vaddss %xmm0,%xmm2,%xmm2
+  40ba70:	c5 f0 15 c1          	vunpckhps %xmm1,%xmm1,%xmm0
+  40ba74:	c5 f0 c6 c9 ff       	vshufps $0xff,%xmm1,%xmm1,%xmm1
+  40ba79:	c5 fa 58 c2          	vaddss %xmm2,%xmm0,%xmm0
+  40ba7d:	c5 f2 58 c8          	vaddss %xmm0,%xmm1,%xmm1
+  40ba81:	48 39 d0             	cmp    %rdx,%rax
+  40ba84:	73 25                	jae    40baab <knn::simd_distance(float const*, float const*, unsigned long)+0xbb>
+  40ba86:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  40ba8d:	00 00 00 
+  40ba90:	c5 fa 10 04 87       	vmovss (%rdi,%rax,4),%xmm0
+  40ba95:	c5 fa 5c 04 86       	vsubss (%rsi,%rax,4),%xmm0,%xmm0
+  40ba9a:	48 83 c0 01          	add    $0x1,%rax
+  40ba9e:	c5 fa 59 c0          	vmulss %xmm0,%xmm0,%xmm0
+  40baa2:	c5 f2 58 c8          	vaddss %xmm0,%xmm1,%xmm1
+  40baa6:	48 39 c2             	cmp    %rax,%rdx
+  40baa9:	75 e5                	jne    40ba90 <knn::simd_distance(float const*, float const*, unsigned long)+0xa0>
+  40baab:	c5 f8 57 c0          	vxorps %xmm0,%xmm0,%xmm0
+  40baaf:	c5 f8 2e c8          	vucomiss %xmm0,%xmm1
+  40bab3:	7a 0f                	jp     40bac4 <knn::simd_distance(float const*, float const*, unsigned long)+0xd4>
+  40bab5:	c5 f9 7e c8          	vmovd  %xmm1,%eax
+  40bab9:	c5 f9 7e c2          	vmovd  %xmm0,%edx
+  40babd:	0f 44 c2             	cmove  %edx,%eax
+  40bac0:	c5 f9 6e c8          	vmovd  %eax,%xmm1
+  40bac4:	c5 f8 28 c1          	vmovaps %xmm1,%xmm0
+  40bac8:	c5 f8 77             	vzeroupper
+  40bacb:	c3                   	ret
+  40bacc:	0f 1f 40 00          	nopl   0x0(%rax)
+  40bad0:	31 c0                	xor    %eax,%eax
+  40bad2:	c5 f0 57 c9          	vxorps %xmm1,%xmm1,%xmm1
+  40bad6:	e9 60 ff ff ff       	jmp    40ba3b <knn::simd_distance(float const*, float const*, unsigned long)+0x4b>
+  40badb:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+

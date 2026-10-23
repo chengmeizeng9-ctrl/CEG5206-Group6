@@ -1,0 +1,46 @@
+{
+  "main_experiment_invocations": 1,
+  "configuration_count": 8,
+  "raw_timing_records": 440,
+  "correctness_records": 16,
+  "input_hashes_match_upstream": true,
+  "all_required_correctness_checks_pass": true,
+  "FP64_ID_position_differences": 0,
+  "repeat_rule_verified": "20 samples per route/group; one extra group iff either first-group route IQR/median > 10%",
+  "report_selection": "original scripts: baseline case=0, group=0; no aggregation across experiments",
+  "unit_tests": "111 cases / 1145 checks passed; 16 numerical-boundary ID differences recorded separately",
+  "source_commit": "063769a4d6b04f6f572aa01d119c3092e4e5577d",
+  "original_binary_sha256": {
+    "knn_bench": "411c23a1e664db5070be8b9e82b8d9c8c8666f4d0a3435280b0294f049f7d3b0",
+    "knn_tests": "5393502a36293e4fd04801c62a989731169ac26e51fe16126cc07a90b2e78af2",
+    "knn_export": "5eed9a71e5dd24bc99b473d5b54d038c9558eb694148e67b70c23527661a0b1c",
+    "libknn.a": "35b0ad602955c51a880d39cf48bf10ea2983109641b0b90914e10bcb3eca3a65"
+  },
+  "variable_groups": [
+    {
+      "case": "0",
+      "route": "R1_avx2_topk_heap",
+      "group": "0"
+    },
+    {
+      "case": "0",
+      "route": "R1_avx2_topk_heap",
+      "group": "1"
+    },
+    {
+      "case": "2",
+      "route": "R1_avx2_topk_heap",
+      "group": "0"
+    },
+    {
+      "case": "2",
+      "route": "R1_avx2_topk_heap",
+      "group": "1"
+    },
+    {
+      "case": "3",
+      "route": "R1_avx2_topk_heap",
+      "group": "0"
+    }
+  ]
+}
