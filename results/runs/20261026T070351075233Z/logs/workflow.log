@@ -1,0 +1,3111 @@
++ git rev-parse HEAD
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
++ git status --porcelain
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
++ lscpu
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           39 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  8
+On-line CPU(s) list:                     0-7
+Vendor ID:                               GenuineIntel
+Model name:                              Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+CPU family:                              6
+Model:                                   158
+Thread(s) per core:                      2
+Core(s) per socket:                      4
+Socket(s):                               1
+Stepping:                                9
+CPU(s) scaling MHz:                      91%
+CPU max MHz:                             3800.0000
+CPU min MHz:                             800.0000
+BogoMIPS:                                5599.85
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb pti ssbd ibrs ibpb stibp tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp vnmi md_clear flush_l1d arch_capabilities ibpb_exit_to_user
+Virtualization:                          VT-x
+L1d cache:                               128 KiB (4 instances)
+L1i cache:                               128 KiB (4 instances)
+L2 cache:                                1 MiB (4 instances)
+L3 cache:                                6 MiB (1 instance)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-7
+Vulnerability Gather data sampling:      Mitigation; Microcode
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             KVM: Mitigation: VMX disabled
+Vulnerability L1tf:                      Mitigation; PTE Inversion; VMX conditional cache flushes, SMT vulnerable
+Vulnerability Mds:                       Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerability Meltdown:                  Mitigation; PTI
+Vulnerability Mmio stale data:           Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerability Reg file data sampling:    Not affected
+Vulnerability Retbleed:                  Mitigation; IBRS
+Vulnerability Spec rstack overflow:      Not affected
+Vulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; IBRS; IBPB conditional; STIBP conditional; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                     Mitigation; Microcode
+Vulnerability Tsa:                       Not affected
+Vulnerability Tsx async abort:           Not affected
+Vulnerability Vmscape:                   Mitigation; IBPB before exit to userspace
++ cmake --version
+cmake version 3.28.3
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
++ c++ --version
+c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
++ nvidia-smi
+Mon Oct 26 14:03:51 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce GTX 1050        Off |   00000000:01:00.0 Off |                  N/A |
+| N/A   63C    P0            N/A  /   30W |     403MiB /   4096MiB |      3%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            1853      G   /usr/lib/xorg/Xorg                      149MiB |
+|    0   N/A  N/A            2360      G   /usr/bin/gnome-shell                     30MiB |
+|    0   N/A  N/A            3006      G   ...exec/xdg-desktop-portal-gnome          9MiB |
+|    0   N/A  N/A           12122      G   ...rack-uuid=3190708988185955192        112MiB |
+|    0   N/A  N/A           14195      G   /usr/bin/nautilus                        13MiB |
+|    0   N/A  N/A           16662      G   ...ess --variations-seed-version         84MiB |
++-----------------------------------------------------------------------------------------+
++ cmake -S /home/zhuoxun/Documents/5206_CA2/CPU -B /home/zhuoxun/Documents/5206_CA2/build_full/cpu -DCMAKE_BUILD_TYPE=Release
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/zhuoxun/Documents/5206_CA2/build_full/cpu
++ cmake --build /home/zhuoxun/Documents/5206_CA2/build_full/cpu -j 4 --clean-first
+[  9%] Building CXX object CMakeFiles/knn.dir/src/knn.cpp.o
+[ 18%] Building CXX object CMakeFiles/knn.dir/src/oracle.cpp.o
+[ 27%] Building CXX object CMakeFiles/knn.dir/src/simd.cpp.o
+[ 36%] Building CXX object CMakeFiles/knn.dir/src/scalar.cpp.o
+[ 45%] Linking CXX static library libknn.a
+[ 45%] Built target knn
+[ 72%] Building CXX object CMakeFiles/knn_bench.dir/src/bench.cpp.o
+[ 72%] Building CXX object CMakeFiles/knn_export.dir/src/export.cpp.o
+[ 72%] Building CXX object CMakeFiles/knn_tests.dir/tests/test.cpp.o
+[ 81%] Linking CXX executable knn_export
+[ 81%] Built target knn_export
+[ 90%] Linking CXX executable knn_bench
+[ 90%] Built target knn_bench
+[100%] Linking CXX executable knn_tests
+[100%] Built target knn_tests
++ ctest --test-dir /home/zhuoxun/Documents/5206_CA2/build_full/cpu --verbose
+Internal ctest changing into directory: /home/zhuoxun/Documents/5206_CA2/build_full/cpu
+UpdateCTestConfiguration  from :/home/zhuoxun/Documents/5206_CA2/build_full/cpu/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/zhuoxun/Documents/5206_CA2/build_full/cpu/DartConfiguration.tcl
+Test project /home/zhuoxun/Documents/5206_CA2/build_full/cpu
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: correctness
+
+1: Test command: /home/zhuoxun/Documents/5206_CA2/build_full/cpu/knn_tests
+1: Working Directory: /home/zhuoxun/Documents/5206_CA2/build_full/cpu
+1: Test timeout computed to be: 10000000
+1: PASS cases=111 checks=1145 FP64_ID_mismatches=16
+1/1 Test #1: correctness ......................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.01 sec
++ cmake -S /home/zhuoxun/Documents/5206_CA2/GPU -B /home/zhuoxun/Documents/5206_CA2/build_full/gpu -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=61
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/zhuoxun/Documents/5206_CA2/build_full/gpu
++ cmake --build /home/zhuoxun/Documents/5206_CA2/build_full/gpu -j 4 --clean-first
+[ 30%] Building CXX object CMakeFiles/gpu_knn.dir/src/verify.cpp.o
+[ 30%] Building CXX object CMakeFiles/gpu_knn.dir/src/io.cpp.o
+[ 30%] Building CUDA object CMakeFiles/gpu_knn.dir/src/gpu_knn.cu.o
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/tmp/tmpxft_0002abac_00000000-6_gpu_knn.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension
+    1 | # 1 "/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu"
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:3:3: warning: style of line directive is a GCC extension
+    3 | #include <cuda_runtime.h>
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:7:3: warning: style of line directive is a GCC extension
+    7 | #include <algorithm>
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:1:3: warning: style of line directive is a GCC extension
+    1 | #include "gpu_knn.hpp"
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:9:3: warning: style of line directive is a GCC extension
+    9 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:11:3: warning: style of line directive is a GCC extension
+   11 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:13:3: warning: style of line directive is a GCC extension
+   13 |   float distance = 0.0f;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:14:3: warning: style of line directive is a GCC extension
+   14 |   std::uint32_t id = invalid_id;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:15:3: warning: style of line directive is a GCC extension
+   15 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:16:3: warning: style of line directive is a GCC extension
+   16 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:18:3: warning: style of line directive is a GCC extension
+   18 |   std::size_t n = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:19:3: warning: style of line directive is a GCC extension
+   19 |   std::size_t d = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:20:3: warning: style of line directive is a GCC extension
+   20 |   std::size_t q = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:21:3: warning: style of line directive is a GCC extension
+   21 |   std::size_t k = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:22:3: warning: style of line directive is a GCC extension
+   22 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:23:3: warning: style of line directive is a GCC extension
+   23 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:25:3: warning: style of line directive is a GCC extension
+   25 |   Shape shape;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:26:3: warning: style of line directive is a GCC extension
+   26 |   std::vector<float> x;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:27:3: warning: style of line directive is a GCC extension
+   27 |   std::vector<float> queries;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:28:3: warning: style of line directive is a GCC extension
+   28 |   std::vector<std::int32_t> labels;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:29:3: warning: style of line directive is a GCC extension
+   29 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:30:3: warning: style of line directive is a GCC extension
+   30 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:32:3: warning: style of line directive is a GCC extension
+   32 |   MaterializedFullSort,
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:33:3: warning: style of line directive is a GCC extension
+   33 |   FusedTiledBitonic,
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:34:3: warning: style of line directive is a GCC extension
+   34 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:35:3: warning: style of line directive is a GCC extension
+   35 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:37:3: warning: style of line directive is a GCC extension
+   37 |   ThreadPerVector,
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:38:3: warning: style of line directive is a GCC extension
+   38 |   WarpPerVector,
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:39:3: warning: style of line directive is a GCC extension
+   39 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:40:3: warning: style of line directive is a GCC extension
+   40 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:42:3: warning: style of line directive is a GCC extension
+   42 |   Route route = Route::MaterializedFullSort;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:43:3: warning: style of line directive is a GCC extension
+   43 |   Mapping mapping = Mapping::WarpPerVector;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:44:3: warning: style of line directive is a GCC extension
+   44 |   std::size_t tile_size = 128;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:45:3: warning: style of line directive is a GCC extension
+   45 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:46:3: warning: style of line directive is a GCC extension
+   46 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:48:3: warning: style of line directive is a GCC extension
+   48 |   double h2d_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:49:3: warning: style of line directive is a GCC extension
+   49 |   double distance_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:50:3: warning: style of line directive is a GCC extension
+   50 |   double pack_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:51:3: warning: style of line directive is a GCC extension
+   51 |   double local_selection_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:52:3: warning: style of line directive is a GCC extension
+   52 |   double full_sort_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:53:3: warning: style of line directive is a GCC extension
+   53 |   double merge_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:54:3: warning: style of line directive is a GCC extension
+   54 |   double gather_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:55:3: warning: style of line directive is a GCC extension
+   55 |   double d2h_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:56:3: warning: style of line directive is a GCC extension
+   56 |   double device_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:57:3: warning: style of line directive is a GCC extension
+   57 |   double end_to_end_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:58:3: warning: style of line directive is a GCC extension
+   58 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:59:3: warning: style of line directive is a GCC extension
+   59 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:61:3: warning: style of line directive is a GCC extension
+   61 |   std::size_t input_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:62:3: warning: style of line directive is a GCC extension
+   62 |   std::size_t output_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:63:3: warning: style of line directive is a GCC extension
+   63 |   std::size_t auxiliary_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:64:3: warning: style of line directive is a GCC extension
+   64 |   std::size_t peak_allocated_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:65:3: warning: style of line directive is a GCC extension
+   65 |   std::size_t dynamic_shared_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:66:3: warning: style of line directive is a GCC extension
+   66 |   std::size_t cub_temp_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:67:3: warning: style of line directive is a GCC extension
+   67 |   std::size_t distance_buffer_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:68:3: warning: style of line directive is a GCC extension
+   68 |   std::size_t key_buffer_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:69:3: warning: style of line directive is a GCC extension
+   69 |   std::size_t candidate_buffer_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:70:3: warning: style of line directive is a GCC extension
+   70 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:71:3: warning: style of line directive is a GCC extension
+   71 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:73:3: warning: style of line directive is a GCC extension
+   73 |   std::vector<std::uint32_t> ids;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:74:3: warning: style of line directive is a GCC extension
+   74 |   std::vector<float> distances;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:75:3: warning: style of line directive is a GCC extension
+   75 |   std::vector<std::int32_t> labels;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:76:3: warning: style of line directive is a GCC extension
+   76 |   StageTimes times;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:77:3: warning: style of line directive is a GCC extension
+   77 |   MemoryStats memory;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:78:3: warning: style of line directive is a GCC extension
+   78 |   std::size_t merge_levels = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:79:3: warning: style of line directive is a GCC extension
+   79 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:80:3: warning: style of line directive is a GCC extension
+   80 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:82:3: warning: style of line directive is a GCC extension
+   82 |   Shape shape;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:83:3: warning: style of line directive is a GCC extension
+   83 |   std::vector<double> distances;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:84:3: warning: style of line directive is a GCC extension
+   84 |   std::vector<std::uint32_t> order;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:85:3: warning: style of line directive is a GCC extension
+   85 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:86:3: warning: style of line directive is a GCC extension
+   86 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:88:3: warning: style of line directive is a GCC extension
+   88 |   bool structure = true;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:89:3: warning: style of line directive is a GCC extension
+   89 |   bool labels = true;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:90:3: warning: style of line directive is a GCC extension
+   90 |   bool sorted = true;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:91:3: warning: style of line directive is a GCC extension
+   91 |   bool distance_tolerance = true;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:92:3: warning: style of line directive is a GCC extension
+   92 |   bool fp64_id_agreement = true;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:93:3: warning: style of line directive is a GCC extension
+   93 |   std::size_t id_mismatches = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:94:3: warning: style of line directive is a GCC extension
+   94 |   double max_abs_error = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:95:3: warning: style of line directive is a GCC extension
+   95 |   double max_rel_error = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:96:3: warning: style of line directive is a GCC extension
+   96 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:98:3: warning: style of line directive is a GCC extension
+   98 |     return structure && labels && sorted && distance_tolerance;
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:99:3: warning: style of line directive is a GCC extension
+   99 |   }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:100:3: warning: style of line directive is a GCC extension
+  100 | };
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:101:3: warning: style of line directive is a GCC extension
+  101 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:103:3: warning: style of line directive is a GCC extension
+  103 | HostInput load_input(const std::string &prefix, const Shape &shape);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:104:3: warning: style of line directive is a GCC extension
+  104 | HostInput synthetic(std::size_t n, std::size_t d, std::size_t q,
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:105:3: warning: style of line directive is a GCC extension
+  105 |                     std::size_t k, std::uint32_t seed = 5206);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:107:3: warning: style of line directive is a GCC extension
+  107 | Fp64Oracle make_fp64_oracle(const HostInput &input);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:108:3: warning: style of line directive is a GCC extension
+  108 | Verification verify_fp64(const HostInput &input, const SearchResult &result,
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:109:3: warning: style of line directive is a GCC extension
+  109 |                          const Fp64Oracle &oracle);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:111:3: warning: style of line directive is a GCC extension
+  111 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:113:3: warning: style of line directive is a GCC extension
+  113 | const char *mapping_name(Mapping mapping);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:114:3: warning: style of line directive is a GCC extension
+  114 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:116:3: warning: style of line directive is a GCC extension
+  116 | public:
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:118:3: warning: style of line directive is a GCC extension
+  118 |   ~Runner();
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:119:3: warning: style of line directive is a GCC extension
+  119 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:121:3: warning: style of line directive is a GCC extension
+  121 |   Runner &operator=(const Runner &) = delete;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:122:3: warning: style of line directive is a GCC extension
+  122 |   Runner(Runner &&) noexcept;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:123:3: warning: style of line directive is a GCC extension
+  123 |   Runner &operator=(Runner &&) noexcept;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:124:3: warning: style of line directive is a GCC extension
+  124 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:129:3: warning: style of line directive is a GCC extension
+  129 |   const MemoryStats &memory() const;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:130:3: warning: style of line directive is a GCC extension
+  130 |   std::size_t merge_levels() const;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:131:3: warning: style of line directive is a GCC extension
+  131 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:134:3: warning: style of line directive is a GCC extension
+  134 |   Impl *impl_ = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:135:3: warning: style of line directive is a GCC extension
+  135 | };
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:136:3: warning: style of line directive is a GCC extension
+  136 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:141:3: warning: style of line directive is a GCC extension
+  141 |                  std::size_t list_count, std::size_t k);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:144:3: warning: style of line directive is a GCC extension
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:19:3: warning: style of line directive is a GCC extension
+   19 | namespace {
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:22:3: warning: style of line directive is a GCC extension
+   22 |   if (status != cudaSuccess) {
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:22:3: warning: style of line directive is a GCC extension
+   22 |   if (status != cudaSuccess) {
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:23:3: warning: style of line directive is a GCC extension
+   23 |     std::ostringstream message;
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:24:3: warning: style of line directive is a GCC extension
+   24 |     message << operation << ": " << cudaGetErrorString(status);
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:25:3: warning: style of line directive is a GCC extension
+   25 |     throw std::runtime_error(message.str());
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:26:3: warning: style of line directive is a GCC extension
+   26 |   }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:27:3: warning: style of line directive is a GCC extension
+   27 | }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:28:3: warning: style of line directive is a GCC extension
+   28 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:30:3: warning: style of line directive is a GCC extension
+   30 |   const std::size_t bytes = checked_product(count, sizeof(T));
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:31:3: warning: style of line directive is a GCC extension
+   31 |   cuda_check(cudaMalloc(reinterpret_cast<void **>(pointer), bytes),
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:32:3: warning: style of line directive is a GCC extension
+   32 |              "cudaMalloc");
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:34:3: warning: style of line directive is a GCC extension
+   34 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:36:3: warning: style of line directive is a GCC extension
+   36 |   if (pointer != nullptr) {
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:37:3: warning: style of line directive is a GCC extension
+   37 |     cudaFree(pointer);
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:38:3: warning: style of line directive is a GCC extension
+   38 |   }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:39:3: warning: style of line directive is a GCC extension
+   39 | }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:40:3: warning: style of line directive is a GCC extension
+   40 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:42:3: warning: style of line directive is a GCC extension
+   42 |   return value != 0 && (value & (value - 1)) == 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:43:3: warning: style of line directive is a GCC extension
+   43 | }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:44:3: warning: style of line directive is a GCC extension
+   44 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:46:3: warning: style of line directive is a GCC extension
+   46 |   if (value == 0) {
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:47:3: warning: style of line directive is a GCC extension
+   47 |     return 1;
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:48:3: warning: style of line directive is a GCC extension
+   48 |   }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:49:3: warning: style of line directive is a GCC extension
+   49 |   std::size_t result = 1;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:50:3: warning: style of line directive is a GCC extension
+   50 |   while (result < value) {
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:51:3: warning: style of line directive is a GCC extension
+   51 |     if (result > std::numeric_limits<std::size_t>::max() / 2) {
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:52:3: warning: style of line directive is a GCC extension
+   52 |       throw std::overflow_error("next power of two overflow");
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:53:3: warning: style of line directive is a GCC extension
+   53 |     }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:54:3: warning: style of line directive is a GCC extension
+   54 |     result *= 2;
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:55:3: warning: style of line directive is a GCC extension
+   55 |   }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:56:3: warning: style of line directive is a GCC extension
+   56 |   return result;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:57:3: warning: style of line directive is a GCC extension
+   57 | }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:58:3: warning: style of line directive is a GCC extension
+   58 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:60:3: warning: style of line directive is a GCC extension
+   60 |   return a / b + static_cast<std::size_t>(a % b != 0);
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:61:3: warning: style of line directive is a GCC extension
+   61 | }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:62:3: warning: style of line directive is a GCC extension
+   62 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:64:3: warning: style of line directive is a GCC extension
+   64 |   return Candidate{CUDART_INF_F, invalid_id};
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:74:3: warning: style of line directive is a GCC extension
+   74 | }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:68:3: warning: style of line directive is a GCC extension
+   68 |                                                            const Candidate &b) {
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:69:3: warning: style of line directive is a GCC extension
+   69 |   if (a.id == invalid_id || b.id == invalid_id) {
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:70:3: warning: style of line directive is a GCC extension
+   70 |     return a.id != invalid_id && b.id == invalid_id;
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:71:3: warning: style of line directive is a GCC extension
+   71 |   }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:72:3: warning: style of line directive is a GCC extension
+   72 |   return a.distance < b.distance ||
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:73:3: warning: style of line directive is a GCC extension
+   73 |          (a.distance == b.distance && a.id < b.id);
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:75:3: warning: style of line directive is a GCC extension
+   75 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:78:3: warning: style of line directive is a GCC extension
+   78 |   float sum = 0.0f;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:103:3: warning: style of line directive is a GCC extension
+  103 |     std::size_t d, std::size_t q) {
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:88:3: warning: style of line directive is a GCC extension
+   88 |               unsigned lane) {
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:89:3: warning: style of line directive is a GCC extension
+   89 |   float sum = 0.0f;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:126:3: warning: style of line directive is a GCC extension
+  126 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:102:3: warning: style of line directive is a GCC extension
+  102 |     const float *x, const float *queries, float *distances, std::size_t n,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:103:3: warning: style of line directive is a GCC extension
+  103 |     std::size_t d, std::size_t q) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:126:3: warning: style of line directive is a GCC extension
+  126 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:117:3: warning: style of line directive is a GCC extension
+  117 |     const float *x, const float *queries, float *distances, std::size_t n,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:118:3: warning: style of line directive is a GCC extension
+  118 |     std::size_t d, std::size_t q) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:151:3: warning: style of line directive is a GCC extension
+  151 |                                    std::uint32_t *output_ids,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:137:3: warning: style of line directive is a GCC extension
+  137 |                                  std::size_t n, std::size_t total) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:160:3: warning: style of line directive is a GCC extension
+  160 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:150:3: warning: style of line directive is a GCC extension
+  150 |                                    const std::int32_t *labels,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:151:3: warning: style of line directive is a GCC extension
+  151 |                                    std::uint32_t *output_ids,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:152:3: warning: style of line directive is a GCC extension
+  152 |                                    float *output_distances,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:153:3: warning: style of line directive is a GCC extension
+  153 |                                    std::int32_t *output_labels, std::size_t n,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:154:3: warning: style of line directive is a GCC extension
+  154 |                                    std::size_t k, std::size_t q) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:187:3: warning: style of line directive is a GCC extension
+  187 |         }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:172:3: warning: style of line directive is a GCC extension
+  172 |   const unsigned index = threadIdx.x;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:237:3: warning: style of line directive is a GCC extension
+  237 |   for (unsigned local = warp; local < tile_size;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:195:3: warning: style of line directive is a GCC extension
+  195 |     const float *x, const float *queries, Candidate *local_topk,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:196:3: warning: style of line directive is a GCC extension
+  196 |     std::size_t n, std::size_t d, std::size_t q, unsigned tile_size,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:197:3: warning: style of line directive is a GCC extension
+  197 |     unsigned k, std::size_t tile_count) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:248:3: warning: style of line directive is a GCC extension
+  248 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:225:3: warning: style of line directive is a GCC extension
+  225 |     const float *x, const float *queries, Candidate *local_topk,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:226:3: warning: style of line directive is a GCC extension
+  226 |     std::size_t n, std::size_t d, std::size_t q, unsigned tile_size,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:227:3: warning: style of line directive is a GCC extension
+  227 |     unsigned k, std::size_t tile_count) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:294:3: warning: style of line directive is a GCC extension
+  294 |     std::uint32_t *output_ids, float *output_distances,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:263:3: warning: style of line directive is a GCC extension
+  263 |                                   std::size_t input_list_count,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:264:3: warning: style of line directive is a GCC extension
+  264 |                                   std::size_t output_list_count, unsigned k,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:265:3: warning: style of line directive is a GCC extension
+  265 |                                   unsigned padded_k) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:314:3: warning: style of line directive is a GCC extension
+  314 |     lists = ceil_div(lists, std::size_t{2});
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:293:3: warning: style of line directive is a GCC extension
+  293 |     const Candidate *candidates, const std::int32_t *labels,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:294:3: warning: style of line directive is a GCC extension
+  294 |     std::uint32_t *output_ids, float *output_distances,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:295:3: warning: style of line directive is a GCC extension
+  295 |     std::int32_t *output_labels, std::size_t total) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:318:3: warning: style of line directive is a GCC extension
+  318 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:308:3: warning: style of line directive is a GCC extension
+  308 |   cuda_check(cudaPeekAtLastError(), operation);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:309:3: warning: style of line directive is a GCC extension
+  309 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:310:3: warning: style of line directive is a GCC extension
+  310 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:312:3: warning: style of line directive is a GCC extension
+  312 |   std::size_t levels = 0;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:313:3: warning: style of line directive is a GCC extension
+  313 |   while (lists > 1) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:314:3: warning: style of line directive is a GCC extension
+  314 |     lists = ceil_div(lists, std::size_t{2});
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:315:3: warning: style of line directive is a GCC extension
+  315 |     ++levels;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:316:3: warning: style of line directive is a GCC extension
+  316 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:317:3: warning: style of line directive is a GCC extension
+  317 |   return levels;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:318:3: warning: style of line directive is a GCC extension
+  318 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:319:3: warning: style of line directive is a GCC extension
+  319 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:321:3: warning: style of line directive is a GCC extension
+  321 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:323:3: warning: style of line directive is a GCC extension
+  323 |   enum EventIndex {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:324:3: warning: style of line directive is a GCC extension
+  324 |     H2D_START,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:325:3: warning: style of line directive is a GCC extension
+  325 |     H2D_END,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:326:3: warning: style of line directive is a GCC extension
+  326 |     DEVICE_START,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:327:3: warning: style of line directive is a GCC extension
+  327 |     DISTANCE_START,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:328:3: warning: style of line directive is a GCC extension
+  328 |     DISTANCE_END,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:329:3: warning: style of line directive is a GCC extension
+  329 |     PACK_START,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:330:3: warning: style of line directive is a GCC extension
+  330 |     PACK_END,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:331:3: warning: style of line directive is a GCC extension
+  331 |     SELECT_START,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:332:3: warning: style of line directive is a GCC extension
+  332 |     SELECT_END,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:333:3: warning: style of line directive is a GCC extension
+  333 |     MERGE_START,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:334:3: warning: style of line directive is a GCC extension
+  334 |     MERGE_END,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:335:3: warning: style of line directive is a GCC extension
+  335 |     GATHER_START,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:336:3: warning: style of line directive is a GCC extension
+  336 |     GATHER_END,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:337:3: warning: style of line directive is a GCC extension
+  337 |     DEVICE_END,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:338:3: warning: style of line directive is a GCC extension
+  338 |     D2H_START,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:339:3: warning: style of line directive is a GCC extension
+  339 |     D2H_END,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:340:3: warning: style of line directive is a GCC extension
+  340 |     EVENT_COUNT
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:341:3: warning: style of line directive is a GCC extension
+  341 |   };
+      |   ^~ 
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:342:3: warning: style of line directive is a GCC extension
+  342 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:344:3: warning: style of line directive is a GCC extension
+  344 |   SearchConfig config;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:345:3: warning: style of line directive is a GCC extension
+  345 |   std::size_t n = 0, d = 0, q = 0, k = 0, total = 0;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:346:3: warning: style of line directive is a GCC extension
+  346 |   std::size_t tile_count = 0, padded_k = 0, levels = 0;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:347:3: warning: style of line directive is a GCC extension
+  347 |   cudaStream_t stream = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:348:3: warning: style of line directive is a GCC extension
+  348 |   cudaEvent_t events[EVENT_COUNT]{};
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:349:3: warning: style of line directive is a GCC extension
+  349 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:351:3: warning: style of line directive is a GCC extension
+  351 |   float *d_queries = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:352:3: warning: style of line directive is a GCC extension
+  352 |   std::int32_t *d_labels = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:353:3: warning: style of line directive is a GCC extension
+  353 |   std::uint32_t *d_output_ids = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:354:3: warning: style of line directive is a GCC extension
+  354 |   float *d_output_distances = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:355:3: warning: style of line directive is a GCC extension
+  355 |   std::int32_t *d_output_labels = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:356:3: warning: style of line directive is a GCC extension
+  356 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:358:3: warning: style of line directive is a GCC extension
+  358 |   std::uint64_t *d_keys_in = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:359:3: warning: style of line directive is a GCC extension
+  359 |   std::uint64_t *d_keys_out = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:360:3: warning: style of line directive is a GCC extension
+  360 |   int *d_offsets = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:361:3: warning: style of line directive is a GCC extension
+  361 |   void *d_cub_temp = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:362:3: warning: style of line directive is a GCC extension
+  362 |   std::size_t cub_temp_bytes = 0;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:363:3: warning: style of line directive is a GCC extension
+  363 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:365:3: warning: style of line directive is a GCC extension
+  365 |   Candidate *d_candidates_b = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:366:3: warning: style of line directive is a GCC extension
+  366 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:368:3: warning: style of line directive is a GCC extension
+  368 |   std::vector<std::uint32_t> h_output_ids;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:369:3: warning: style of line directive is a GCC extension
+  369 |   std::vector<float> h_output_distances;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:370:3: warning: style of line directive is a GCC extension
+  370 |   std::vector<std::int32_t> h_output_labels;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:371:3: warning: style of line directive is a GCC extension
+  371 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:373:3: warning: style of line directive is a GCC extension
+  373 |       : host(&input), config(cfg), n(input.shape.n), d(input.shape.d),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:375:3: warning: style of line directive is a GCC extension
+  375 |     validate_input(input);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:376:3: warning: style of line directive is a GCC extension
+  376 |     if (total > static_cast<std::size_t>(INT_MAX) || n > INT_MAX ||
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:377:3: warning: style of line directive is a GCC extension
+  377 |         q > INT_MAX) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:378:3: warning: style of line directive is a GCC extension
+  378 |       throw std::overflow_error(
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:379:3: warning: style of line directive is a GCC extension
+  379 |           "CUB segmented sort and launch metadata require values <= INT_MAX");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:381:3: warning: style of line directive is a GCC extension
+  381 |     if (config.route == Route::FusedTiledBitonic) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:382:3: warning: style of line directive is a GCC extension
+  382 |       if (!is_power_of_two(config.tile_size) || config.tile_size < 32 ||
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:383:3: warning: style of line directive is a GCC extension
+  383 |           config.tile_size > 256) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:384:3: warning: style of line directive is a GCC extension
+  384 |         throw std::invalid_argument(
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:385:3: warning: style of line directive is a GCC extension
+  385 |             "fused tile size must be a power of two in [32, 256]");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:387:3: warning: style of line directive is a GCC extension
+  387 |       if (k > config.tile_size || k > 128) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:388:3: warning: style of line directive is a GCC extension
+  388 |         throw std::invalid_argument(
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:389:3: warning: style of line directive is a GCC extension
+  389 |             "fused route requires k <= tile size and k <= 128");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:391:3: warning: style of line directive is a GCC extension
+  391 |       tile_count = ceil_div(n, config.tile_size);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:392:3: warning: style of line directive is a GCC extension
+  392 |       padded_k = next_power_of_two(k);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:393:3: warning: style of line directive is a GCC extension
+  393 |       levels = merge_level_count(tile_count);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:394:3: warning: style of line directive is a GCC extension
+  394 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:395:3: warning: style of line directive is a GCC extension
+  395 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:397:3: warning: style of line directive is a GCC extension
+  397 |       cuda_check(cudaStreamCreateWithFlags(&stream, cudaStreamNonBlocking),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:398:3: warning: style of line directive is a GCC extension
+  398 |                  "cudaStreamCreateWithFlags");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:400:3: warning: style of line directive is a GCC extension
+  400 |         cuda_check(cudaEventCreate(&event), "cudaEventCreate");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:401:3: warning: style of line directive is a GCC extension
+  401 |       }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:402:3: warning: style of line directive is a GCC extension
+  402 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:404:3: warning: style of line directive is a GCC extension
+  404 |     device_allocate(&d_queries, checked_product(q, d));
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:405:3: warning: style of line directive is a GCC extension
+  405 |     device_allocate(&d_labels, n);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:406:3: warning: style of line directive is a GCC extension
+  406 |     const std::size_t output_count = checked_product(q, k);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:407:3: warning: style of line directive is a GCC extension
+  407 |     device_allocate(&d_output_ids, output_count);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:408:3: warning: style of line directive is a GCC extension
+  408 |     device_allocate(&d_output_distances, output_count);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:409:3: warning: style of line directive is a GCC extension
+  409 |     device_allocate(&d_output_labels, output_count);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:410:3: warning: style of line directive is a GCC extension
+  410 |     h_output_ids.resize(output_count);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:411:3: warning: style of line directive is a GCC extension
+  411 |     h_output_distances.resize(output_count);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:412:3: warning: style of line directive is a GCC extension
+  412 |     h_output_labels.resize(output_count);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:413:3: warning: style of line directive is a GCC extension
+  413 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:415:3: warning: style of line directive is a GCC extension
+  415 |       device_allocate(&d_all_distances, total);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:416:3: warning: style of line directive is a GCC extension
+  416 |       device_allocate(&d_keys_in, total);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:417:3: warning: style of line directive is a GCC extension
+  417 |       device_allocate(&d_keys_out, total);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:418:3: warning: style of line directive is a GCC extension
+  418 |       device_allocate(&d_offsets, q + 1);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:419:3: warning: style of line directive is a GCC extension
+  419 |       std::vector<int> offsets(q + 1);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:420:3: warning: style of line directive is a GCC extension
+  420 |       for (std::size_t index = 0; index <= q; ++index) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:421:3: warning: style of line directive is a GCC extension
+  421 |         offsets[index] = static_cast<int>(index * n);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:422:3: warning: style of line directive is a GCC extension
+  422 |       }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:423:3: warning: style of line directive is a GCC extension
+  423 |       cuda_check(cudaMemcpyAsync(d_offsets, offsets.data(),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:424:3: warning: style of line directive is a GCC extension
+  424 |                                  (q + 1) * sizeof(int),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:428:3: warning: style of line directive is a GCC extension
+  428 |                      nullptr, cub_temp_bytes, d_keys_in, d_keys_out,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:433:3: warning: style of line directive is a GCC extension
+  433 |         cuda_check(cudaMalloc(&d_cub_temp, cub_temp_bytes),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:434:3: warning: style of line directive is a GCC extension
+  434 |                    "allocate CUB segmented radix sort storage");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:436:3: warning: style of line directive is a GCC extension
+  436 |     } else {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:437:3: warning: style of line directive is a GCC extension
+  437 |       const std::size_t candidates =
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:438:3: warning: style of line directive is a GCC extension
+  438 |           checked_product(checked_product(q, tile_count), k);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:440:3: warning: style of line directive is a GCC extension
+  440 |       device_allocate(&d_candidates_b, candidates);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:441:3: warning: style of line directive is a GCC extension
+  441 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:442:3: warning: style of line directive is a GCC extension
+  442 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:444:3: warning: style of line directive is a GCC extension
+  444 |       cuda_check(cudaStreamSynchronize(stream), "initial input upload");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:445:3: warning: style of line directive is a GCC extension
+  445 |       calculate_memory_stats();
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:446:3: warning: style of line directive is a GCC extension
+  446 |     } catch (...) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:447:3: warning: style of line directive is a GCC extension
+  447 |       cleanup();
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:448:3: warning: style of line directive is a GCC extension
+  448 |       throw;
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:449:3: warning: style of line directive is a GCC extension
+  449 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:450:3: warning: style of line directive is a GCC extension
+  450 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:451:3: warning: style of line directive is a GCC extension
+  451 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:453:3: warning: style of line directive is a GCC extension
+  453 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:455:3: warning: style of line directive is a GCC extension
+  455 |     device_release(d_candidates_b);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:456:3: warning: style of line directive is a GCC extension
+  456 |     device_release(d_candidates_a);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:457:3: warning: style of line directive is a GCC extension
+  457 |     if (d_cub_temp != nullptr) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:458:3: warning: style of line directive is a GCC extension
+  458 |       cudaFree(d_cub_temp);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:459:3: warning: style of line directive is a GCC extension
+  459 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:460:3: warning: style of line directive is a GCC extension
+  460 |     device_release(d_offsets);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:461:3: warning: style of line directive is a GCC extension
+  461 |     device_release(d_keys_out);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:462:3: warning: style of line directive is a GCC extension
+  462 |     device_release(d_keys_in);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:463:3: warning: style of line directive is a GCC extension
+  463 |     device_release(d_all_distances);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:464:3: warning: style of line directive is a GCC extension
+  464 |     device_release(d_output_labels);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:465:3: warning: style of line directive is a GCC extension
+  465 |     device_release(d_output_distances);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:466:3: warning: style of line directive is a GCC extension
+  466 |     device_release(d_output_ids);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:467:3: warning: style of line directive is a GCC extension
+  467 |     device_release(d_labels);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:468:3: warning: style of line directive is a GCC extension
+  468 |     device_release(d_queries);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:469:3: warning: style of line directive is a GCC extension
+  469 |     device_release(d_x);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:470:3: warning: style of line directive is a GCC extension
+  470 |     for (auto &event : events) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:471:3: warning: style of line directive is a GCC extension
+  471 |       if (event != nullptr) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:472:3: warning: style of line directive is a GCC extension
+  472 |         cudaEventDestroy(event);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:473:3: warning: style of line directive is a GCC extension
+  473 |       }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:474:3: warning: style of line directive is a GCC extension
+  474 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:475:3: warning: style of line directive is a GCC extension
+  475 |     if (stream != nullptr) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:476:3: warning: style of line directive is a GCC extension
+  476 |       cudaStreamDestroy(stream);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:477:3: warning: style of line directive is a GCC extension
+  477 |       stream = nullptr;
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:478:3: warning: style of line directive is a GCC extension
+  478 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:479:3: warning: style of line directive is a GCC extension
+  479 |     d_candidates_b = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:480:3: warning: style of line directive is a GCC extension
+  480 |     d_candidates_a = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:481:3: warning: style of line directive is a GCC extension
+  481 |     d_cub_temp = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:482:3: warning: style of line directive is a GCC extension
+  482 |     d_offsets = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:483:3: warning: style of line directive is a GCC extension
+  483 |     d_keys_out = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:484:3: warning: style of line directive is a GCC extension
+  484 |     d_keys_in = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:485:3: warning: style of line directive is a GCC extension
+  485 |     d_all_distances = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:486:3: warning: style of line directive is a GCC extension
+  486 |     d_output_labels = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:487:3: warning: style of line directive is a GCC extension
+  487 |     d_output_distances = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:488:3: warning: style of line directive is a GCC extension
+  488 |     d_output_ids = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:489:3: warning: style of line directive is a GCC extension
+  489 |     d_labels = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:490:3: warning: style of line directive is a GCC extension
+  490 |     d_queries = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:491:3: warning: style of line directive is a GCC extension
+  491 |     d_x = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:492:3: warning: style of line directive is a GCC extension
+  492 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:493:3: warning: style of line directive is a GCC extension
+  493 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:495:3: warning: style of line directive is a GCC extension
+  495 |     const std::size_t input_values =
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:496:3: warning: style of line directive is a GCC extension
+  496 |         checked_product(n, d) + checked_product(q, d);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:498:3: warning: style of line directive is a GCC extension
+  498 |         checked_product(input_values, sizeof(float)) +
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:501:3: warning: style of line directive is a GCC extension
+  501 |     memory_stats.output_bytes =
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:502:3: warning: style of line directive is a GCC extension
+  502 |         checked_product(output_count, sizeof(std::uint32_t) + sizeof(float) +
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:506:3: warning: style of line directive is a GCC extension
+  506 |       memory_stats.distance_buffer_bytes =
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:507:3: warning: style of line directive is a GCC extension
+  507 |           checked_product(total, sizeof(float));
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:509:3: warning: style of line directive is a GCC extension
+  509 |           checked_product(total, 2 * sizeof(std::uint64_t));
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:511:3: warning: style of line directive is a GCC extension
+  511 |       memory_stats.auxiliary_bytes =
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:512:3: warning: style of line directive is a GCC extension
+  512 |           memory_stats.distance_buffer_bytes + memory_stats.key_buffer_bytes +
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:515:3: warning: style of line directive is a GCC extension
+  515 |     } else {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:516:3: warning: style of line directive is a GCC extension
+  516 |       const std::size_t candidates =
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:517:3: warning: style of line directive is a GCC extension
+  517 |           checked_product(checked_product(q, tile_count), k);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:519:3: warning: style of line directive is a GCC extension
+  519 |           checked_product(candidates, 2 * sizeof(Candidate));
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:521:3: warning: style of line directive is a GCC extension
+  521 |       memory_stats.dynamic_shared_bytes =
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:522:3: warning: style of line directive is a GCC extension
+  522 |           std::max(config.tile_size * sizeof(Candidate),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:525:3: warning: style of line directive is a GCC extension
+  525 |     memory_stats.peak_allocated_bytes =
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:526:3: warning: style of line directive is a GCC extension
+  526 |         memory_stats.input_bytes + memory_stats.output_bytes +
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:529:3: warning: style of line directive is a GCC extension
+  529 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:531:3: warning: style of line directive is a GCC extension
+  531 |     cuda_check(cudaMemcpyAsync(d_x, host->x.data(),
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:532:3: warning: style of line directive is a GCC extension
+  532 |                                host->x.size() * sizeof(float),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:536:3: warning: style of line directive is a GCC extension
+  536 |                                host->queries.size() * sizeof(float),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:540:3: warning: style of line directive is a GCC extension
+  540 |                                host->labels.size() * sizeof(std::int32_t),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:544:3: warning: style of line directive is a GCC extension
+  544 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:546:3: warning: style of line directive is a GCC extension
+  546 |     float milliseconds = 0.0f;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:547:3: warning: style of line directive is a GCC extension
+  547 |     cuda_check(cudaEventElapsedTime(&milliseconds, start, end),
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:548:3: warning: style of line directive is a GCC extension
+  548 |                "cudaEventElapsedTime");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:550:3: warning: style of line directive is a GCC extension
+  550 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:551:3: warning: style of line directive is a GCC extension
+  551 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:553:3: warning: style of line directive is a GCC extension
+  553 |     constexpr unsigned threads = 256;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:554:3: warning: style of line directive is a GCC extension
+  554 |     if (config.mapping == Mapping::ThreadPerVector) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:555:3: warning: style of line directive is a GCC extension
+  555 |       const std::size_t blocks = ceil_div(total, std::size_t{threads});
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:556:3: warning: style of line directive is a GCC extension
+  556 |       materialized_thread_distance_kernel<<<static_cast<unsigned>(blocks),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:557:3: warning: style of line directive is a GCC extension
+  557 |                                             threads, 0, stream>>>(
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:560:3: warning: style of line directive is a GCC extension
+  560 |     } else {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:561:3: warning: style of line directive is a GCC extension
+  561 |       const std::size_t total_threads = checked_product(total, 32);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:562:3: warning: style of line directive is a GCC extension
+  562 |       const std::size_t blocks = ceil_div(total_threads,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:563:3: warning: style of line directive is a GCC extension
+  563 |                                           static_cast<std::size_t>(threads));
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:565:3: warning: style of line directive is a GCC extension
+  565 |                                           threads, 0, stream>>>(
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:568:3: warning: style of line directive is a GCC extension
+  568 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:569:3: warning: style of line directive is a GCC extension
+  569 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:570:3: warning: style of line directive is a GCC extension
+  570 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:572:3: warning: style of line directive is a GCC extension
+  572 |     constexpr unsigned threads = 256;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:573:3: warning: style of line directive is a GCC extension
+  573 |     const std::size_t blocks = ceil_div(total, std::size_t{threads});
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:574:3: warning: style of line directive is a GCC extension
+  574 |     pack_keys_kernel<<<static_cast<unsigned>(blocks), threads, 0, stream>>>(
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:575:3: warning: style of line directive is a GCC extension
+  575 |         d_all_distances, d_keys_in, n, total);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:577:3: warning: style of line directive is a GCC extension
+  577 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:578:3: warning: style of line directive is a GCC extension
+  578 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:580:3: warning: style of line directive is a GCC extension
+  580 |     cuda_check(cub::DeviceSegmentedRadixSort::SortKeys(
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:581:3: warning: style of line directive is a GCC extension
+  581 |                    d_cub_temp, cub_temp_bytes, d_keys_in, d_keys_out,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:586:3: warning: style of line directive is a GCC extension
+  586 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:588:3: warning: style of line directive is a GCC extension
+  588 |     const dim3 grid(static_cast<unsigned>(tile_count),
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:589:3: warning: style of line directive is a GCC extension
+  589 |                     static_cast<unsigned>(q));
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:591:3: warning: style of line directive is a GCC extension
+  591 |     if (config.mapping == Mapping::ThreadPerVector) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:592:3: warning: style of line directive is a GCC extension
+  592 |       const unsigned threads = static_cast<unsigned>(config.tile_size);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:593:3: warning: style of line directive is a GCC extension
+  593 |       fused_thread_bitonic_kernel<<<grid, threads, shared_bytes, stream>>>(
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:594:3: warning: style of line directive is a GCC extension
+  594 |           d_x, d_queries, d_candidates_a, n, d, q,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:598:3: warning: style of line directive is a GCC extension
+  598 |     } else {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:599:3: warning: style of line directive is a GCC extension
+  599 |       constexpr unsigned threads = 256;
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:600:3: warning: style of line directive is a GCC extension
+  600 |       fused_warp_bitonic_kernel<<<grid, threads, shared_bytes, stream>>>(
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:601:3: warning: style of line directive is a GCC extension
+  601 |           d_x, d_queries, d_candidates_a, n, d, q,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:605:3: warning: style of line directive is a GCC extension
+  605 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:606:3: warning: style of line directive is a GCC extension
+  606 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:607:3: warning: style of line directive is a GCC extension
+  607 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:609:3: warning: style of line directive is a GCC extension
+  609 |     Candidate *input = d_candidates_a;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:610:3: warning: style of line directive is a GCC extension
+  610 |     Candidate *output = d_candidates_b;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:611:3: warning: style of line directive is a GCC extension
+  611 |     std::size_t lists = tile_count;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:612:3: warning: style of line directive is a GCC extension
+  612 |     while (lists > 1) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:613:3: warning: style of line directive is a GCC extension
+  613 |       const std::size_t output_lists = ceil_div(lists, std::size_t{2});
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:614:3: warning: style of line directive is a GCC extension
+  614 |       const unsigned threads = static_cast<unsigned>(2 * padded_k);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:615:3: warning: style of line directive is a GCC extension
+  615 |       const dim3 grid(static_cast<unsigned>(output_lists),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:616:3: warning: style of line directive is a GCC extension
+  616 |                       static_cast<unsigned>(q));
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:618:3: warning: style of line directive is a GCC extension
+  618 |           input, output, lists, output_lists, static_cast<unsigned>(k),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:621:3: warning: style of line directive is a GCC extension
+  621 |       std::swap(input, output);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:622:3: warning: style of line directive is a GCC extension
+  622 |       lists = output_lists;
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:623:3: warning: style of line directive is a GCC extension
+  623 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:624:3: warning: style of line directive is a GCC extension
+  624 |     return input;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:625:3: warning: style of line directive is a GCC extension
+  625 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:626:3: warning: style of line directive is a GCC extension
+  626 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:628:3: warning: style of line directive is a GCC extension
+  628 |     constexpr unsigned threads = 256;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:629:3: warning: style of line directive is a GCC extension
+  629 |     const std::size_t output_count = checked_product(q, k);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:630:3: warning: style of line directive is a GCC extension
+  630 |     const std::size_t blocks = ceil_div(output_count,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:631:3: warning: style of line directive is a GCC extension
+  631 |                                         static_cast<std::size_t>(threads));
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:633:3: warning: style of line directive is a GCC extension
+  633 |         d_keys_out, d_labels, d_output_ids, d_output_distances,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:636:3: warning: style of line directive is a GCC extension
+  636 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:637:3: warning: style of line directive is a GCC extension
+  637 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:639:3: warning: style of line directive is a GCC extension
+  639 |     constexpr unsigned threads = 256;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:640:3: warning: style of line directive is a GCC extension
+  640 |     const std::size_t output_count = checked_product(q, k);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:641:3: warning: style of line directive is a GCC extension
+  641 |     const std::size_t blocks = ceil_div(output_count,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:642:3: warning: style of line directive is a GCC extension
+  642 |                                         static_cast<std::size_t>(threads));
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:644:3: warning: style of line directive is a GCC extension
+  644 |                                stream>>>(
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:648:3: warning: style of line directive is a GCC extension
+  648 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:649:3: warning: style of line directive is a GCC extension
+  649 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:651:3: warning: style of line directive is a GCC extension
+  651 |     SearchResult result;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:652:3: warning: style of line directive is a GCC extension
+  652 |     result.memory = memory_stats;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:653:3: warning: style of line directive is a GCC extension
+  653 |     result.merge_levels = levels;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:654:3: warning: style of line directive is a GCC extension
+  654 |     const auto wall_start = std::chrono::steady_clock::now();
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:655:3: warning: style of line directive is a GCC extension
+  655 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:657:3: warning: style of line directive is a GCC extension
+  657 |       cuda_check(cudaEventRecord(events[H2D_START], stream),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:658:3: warning: style of line directive is a GCC extension
+  658 |                  "record H2D start");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:660:3: warning: style of line directive is a GCC extension
+  660 |       cuda_check(cudaEventRecord(events[H2D_END], stream), "record H2D end");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:661:3: warning: style of line directive is a GCC extension
+  661 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:662:3: warning: style of line directive is a GCC extension
+  662 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:664:3: warning: style of line directive is a GCC extension
+  664 |                "record device start");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:666:3: warning: style of line directive is a GCC extension
+  666 |     if (config.route == Route::MaterializedFullSort) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:667:3: warning: style of line directive is a GCC extension
+  667 |       result.times.local_selection_ms =
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:668:3: warning: style of line directive is a GCC extension
+  668 |           std::numeric_limits<double>::quiet_NaN();
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:670:3: warning: style of line directive is a GCC extension
+  670 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:672:3: warning: style of line directive is a GCC extension
+  672 |                  "record distance start");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:674:3: warning: style of line directive is a GCC extension
+  674 |       cuda_check(cudaEventRecord(events[DISTANCE_END], stream),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:675:3: warning: style of line directive is a GCC extension
+  675 |                  "record distance end");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:678:3: warning: style of line directive is a GCC extension
+  678 |                  "record pack start");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:680:3: warning: style of line directive is a GCC extension
+  680 |       cuda_check(cudaEventRecord(events[PACK_END], stream),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:681:3: warning: style of line directive is a GCC extension
+  681 |                  "record pack end");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:684:3: warning: style of line directive is a GCC extension
+  684 |                  "record sort start");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:686:3: warning: style of line directive is a GCC extension
+  686 |       cuda_check(cudaEventRecord(events[SELECT_END], stream),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:687:3: warning: style of line directive is a GCC extension
+  687 |                  "record sort end");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:689:3: warning: style of line directive is a GCC extension
+  689 |       result.times.distance_ms = std::numeric_limits<double>::quiet_NaN();
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:690:3: warning: style of line directive is a GCC extension
+  690 |       result.times.pack_ms = std::numeric_limits<double>::quiet_NaN();
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:691:3: warning: style of line directive is a GCC extension
+  691 |       result.times.full_sort_ms = std::numeric_limits<double>::quiet_NaN();
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:692:3: warning: style of line directive is a GCC extension
+  692 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:694:3: warning: style of line directive is a GCC extension
+  694 |                  "record fused local-selection start");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:696:3: warning: style of line directive is a GCC extension
+  696 |       cuda_check(cudaEventRecord(events[SELECT_END], stream),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:697:3: warning: style of line directive is a GCC extension
+  697 |                  "record fused local-selection end");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:700:3: warning: style of line directive is a GCC extension
+  700 |                  "record merge start");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:702:3: warning: style of line directive is a GCC extension
+  702 |       cuda_check(cudaEventRecord(events[MERGE_END], stream),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:703:3: warning: style of line directive is a GCC extension
+  703 |                  "record merge end");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:705:3: warning: style of line directive is a GCC extension
+  705 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:707:3: warning: style of line directive is a GCC extension
+  707 |                "record gather start");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:709:3: warning: style of line directive is a GCC extension
+  709 |       launch_gather_keys();
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:710:3: warning: style of line directive is a GCC extension
+  710 |     } else {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:711:3: warning: style of line directive is a GCC extension
+  711 |       launch_gather_candidates(final_candidates);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:712:3: warning: style of line directive is a GCC extension
+  712 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:713:3: warning: style of line directive is a GCC extension
+  713 |     cuda_check(cudaEventRecord(events[GATHER_END], stream),
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:714:3: warning: style of line directive is a GCC extension
+  714 |                "record gather end");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:716:3: warning: style of line directive is a GCC extension
+  716 |                "record device end");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:719:3: warning: style of line directive is a GCC extension
+  719 |       const std::size_t output_count = checked_product(q, k);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:720:3: warning: style of line directive is a GCC extension
+  720 |       cuda_check(cudaEventRecord(events[D2H_START], stream),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:721:3: warning: style of line directive is a GCC extension
+  721 |                  "record D2H start");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:723:3: warning: style of line directive is a GCC extension
+  723 |                                  output_count * sizeof(std::uint32_t),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:727:3: warning: style of line directive is a GCC extension
+  727 |                                  output_count * sizeof(float),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:731:3: warning: style of line directive is a GCC extension
+  731 |                                  output_count * sizeof(std::int32_t),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:735:3: warning: style of line directive is a GCC extension
+  735 |       cuda_check(cudaEventSynchronize(events[D2H_END]),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:736:3: warning: style of line directive is a GCC extension
+  736 |                  "synchronize output transfer");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:738:3: warning: style of line directive is a GCC extension
+  738 |       cuda_check(cudaEventSynchronize(events[DEVICE_END]),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:739:3: warning: style of line directive is a GCC extension
+  739 |                  "synchronize device search");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:741:3: warning: style of line directive is a GCC extension
+  741 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:743:3: warning: style of line directive is a GCC extension
+  743 |     result.times.end_to_end_ms =
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:744:3: warning: style of line directive is a GCC extension
+  744 |         std::chrono::duration<double, std::milli>(wall_end - wall_start)
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:747:3: warning: style of line directive is a GCC extension
+  747 |       result.times.h2d_ms = elapsed(events[H2D_START], events[H2D_END]);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:748:3: warning: style of line directive is a GCC extension
+  748 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:749:3: warning: style of line directive is a GCC extension
+  749 |     if (copy_outputs) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:750:3: warning: style of line directive is a GCC extension
+  750 |       result.times.d2h_ms = elapsed(events[D2H_START], events[D2H_END]);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:751:3: warning: style of line directive is a GCC extension
+  751 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:752:3: warning: style of line directive is a GCC extension
+  752 |     result.times.device_ms =
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:753:3: warning: style of line directive is a GCC extension
+  753 |         elapsed(events[DEVICE_START], events[DEVICE_END]);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:755:3: warning: style of line directive is a GCC extension
+  755 |         elapsed(events[GATHER_START], events[GATHER_END]);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:757:3: warning: style of line directive is a GCC extension
+  757 |       // Host vectors are preallocated in the runner. Copying them into the
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:760:3: warning: style of line directive is a GCC extension
+  760 |       result.distances = h_output_distances;
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:761:3: warning: style of line directive is a GCC extension
+  761 |       result.labels = h_output_labels;
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:762:3: warning: style of line directive is a GCC extension
+  762 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:763:3: warning: style of line directive is a GCC extension
+  763 |     if (config.route == Route::MaterializedFullSort) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:764:3: warning: style of line directive is a GCC extension
+  764 |       result.times.distance_ms =
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:765:3: warning: style of line directive is a GCC extension
+  765 |           elapsed(events[DISTANCE_START], events[DISTANCE_END]);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:767:3: warning: style of line directive is a GCC extension
+  767 |       result.times.full_sort_ms =
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:768:3: warning: style of line directive is a GCC extension
+  768 |           elapsed(events[SELECT_START], events[SELECT_END]);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:770:3: warning: style of line directive is a GCC extension
+  770 |       result.times.local_selection_ms =
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:771:3: warning: style of line directive is a GCC extension
+  771 |           elapsed(events[SELECT_START], events[SELECT_END]);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:773:3: warning: style of line directive is a GCC extension
+  773 |           elapsed(events[MERGE_START], events[MERGE_END]);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:775:3: warning: style of line directive is a GCC extension
+  775 |     return result;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:776:3: warning: style of line directive is a GCC extension
+  776 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:777:3: warning: style of line directive is a GCC extension
+  777 | };
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:778:3: warning: style of line directive is a GCC extension
+  778 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:780:3: warning: style of line directive is a GCC extension
+  780 |     : impl_(new Impl(input, config)) {}
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:781:3: warning: style of line directive is a GCC extension
+  781 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:783:3: warning: style of line directive is a GCC extension
+  783 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:785:3: warning: style of line directive is a GCC extension
+  785 |   other.impl_ = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:786:3: warning: style of line directive is a GCC extension
+  786 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:787:3: warning: style of line directive is a GCC extension
+  787 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:789:3: warning: style of line directive is a GCC extension
+  789 |   if (this != &other) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:790:3: warning: style of line directive is a GCC extension
+  790 |     delete impl_;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:791:3: warning: style of line directive is a GCC extension
+  791 |     impl_ = other.impl_;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:792:3: warning: style of line directive is a GCC extension
+  792 |     other.impl_ = nullptr;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:793:3: warning: style of line directive is a GCC extension
+  793 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:794:3: warning: style of line directive is a GCC extension
+  794 |   return *this;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:795:3: warning: style of line directive is a GCC extension
+  795 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:796:3: warning: style of line directive is a GCC extension
+  796 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:798:3: warning: style of line directive is a GCC extension
+  798 |   if (impl_ == nullptr) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:799:3: warning: style of line directive is a GCC extension
+  799 |     throw std::logic_error("run called on moved-from Runner");
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:800:3: warning: style of line directive is a GCC extension
+  800 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:801:3: warning: style of line directive is a GCC extension
+  801 |   return impl_->run(copy_inputs, copy_outputs);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:802:3: warning: style of line directive is a GCC extension
+  802 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:803:3: warning: style of line directive is a GCC extension
+  803 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:805:3: warning: style of line directive is a GCC extension
+  805 |   if (impl_ == nullptr) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:806:3: warning: style of line directive is a GCC extension
+  806 |     throw std::logic_error("memory called on moved-from Runner");
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:807:3: warning: style of line directive is a GCC extension
+  807 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:808:3: warning: style of line directive is a GCC extension
+  808 |   return impl_->memory_stats;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:809:3: warning: style of line directive is a GCC extension
+  809 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:810:3: warning: style of line directive is a GCC extension
+  810 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:812:3: warning: style of line directive is a GCC extension
+  812 |   if (impl_ == nullptr) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:813:3: warning: style of line directive is a GCC extension
+  813 |     throw std::logic_error("merge_levels called on moved-from Runner");
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:814:3: warning: style of line directive is a GCC extension
+  814 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:815:3: warning: style of line directive is a GCC extension
+  815 |   return impl_->levels;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:816:3: warning: style of line directive is a GCC extension
+  816 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:817:3: warning: style of line directive is a GCC extension
+  817 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:820:3: warning: style of line directive is a GCC extension
+  820 |                  std::size_t list_count, std::size_t k) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:821:3: warning: style of line directive is a GCC extension
+  821 |   if (list_count == 0 || k == 0 ||
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:822:3: warning: style of line directive is a GCC extension
+  822 |       lists.size() != checked_product(list_count, k)) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:823:3: warning: style of line directive is a GCC extension
+  823 |     throw std::invalid_argument("invalid flattened candidate-list shape");
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:824:3: warning: style of line directive is a GCC extension
+  824 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:825:3: warning: style of line directive is a GCC extension
+  825 |   const std::size_t padded_k = next_power_of_two(k);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:826:3: warning: style of line directive is a GCC extension
+  826 |   if (padded_k > 128) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:827:3: warning: style of line directive is a GCC extension
+  827 |     throw std::invalid_argument("debug merge supports k <= 128");
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:828:3: warning: style of line directive is a GCC extension
+  828 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:829:3: warning: style of line directive is a GCC extension
+  829 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:831:3: warning: style of line directive is a GCC extension
+  831 |   Candidate *d_b = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:832:3: warning: style of line directive is a GCC extension
+  832 |   cudaStream_t stream = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:833:3: warning: style of line directive is a GCC extension
+  833 |   try {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:834:3: warning: style of line directive is a GCC extension
+  834 |     device_allocate(&d_a, lists.size());
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:835:3: warning: style of line directive is a GCC extension
+  835 |     device_allocate(&d_b, lists.size());
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:836:3: warning: style of line directive is a GCC extension
+  836 |     cuda_check(cudaStreamCreateWithFlags(&stream, cudaStreamNonBlocking),
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:837:3: warning: style of line directive is a GCC extension
+  837 |                "create debug merge stream");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:839:3: warning: style of line directive is a GCC extension
+  839 |                                lists.size() * sizeof(Candidate),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:844:3: warning: style of line directive is a GCC extension
+  844 |     Candidate *output = d_b;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:845:3: warning: style of line directive is a GCC extension
+  845 |     std::size_t current_lists = list_count;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:846:3: warning: style of line directive is a GCC extension
+  846 |     while (current_lists > 1) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:847:3: warning: style of line directive is a GCC extension
+  847 |       const std::size_t output_lists =
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:848:3: warning: style of line directive is a GCC extension
+  848 |           ceil_div(current_lists, std::size_t{2});
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:850:3: warning: style of line directive is a GCC extension
+  850 |       const dim3 grid(static_cast<unsigned>(output_lists), 1);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:851:3: warning: style of line directive is a GCC extension
+  851 |       merge_topk_kernel<<<grid, threads, threads * sizeof(Candidate), stream>>>(
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:852:3: warning: style of line directive is a GCC extension
+  852 |           input, output, current_lists, output_lists,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:855:3: warning: style of line directive is a GCC extension
+  855 |       std::swap(input, output);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:856:3: warning: style of line directive is a GCC extension
+  856 |       current_lists = output_lists;
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:857:3: warning: style of line directive is a GCC extension
+  857 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:858:3: warning: style of line directive is a GCC extension
+  858 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:860:3: warning: style of line directive is a GCC extension
+  860 |     cuda_check(cudaMemcpyAsync(result.data(), input, k * sizeof(Candidate),
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:861:3: warning: style of line directive is a GCC extension
+  861 |                                cudaMemcpyDeviceToHost, stream),
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:864:3: warning: style of line directive is a GCC extension
+  864 |     cudaStreamDestroy(stream);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:865:3: warning: style of line directive is a GCC extension
+  865 |     device_release(d_b);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:866:3: warning: style of line directive is a GCC extension
+  866 |     device_release(d_a);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:867:3: warning: style of line directive is a GCC extension
+  867 |     return result;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:868:3: warning: style of line directive is a GCC extension
+  868 |   } catch (...) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:869:3: warning: style of line directive is a GCC extension
+  869 |     if (stream != nullptr) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:870:3: warning: style of line directive is a GCC extension
+  870 |       cudaStreamDestroy(stream);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:871:3: warning: style of line directive is a GCC extension
+  871 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:872:3: warning: style of line directive is a GCC extension
+  872 |     device_release(d_b);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:873:3: warning: style of line directive is a GCC extension
+  873 |     device_release(d_a);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:874:3: warning: style of line directive is a GCC extension
+  874 |     throw;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:875:3: warning: style of line directive is a GCC extension
+  875 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:876:3: warning: style of line directive is a GCC extension
+  876 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:877:3: warning: style of line directive is a GCC extension
+  877 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:880:3: warning: style of line directive is a GCC extension
+tmpxft_0002abac_00000000-6_gpu_knn.cudafe1.stub.c:4:3: warning: style of line directive is a GCC extension
+In file included from tmpxft_0002abac_00000000-6_gpu_knn.cudafe1.stub.c:1:
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:102:3: warning: style of line directive is a GCC extension
+  102 |     const float *x, const float *queries, float *distances, std::size_t n,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:104:3: warning: style of line directive is a GCC extension
+  104 |   const std::size_t index =
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:115:3: warning: style of line directive is a GCC extension
+  115 | 
+      |   ^
+/tmp/tmpxft_0002abac_00000000-6_gpu_knn.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension
+    2 | #pragma GCC diagnostic ignored "-Wunused-function"
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:117:3: warning: style of line directive is a GCC extension
+  117 |     const float *x, const float *queries, float *distances, std::size_t n,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:119:3: warning: style of line directive is a GCC extension
+  119 |   const std::size_t global_thread =
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:135:3: warning: style of line directive is a GCC extension
+  135 | 
+      |   ^
+/tmp/tmpxft_0002abac_00000000-6_gpu_knn.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension
+    2 | #pragma GCC diagnostic ignored "-Wunused-function"
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:137:3: warning: style of line directive is a GCC extension
+  137 |                                  std::size_t n, std::size_t total) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:138:3: warning: style of line directive is a GCC extension
+  138 |   const std::size_t index =
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:148:3: warning: style of line directive is a GCC extension
+  148 | 
+      |   ^
+/tmp/tmpxft_0002abac_00000000-6_gpu_knn.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension
+    2 | #pragma GCC diagnostic ignored "-Wunused-function"
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:150:3: warning: style of line directive is a GCC extension
+  150 |                                    const std::int32_t *labels,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:155:3: warning: style of line directive is a GCC extension
+  155 |   const std::size_t index =
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:170:3: warning: style of line directive is a GCC extension
+  170 | 
+      |   ^
+/tmp/tmpxft_0002abac_00000000-6_gpu_knn.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension
+    2 | #pragma GCC diagnostic ignored "-Wunused-function"
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:195:3: warning: style of line directive is a GCC extension
+  195 |     const float *x, const float *queries, Candidate *local_topk,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:198:3: warning: style of line directive is a GCC extension
+  198 |   extern __shared__ Candidate shared[];
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:223:3: warning: style of line directive is a GCC extension
+  223 | 
+      |   ^
+/tmp/tmpxft_0002abac_00000000-6_gpu_knn.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension
+    2 | #pragma GCC diagnostic ignored "-Wunused-function"
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:225:3: warning: style of line directive is a GCC extension
+  225 |     const float *x, const float *queries, Candidate *local_topk,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:228:3: warning: style of line directive is a GCC extension
+  228 |   extern __shared__ Candidate shared[];
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:261:3: warning: style of line directive is a GCC extension
+  261 | 
+      |   ^
+/tmp/tmpxft_0002abac_00000000-6_gpu_knn.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension
+    2 | #pragma GCC diagnostic ignored "-Wunused-function"
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:263:3: warning: style of line directive is a GCC extension
+  263 |                                   std::size_t input_list_count,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:266:3: warning: style of line directive is a GCC extension
+  266 |   extern __shared__ Candidate shared[];
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:291:3: warning: style of line directive is a GCC extension
+  291 | 
+      |   ^
+/tmp/tmpxft_0002abac_00000000-6_gpu_knn.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension
+    2 | #pragma GCC diagnostic ignored "-Wunused-function"
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:293:3: warning: style of line directive is a GCC extension
+  293 |     const Candidate *candidates, const std::int32_t *labels,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:296:3: warning: style of line directive is a GCC extension
+  296 |   const std::size_t index =
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/src/gpu_knn.cu:306:3: warning: style of line directive is a GCC extension
+  306 | 
+      |   ^
+tmpxft_0002abac_00000000-6_gpu_knn.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension
+[ 40%] Linking CXX static library libgpu_knn.a
+[ 40%] Built target gpu_knn
+[ 60%] Building CUDA object CMakeFiles/knn_gpu_tests.dir/tests/test_gpu.cu.o
+[ 60%] Building CXX object CMakeFiles/knn_gpu_bench.dir/src/bench.cpp.o
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/tmp/tmpxft_0002ac70_00000000-6_test_gpu.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension
+    1 | # 1 "/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu"
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:2:3: warning: style of line directive is a GCC extension
+    2 | 
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:3:3: warning: style of line directive is a GCC extension
+    3 | #include <cuda_runtime.h>
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:7:3: warning: style of line directive is a GCC extension
+    7 | #include <cstdint>
+      |   ^
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:1:3: warning: style of line directive is a GCC extension
+    1 | #include "gpu_knn.hpp"
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:9:3: warning: style of line directive is a GCC extension
+    9 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:11:3: warning: style of line directive is a GCC extension
+   11 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:13:3: warning: style of line directive is a GCC extension
+   13 |   float distance = 0.0f;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:14:3: warning: style of line directive is a GCC extension
+   14 |   std::uint32_t id = invalid_id;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:15:3: warning: style of line directive is a GCC extension
+   15 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:16:3: warning: style of line directive is a GCC extension
+   16 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:18:3: warning: style of line directive is a GCC extension
+   18 |   std::size_t n = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:19:3: warning: style of line directive is a GCC extension
+   19 |   std::size_t d = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:20:3: warning: style of line directive is a GCC extension
+   20 |   std::size_t q = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:21:3: warning: style of line directive is a GCC extension
+   21 |   std::size_t k = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:22:3: warning: style of line directive is a GCC extension
+   22 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:23:3: warning: style of line directive is a GCC extension
+   23 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:25:3: warning: style of line directive is a GCC extension
+   25 |   Shape shape;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:26:3: warning: style of line directive is a GCC extension
+   26 |   std::vector<float> x;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:27:3: warning: style of line directive is a GCC extension
+   27 |   std::vector<float> queries;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:28:3: warning: style of line directive is a GCC extension
+   28 |   std::vector<std::int32_t> labels;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:29:3: warning: style of line directive is a GCC extension
+   29 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:30:3: warning: style of line directive is a GCC extension
+   30 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:32:3: warning: style of line directive is a GCC extension
+   32 |   MaterializedFullSort,
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:33:3: warning: style of line directive is a GCC extension
+   33 |   FusedTiledBitonic,
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:34:3: warning: style of line directive is a GCC extension
+   34 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:35:3: warning: style of line directive is a GCC extension
+   35 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:37:3: warning: style of line directive is a GCC extension
+   37 |   ThreadPerVector,
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:38:3: warning: style of line directive is a GCC extension
+   38 |   WarpPerVector,
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:39:3: warning: style of line directive is a GCC extension
+   39 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:40:3: warning: style of line directive is a GCC extension
+   40 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:42:3: warning: style of line directive is a GCC extension
+   42 |   Route route = Route::MaterializedFullSort;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:43:3: warning: style of line directive is a GCC extension
+   43 |   Mapping mapping = Mapping::WarpPerVector;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:44:3: warning: style of line directive is a GCC extension
+   44 |   std::size_t tile_size = 128;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:45:3: warning: style of line directive is a GCC extension
+   45 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:46:3: warning: style of line directive is a GCC extension
+   46 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:48:3: warning: style of line directive is a GCC extension
+   48 |   double h2d_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:49:3: warning: style of line directive is a GCC extension
+   49 |   double distance_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:50:3: warning: style of line directive is a GCC extension
+   50 |   double pack_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:51:3: warning: style of line directive is a GCC extension
+   51 |   double local_selection_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:52:3: warning: style of line directive is a GCC extension
+   52 |   double full_sort_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:53:3: warning: style of line directive is a GCC extension
+   53 |   double merge_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:54:3: warning: style of line directive is a GCC extension
+   54 |   double gather_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:55:3: warning: style of line directive is a GCC extension
+   55 |   double d2h_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:56:3: warning: style of line directive is a GCC extension
+   56 |   double device_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:57:3: warning: style of line directive is a GCC extension
+   57 |   double end_to_end_ms = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:58:3: warning: style of line directive is a GCC extension
+   58 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:59:3: warning: style of line directive is a GCC extension
+   59 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:61:3: warning: style of line directive is a GCC extension
+   61 |   std::size_t input_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:62:3: warning: style of line directive is a GCC extension
+   62 |   std::size_t output_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:63:3: warning: style of line directive is a GCC extension
+   63 |   std::size_t auxiliary_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:64:3: warning: style of line directive is a GCC extension
+   64 |   std::size_t peak_allocated_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:65:3: warning: style of line directive is a GCC extension
+   65 |   std::size_t dynamic_shared_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:66:3: warning: style of line directive is a GCC extension
+   66 |   std::size_t cub_temp_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:67:3: warning: style of line directive is a GCC extension
+   67 |   std::size_t distance_buffer_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:68:3: warning: style of line directive is a GCC extension
+   68 |   std::size_t key_buffer_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:69:3: warning: style of line directive is a GCC extension
+   69 |   std::size_t candidate_buffer_bytes = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:70:3: warning: style of line directive is a GCC extension
+   70 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:71:3: warning: style of line directive is a GCC extension
+   71 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:73:3: warning: style of line directive is a GCC extension
+   73 |   std::vector<std::uint32_t> ids;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:74:3: warning: style of line directive is a GCC extension
+   74 |   std::vector<float> distances;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:75:3: warning: style of line directive is a GCC extension
+   75 |   std::vector<std::int32_t> labels;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:76:3: warning: style of line directive is a GCC extension
+   76 |   StageTimes times;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:77:3: warning: style of line directive is a GCC extension
+   77 |   MemoryStats memory;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:78:3: warning: style of line directive is a GCC extension
+   78 |   std::size_t merge_levels = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:79:3: warning: style of line directive is a GCC extension
+   79 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:80:3: warning: style of line directive is a GCC extension
+   80 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:82:3: warning: style of line directive is a GCC extension
+   82 |   Shape shape;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:83:3: warning: style of line directive is a GCC extension
+   83 |   std::vector<double> distances;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:84:3: warning: style of line directive is a GCC extension
+   84 |   std::vector<std::uint32_t> order;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:85:3: warning: style of line directive is a GCC extension
+   85 | };
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:86:3: warning: style of line directive is a GCC extension
+   86 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:88:3: warning: style of line directive is a GCC extension
+   88 |   bool structure = true;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:89:3: warning: style of line directive is a GCC extension
+   89 |   bool labels = true;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:90:3: warning: style of line directive is a GCC extension
+   90 |   bool sorted = true;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:91:3: warning: style of line directive is a GCC extension
+   91 |   bool distance_tolerance = true;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:92:3: warning: style of line directive is a GCC extension
+   92 |   bool fp64_id_agreement = true;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:93:3: warning: style of line directive is a GCC extension
+   93 |   std::size_t id_mismatches = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:94:3: warning: style of line directive is a GCC extension
+   94 |   double max_abs_error = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:95:3: warning: style of line directive is a GCC extension
+   95 |   double max_rel_error = 0.0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:96:3: warning: style of line directive is a GCC extension
+   96 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:98:3: warning: style of line directive is a GCC extension
+   98 |     return structure && labels && sorted && distance_tolerance;
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:99:3: warning: style of line directive is a GCC extension
+   99 |   }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:100:3: warning: style of line directive is a GCC extension
+  100 | };
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:101:3: warning: style of line directive is a GCC extension
+  101 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:103:3: warning: style of line directive is a GCC extension
+  103 | HostInput load_input(const std::string &prefix, const Shape &shape);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:104:3: warning: style of line directive is a GCC extension
+  104 | HostInput synthetic(std::size_t n, std::size_t d, std::size_t q,
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:105:3: warning: style of line directive is a GCC extension
+  105 |                     std::size_t k, std::uint32_t seed = 5206);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:107:3: warning: style of line directive is a GCC extension
+  107 | Fp64Oracle make_fp64_oracle(const HostInput &input);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:108:3: warning: style of line directive is a GCC extension
+  108 | Verification verify_fp64(const HostInput &input, const SearchResult &result,
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:109:3: warning: style of line directive is a GCC extension
+  109 |                          const Fp64Oracle &oracle);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:111:3: warning: style of line directive is a GCC extension
+  111 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:113:3: warning: style of line directive is a GCC extension
+  113 | const char *mapping_name(Mapping mapping);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:114:3: warning: style of line directive is a GCC extension
+  114 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:116:3: warning: style of line directive is a GCC extension
+  116 | public:
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:118:3: warning: style of line directive is a GCC extension
+  118 |   ~Runner();
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:119:3: warning: style of line directive is a GCC extension
+  119 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:121:3: warning: style of line directive is a GCC extension
+  121 |   Runner &operator=(const Runner &) = delete;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:122:3: warning: style of line directive is a GCC extension
+  122 |   Runner(Runner &&) noexcept;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:123:3: warning: style of line directive is a GCC extension
+  123 |   Runner &operator=(Runner &&) noexcept;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:124:3: warning: style of line directive is a GCC extension
+  124 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:129:3: warning: style of line directive is a GCC extension
+  129 |   const MemoryStats &memory() const;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:130:3: warning: style of line directive is a GCC extension
+  130 |   std::size_t merge_levels() const;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:131:3: warning: style of line directive is a GCC extension
+  131 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:134:3: warning: style of line directive is a GCC extension
+  134 |   Impl *impl_ = nullptr;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:135:3: warning: style of line directive is a GCC extension
+  135 | };
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:136:3: warning: style of line directive is a GCC extension
+  136 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:141:3: warning: style of line directive is a GCC extension
+  141 |                  std::size_t list_count, std::size_t k);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/include/gpu_knn.hpp:144:3: warning: style of line directive is a GCC extension
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:17:3: warning: style of line directive is a GCC extension
+   17 | std::size_t cases = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:17:3: warning: style of line directive is a GCC extension
+   17 | std::size_t cases = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:18:3: warning: style of line directive is a GCC extension
+   18 | std::size_t near_tie_id_mismatches = 0;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:19:3: warning: style of line directive is a GCC extension
+   19 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:21:3: warning: style of line directive is a GCC extension
+   21 |   ++checks;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:22:3: warning: style of line directive is a GCC extension
+   22 |   if (!condition) {
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:23:3: warning: style of line directive is a GCC extension
+   23 |     throw std::runtime_error(message);
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:24:3: warning: style of line directive is a GCC extension
+   24 |   }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:25:3: warning: style of line directive is a GCC extension
+   25 | }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:26:3: warning: style of line directive is a GCC extension
+   26 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:28:3: warning: style of line directive is a GCC extension
+   28 |   if (a.id == gpu_knn::invalid_id || b.id == gpu_knn::invalid_id) {
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:29:3: warning: style of line directive is a GCC extension
+   29 |     return a.id != gpu_knn::invalid_id && b.id == gpu_knn::invalid_id;
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:30:3: warning: style of line directive is a GCC extension
+   30 |   }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:31:3: warning: style of line directive is a GCC extension
+   31 |   return a.distance < b.distance ||
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:32:3: warning: style of line directive is a GCC extension
+   32 |          (a.distance == b.distance && a.id < b.id);
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:34:3: warning: style of line directive is a GCC extension
+   34 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:36:3: warning: style of line directive is a GCC extension
+   36 |               bool require_fp64_ids = true) {
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:37:3: warning: style of line directive is a GCC extension
+   37 |   ++cases;
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:38:3: warning: style of line directive is a GCC extension
+   38 |   const auto oracle = gpu_knn::make_fp64_oracle(input);
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:39:3: warning: style of line directive is a GCC extension
+   39 |   for (const auto mapping : {gpu_knn::Mapping::ThreadPerVector,
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:40:3: warning: style of line directive is a GCC extension
+   40 |                              gpu_knn::Mapping::WarpPerVector}) {
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:41:3: warning: style of line directive is a GCC extension
+   41 |     gpu_knn::Runner materialized(
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:42:3: warning: style of line directive is a GCC extension
+   42 |         input, {gpu_knn::Route::MaterializedFullSort, mapping, 0});
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:44:3: warning: style of line directive is a GCC extension
+   44 |         input, {gpu_knn::Route::FusedTiledBitonic, mapping, tile});
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:47:3: warning: style of line directive is a GCC extension
+   47 |     const auto fused_result = fused.run(false, true);
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:48:3: warning: style of line directive is a GCC extension
+   48 |     const auto materialized_check =
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:49:3: warning: style of line directive is a GCC extension
+   49 |         gpu_knn::verify_fp64(input, materialized_result, oracle);
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:51:3: warning: style of line directive is a GCC extension
+   51 |     require(materialized_check.passed(),
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:52:3: warning: style of line directive is a GCC extension
+   52 |             "materialized route failed FP64/structure verification");
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:54:3: warning: style of line directive is a GCC extension
+   54 |             "fused route failed FP64/structure verification");
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:56:3: warning: style of line directive is a GCC extension
+   56 |       require(materialized_check.fp64_id_agreement &&
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:57:3: warning: style of line directive is a GCC extension
+   57 |                   fused_check.fp64_id_agreement,
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:60:3: warning: style of line directive is a GCC extension
+   60 |       near_tie_id_mismatches += materialized_check.id_mismatches +
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:61:3: warning: style of line directive is a GCC extension
+   61 |                                 fused_check.id_mismatches;
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:63:3: warning: style of line directive is a GCC extension
+   63 |     require(gpu_knn::exact_same_result(materialized_result, fused_result),
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:64:3: warning: style of line directive is a GCC extension
+   64 |             "fused result differs from same-mapping materialized full sort");
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:67:3: warning: style of line directive is a GCC extension
+   67 |     const auto fused_repeat = fused.run(false, true);
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:68:3: warning: style of line directive is a GCC extension
+   68 |     require(gpu_knn::exact_same_result(materialized_result,
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:69:3: warning: style of line directive is a GCC extension
+   69 |                                        materialized_repeat),
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:72:3: warning: style of line directive is a GCC extension
+   72 |             "fused route is not deterministic");
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:74:3: warning: style of line directive is a GCC extension
+   74 | }
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:75:3: warning: style of line directive is a GCC extension
+   75 | 
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:77:3: warning: style of line directive is a GCC extension
+   77 |   std::mt19937 rng(5206);
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:78:3: warning: style of line directive is a GCC extension
+   78 |   for (const std::size_t list_count : {std::size_t{1}, std::size_t{2},
+      |   ^~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:79:3: warning: style of line directive is a GCC extension
+   79 |                                        std::size_t{3}, std::size_t{5},
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:82:3: warning: style of line directive is a GCC extension
+   82 |     for (const std::size_t k : {std::size_t{1}, std::size_t{5},
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:83:3: warning: style of line directive is a GCC extension
+   83 |                                 std::size_t{10}, std::size_t{31},
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:85:3: warning: style of line directive is a GCC extension
+   85 |       std::vector<gpu_knn::Candidate> lists(list_count * k);
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:86:3: warning: style of line directive is a GCC extension
+   86 |       std::uint32_t id = 0;
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:87:3: warning: style of line directive is a GCC extension
+   87 |       for (std::size_t list = 0; list < list_count; ++list) {
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:88:3: warning: style of line directive is a GCC extension
+   88 |         for (std::size_t rank = 0; rank < k; ++rank) {
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:89:3: warning: style of line directive is a GCC extension
+   89 |           // Deliberately create many equal distances so ID tie handling is
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:92:3: warning: style of line directive is a GCC extension
+   92 |               {static_cast<float>((rng() % 11) / 3), id++};
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:94:3: warning: style of line directive is a GCC extension
+   94 |         std::sort(lists.begin() + static_cast<std::ptrdiff_t>(list * k),
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:95:3: warning: style of line directive is a GCC extension
+   95 |                   lists.begin() + static_cast<std::ptrdiff_t>((list + 1) * k),
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:98:3: warning: style of line directive is a GCC extension
+   98 |       auto expected = lists;
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:99:3: warning: style of line directive is a GCC extension
+   99 |       std::sort(expected.begin(), expected.end(), better);
+      |   ^ 
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:100:3: warning: style of line directive is a GCC extension
+  100 |       expected.resize(k);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:101:3: warning: style of line directive is a GCC extension
+  101 |       const auto actual =
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:102:3: warning: style of line directive is a GCC extension
+  102 |           gpu_knn::debug_merge_topk(lists, list_count, k);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:104:3: warning: style of line directive is a GCC extension
+  104 |       for (std::size_t rank = 0; rank < k; ++rank) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:105:3: warning: style of line directive is a GCC extension
+  105 |         require(actual[rank].id == expected[rank].id &&
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:106:3: warning: style of line directive is a GCC extension
+  106 |                     actual[rank].distance == expected[rank].distance,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:109:3: warning: style of line directive is a GCC extension
+  109 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:110:3: warning: style of line directive is a GCC extension
+  110 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:111:3: warning: style of line directive is a GCC extension
+  111 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:112:3: warning: style of line directive is a GCC extension
+  112 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:114:3: warning: style of line directive is a GCC extension
+  114 |   gpu_knn::HostInput zero;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:115:3: warning: style of line directive is a GCC extension
+  115 |   zero.shape = {40, 9, 2, 35};
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:116:3: warning: style of line directive is a GCC extension
+  116 |   zero.x.assign(zero.shape.n * zero.shape.d, 0.0f);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:117:3: warning: style of line directive is a GCC extension
+  117 |   zero.queries.assign(zero.shape.q * zero.shape.d, 0.0f);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:118:3: warning: style of line directive is a GCC extension
+  118 |   zero.labels.resize(zero.shape.n);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:119:3: warning: style of line directive is a GCC extension
+  119 |   for (std::size_t id = 0; id < zero.shape.n; ++id) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:120:3: warning: style of line directive is a GCC extension
+  120 |     zero.labels[id] = static_cast<std::int32_t>(100 - id);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:121:3: warning: style of line directive is a GCC extension
+  121 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:122:3: warning: style of line directive is a GCC extension
+  122 |   gpu_knn::validate_input(zero);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:123:3: warning: style of line directive is a GCC extension
+  123 |   exercise(zero, 64);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:124:3: warning: style of line directive is a GCC extension
+  124 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:126:3: warning: style of line directive is a GCC extension
+  126 |       zero, {gpu_knn::Route::FusedTiledBitonic,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:129:3: warning: style of line directive is a GCC extension
+  129 |   for (std::size_t query = 0; query < zero.shape.q; ++query) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:130:3: warning: style of line directive is a GCC extension
+  130 |     for (std::size_t rank = 0; rank < zero.shape.k; ++rank) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:131:3: warning: style of line directive is a GCC extension
+  131 |       require(result.ids[query * zero.shape.k + rank] == rank,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:132:3: warning: style of line directive is a GCC extension
+  132 |               "equal-distance results are not ordered by ID");
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:134:3: warning: style of line directive is a GCC extension
+  134 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:135:3: warning: style of line directive is a GCC extension
+  135 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:137:3: warning: style of line directive is a GCC extension
+  137 |   symmetric.shape = {5, 2, 2, 3};
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:138:3: warning: style of line directive is a GCC extension
+  138 |   symmetric.x = {1, 0, -1, 0, 0, 1, 0, -1, 0, 0};
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:139:3: warning: style of line directive is a GCC extension
+  139 |   symmetric.queries = {0, 0, 1, 0};
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:140:3: warning: style of line directive is a GCC extension
+  140 |   symmetric.labels = {11, 22, 33, 44, 55};
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:141:3: warning: style of line directive is a GCC extension
+  141 |   gpu_knn::validate_input(symmetric);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:142:3: warning: style of line directive is a GCC extension
+  142 |   exercise(symmetric, 32);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:143:3: warning: style of line directive is a GCC extension
+  143 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:144:3: warning: style of line directive is a GCC extension
+  144 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:146:3: warning: style of line directive is a GCC extension
+  146 |   auto input = gpu_knn::synthetic(33, 9, 2, 10);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:147:3: warning: style of line directive is a GCC extension
+  147 |   bool threw = false;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:148:3: warning: style of line directive is a GCC extension
+  148 |   try {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:149:3: warning: style of line directive is a GCC extension
+  149 |     gpu_knn::Runner bad(
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:150:3: warning: style of line directive is a GCC extension
+  150 |         input, {gpu_knn::Route::FusedTiledBitonic,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:153:3: warning: style of line directive is a GCC extension
+  153 |     threw = true;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:154:3: warning: style of line directive is a GCC extension
+  154 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:155:3: warning: style of line directive is a GCC extension
+  155 |   require(threw, "non-power-of-two tile was accepted");
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:156:3: warning: style of line directive is a GCC extension
+  156 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:158:3: warning: style of line directive is a GCC extension
+  158 |   threw = false;
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:159:3: warning: style of line directive is a GCC extension
+  159 |   try {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:160:3: warning: style of line directive is a GCC extension
+  160 |     gpu_knn::Runner bad(
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:161:3: warning: style of line directive is a GCC extension
+  161 |         input, {gpu_knn::Route::FusedTiledBitonic,
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:164:3: warning: style of line directive is a GCC extension
+  164 |     threw = true;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:165:3: warning: style of line directive is a GCC extension
+  165 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:166:3: warning: style of line directive is a GCC extension
+  166 |   require(threw, "k larger than tile was accepted");
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:167:3: warning: style of line directive is a GCC extension
+  167 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:168:3: warning: style of line directive is a GCC extension
+  168 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:170:3: warning: style of line directive is a GCC extension
+  170 |   for (const std::size_t tile : {32u, 64u, 128u, 256u}) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:171:3: warning: style of line directive is a GCC extension
+  171 |     for (const std::size_t n : {tile - 1, tile, tile + 1,
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:172:3: warning: style of line directive is a GCC extension
+  172 |                                 2 * tile - 1, 2 * tile, 2 * tile + 1}) {
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:173:3: warning: style of line directive is a GCC extension
+  173 |       exercise(gpu_knn::synthetic(n, 33, 2, 10), tile);
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:174:3: warning: style of line directive is a GCC extension
+  174 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:175:3: warning: style of line directive is a GCC extension
+  175 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:176:3: warning: style of line directive is a GCC extension
+  176 |   for (const std::size_t d : {31u, 32u, 33u, 63u, 64u, 65u}) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:177:3: warning: style of line directive is a GCC extension
+  177 |     exercise(gpu_knn::synthetic(129, d, 2, 5), 128);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:178:3: warning: style of line directive is a GCC extension
+  178 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:179:3: warning: style of line directive is a GCC extension
+  179 |   for (const std::size_t n : {7u, 32u, 33u, 127u, 128u}) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:180:3: warning: style of line directive is a GCC extension
+  180 |     exercise(gpu_knn::synthetic(n, 9, 2, n), 128);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:181:3: warning: style of line directive is a GCC extension
+  181 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:182:3: warning: style of line directive is a GCC extension
+  182 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:183:3: warning: style of line directive is a GCC extension
+  183 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:185:3: warning: style of line directive is a GCC extension
+  185 |   auto near = gpu_knn::synthetic(8, 9, 2, 4);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:186:3: warning: style of line directive is a GCC extension
+  186 |   std::fill(near.x.begin(), near.x.end(), 0.5f);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:187:3: warning: style of line directive is a GCC extension
+  187 |   std::fill(near.queries.begin(), near.queries.end(), 0.0f);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:188:3: warning: style of line directive is a GCC extension
+  188 |   near.x[0] = std::nextafter(0.5f, 1.0f);
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:189:3: warning: style of line directive is a GCC extension
+  189 |   // FP32 can round distinct FP64 distances to an exact tie. Keep FP64 ID
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:192:3: warning: style of line directive is a GCC extension
+  192 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:193:3: warning: style of line directive is a GCC extension
+  193 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:195:3: warning: style of line directive is a GCC extension
+  195 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:197:3: warning: style of line directive is a GCC extension
+  197 |   try {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:198:3: warning: style of line directive is a GCC extension
+  198 |     int devices = 0;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:199:3: warning: style of line directive is a GCC extension
+  199 |     const cudaError_t status = cudaGetDeviceCount(&devices);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:200:3: warning: style of line directive is a GCC extension
+  200 |     if (status != cudaSuccess) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:201:3: warning: style of line directive is a GCC extension
+  201 |       throw std::runtime_error(cudaGetErrorString(status));
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:202:3: warning: style of line directive is a GCC extension
+  202 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:203:3: warning: style of line directive is a GCC extension
+  203 |     if (devices == 0) {
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:204:3: warning: style of line directive is a GCC extension
+  204 |       std::cout << "SKIP no CUDA device available\n";
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:205:3: warning: style of line directive is a GCC extension
+  205 |       return 77;
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:206:3: warning: style of line directive is a GCC extension
+  206 |     }
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:207:3: warning: style of line directive is a GCC extension
+  207 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:209:3: warning: style of line directive is a GCC extension
+  209 |     exercise(gpu_knn::synthetic(1, 1, 1, 1), 32);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:210:3: warning: style of line directive is a GCC extension
+  210 |     exercise(gpu_knn::synthetic(257, 9, 3, 10), 32);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:211:3: warning: style of line directive is a GCC extension
+  211 |     exercise(gpu_knn::synthetic(257, 9, 3, 10), 128);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:212:3: warning: style of line directive is a GCC extension
+  212 |     exercise(gpu_knn::synthetic(129, 33, 2, 5), 64);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:213:3: warning: style of line directive is a GCC extension
+  213 |     exercise(gpu_knn::synthetic(65, 65, 1, 32), 32);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:214:3: warning: style of line directive is a GCC extension
+  214 |     exercise(gpu_knn::synthetic(513, 128, 4, 10), 256);
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:215:3: warning: style of line directive is a GCC extension
+  215 |     test_ties();
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:216:3: warning: style of line directive is a GCC extension
+  216 |     test_invalid_config();
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:217:3: warning: style of line directive is a GCC extension
+  217 |     test_boundaries();
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:218:3: warning: style of line directive is a GCC extension
+  218 |     test_near_ties();
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:219:3: warning: style of line directive is a GCC extension
+  219 | 
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:221:3: warning: style of line directive is a GCC extension
+  221 |               << " near_tie_FP64_ID_mismatches=" << near_tie_id_mismatches
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:224:3: warning: style of line directive is a GCC extension
+  224 |   } catch (const std::exception &error) {
+      |   ^~~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:225:3: warning: style of line directive is a GCC extension
+  225 |     std::cerr << "FAIL " << error.what() << '\n';
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:226:3: warning: style of line directive is a GCC extension
+  226 |     return 1;
+      |   ^ ~
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:227:3: warning: style of line directive is a GCC extension
+  227 |   }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:228:3: warning: style of line directive is a GCC extension
+  228 | }
+      |   ^  
+/home/zhuoxun/Documents/5206_CA2/GPU/tests/test_gpu.cu:230:3: warning: style of line directive is a GCC extension
+tmpxft_0002ac70_00000000-6_test_gpu.cudafe1.stub.c:4:3: warning: style of line directive is a GCC extension
+tmpxft_0002ac70_00000000-6_test_gpu.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension
+[ 70%] Linking CUDA device code CMakeFiles/knn_gpu_bench.dir/cmake_device_link.o
+[ 80%] Linking CXX executable knn_gpu_bench
+[ 80%] Built target knn_gpu_bench
+[ 90%] Linking CUDA device code CMakeFiles/knn_gpu_tests.dir/cmake_device_link.o
+[100%] Linking CXX executable knn_gpu_tests
+[100%] Built target knn_gpu_tests
++ ctest --test-dir /home/zhuoxun/Documents/5206_CA2/build_full/gpu --verbose
+Internal ctest changing into directory: /home/zhuoxun/Documents/5206_CA2/build_full/gpu
+UpdateCTestConfiguration  from :/home/zhuoxun/Documents/5206_CA2/build_full/gpu/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/zhuoxun/Documents/5206_CA2/build_full/gpu/DartConfiguration.tcl
+Test project /home/zhuoxun/Documents/5206_CA2/build_full/gpu
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: gpu_correctness
+
+1: Test command: /home/zhuoxun/Documents/5206_CA2/build_full/gpu/knn_gpu_tests
+1: Working Directory: /home/zhuoxun/Documents/5206_CA2/build_full/gpu
+1: Test timeout computed to be: 10000000
+1: PASS gpu_cases=44 checks=2294 near_tie_FP64_ID_mismatches=32
+1/1 Test #1: gpu_correctness ..................   Passed    0.17 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.17 sec
++ /home/zhuoxun/Documents/5206_CA2/.tools/cuda-12.8/bin/compute-sanitizer --tool memcheck --error-exitcode 1 /home/zhuoxun/Documents/5206_CA2/build_full/gpu/knn_gpu_tests
+========= COMPUTE-SANITIZER
+PASS gpu_cases=44 checks=2294 near_tie_FP64_ID_mismatches=32
+========= ERROR SUMMARY: 0 errors
++ /home/zhuoxun/Documents/5206_CA2/.tools/cuda-12.8/bin/compute-sanitizer --tool racecheck --error-exitcode 1 /home/zhuoxun/Documents/5206_CA2/build_full/gpu/knn_gpu_tests
+========= COMPUTE-SANITIZER
+PASS gpu_cases=44 checks=2294 near_tie_FP64_ID_mismatches=32
+========= RACECHECK SUMMARY: 0 hazards displayed (0 errors, 0 warnings)
++ /home/zhuoxun/Documents/5206_CA2/build_full/cpu/knn_bench /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/cpu_core
+case 0 N=100000 d=64 q=16
+case 1 N=10000 d=64 q=16
+case 2 N=100000 d=32 q=16
+case 3 N=100000 d=128 q=16
+case 4 N=100000 d=64 q=1
+case 5 N=100000 d=64 q=64
+case 6 N=100000 d=64 q=16
+case 7 N=100000 d=64 q=16
++ /home/zhuoxun/Documents/5206_CA2/.venv/bin/python /home/zhuoxun/Documents/5206_CA2/CPU/scripts/analyze.py /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/cpu_core
+/home/zhuoxun/Documents/5206_CA2/.venv/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+{
+  "input_files": 24,
+  "configurations": 8,
+  "timing_records": 360,
+  "correctness_records": 16,
+  "required_correctness_checks_pass": true,
+  "FP64_ID_position_differences": 0,
+  "maximum_absolute_distance_error": 7.85854888647e-05,
+  "baseline_median_seconds": {
+    "R0_scalar_full_sort": 0.226649504,
+    "R1_avx2_topk_heap": 0.0361147325
+  },
+  "baseline_speedup_scalar_over_AVX2_heap": 6.275818435038941,
+  "variable_groups": [
+    {
+      "case": "5",
+      "route": "R1_avx2_topk_heap",
+      "group": "0"
+    }
+  ]
+}
++ /home/zhuoxun/Documents/5206_CA2/build_full/gpu/knn_gpu_bench --inputs /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/cpu_core --warmups 10 --repeats 20 --output /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/gpu_mapping_ablation --cases 0 --routes materialized,fused --mappings thread,warp --tiles 128
+GPU case 0 N=100000 d=64 q=16 k=10
+  prepare R2_cuda_materialized_full_sort / thread_per_vector
+  prepare R3_cuda_fused_tiled_bitonic / thread_per_vector / T=128
+  prepare R2_cuda_materialized_full_sort / warp_per_vector
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=128
+GPU benchmark complete: "/home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/gpu_mapping_ablation"
++ /home/zhuoxun/Documents/5206_CA2/build_full/gpu/knn_gpu_bench --inputs /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/cpu_core --warmups 10 --repeats 20 --output /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/gpu_core --routes materialized,fused --mappings warp --tiles 128
+GPU case 0 N=100000 d=64 q=16 k=10
+  prepare R2_cuda_materialized_full_sort / warp_per_vector
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=128
+GPU case 1 N=10000 d=64 q=16 k=10
+  prepare R2_cuda_materialized_full_sort / warp_per_vector
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=128
+GPU case 2 N=100000 d=32 q=16 k=10
+  prepare R2_cuda_materialized_full_sort / warp_per_vector
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=128
+GPU case 3 N=100000 d=128 q=16 k=10
+  prepare R2_cuda_materialized_full_sort / warp_per_vector
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=128
+GPU case 4 N=100000 d=64 q=1 k=10
+  prepare R2_cuda_materialized_full_sort / warp_per_vector
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=128
+GPU case 5 N=100000 d=64 q=64 k=10
+  prepare R2_cuda_materialized_full_sort / warp_per_vector
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=128
+GPU case 6 N=100000 d=64 q=16 k=5
+  prepare R2_cuda_materialized_full_sort / warp_per_vector
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=128
+GPU case 7 N=100000 d=64 q=16 k=32
+  prepare R2_cuda_materialized_full_sort / warp_per_vector
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=128
+GPU benchmark complete: "/home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/gpu_core"
++ /home/zhuoxun/Documents/5206_CA2/build_full/gpu/knn_gpu_bench --inputs /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/cpu_core --warmups 10 --repeats 20 --output /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/gpu_tile_ablation --cases 0 --routes materialized,fused --mappings warp --tiles 32,64,128,256
+GPU case 0 N=100000 d=64 q=16 k=10
+  prepare R2_cuda_materialized_full_sort / warp_per_vector
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=32
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=64
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=128
+  prepare R3_cuda_fused_tiled_bitonic / warp_per_vector / T=256
+GPU benchmark complete: "/home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/gpu_tile_ablation"
++ /home/zhuoxun/Documents/5206_CA2/.venv/bin/python /home/zhuoxun/Documents/5206_CA2/experiments/analyze_full.py --cpu-results /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/cpu_core --gpu-results /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/gpu_core /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/gpu_mapping_ablation /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/gpu_tile_ablation --output /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/analysis --primary-mapping warp_per_vector --primary-tile 128
+/home/zhuoxun/Documents/5206_CA2/.venv/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+{
+  "cpu_correctness_records": 16,
+  "gpu_correctness_records": 25,
+  "gpu_raw_measurements": 1000,
+  "all_required_correctness_passed": true,
+  "primary_mapping": "warp_per_vector",
+  "primary_tile": "128",
+  "variable_cpu_groups": [
+    {
+      "case": "5",
+      "route": "R1_avx2_topk_heap",
+      "group": "0",
+      "IQR_over_median": 0.1515700225995566
+    }
+  ],
+  "variable_gpu_groups": [],
+  "baseline": {
+    "R0_ms": 226.649504,
+    "R1_ms": 36.1147325,
+    "R2_resident_ms": 15.7195520401,
+    "R3_resident_ms": 9.35526371002,
+    "R2_end_to_end_ms": 18.390435500000002,
+    "R3_end_to_end_ms": 12.034423499999999
+  },
+  "speedups": {
+    "R0_over_R1": 6.275818435038941,
+    "R0_over_R2_resident": 14.418318246081405,
+    "R0_over_R3_resident": 24.22694977130853,
+    "R2_over_R3_resident": 1.6802895703798815,
+    "R2_over_R3_end_to_end": 1.5281525949290387
+  }
+}
++ /home/zhuoxun/Documents/5206_CA2/.venv/bin/python /home/zhuoxun/Documents/5206_CA2/experiments/generate_report.py --analysis /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/analysis --primary-mapping warp_per_vector --primary-tile 128
+/home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/analysis/final_results.md
++ nvidia-smi
+Mon Oct 26 14:08:09 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce GTX 1050        Off |   00000000:01:00.0 Off |                  N/A |
+| N/A   79C    P0            N/A  /   30W |     385MiB /   4096MiB |      2%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            1853      G   /usr/lib/xorg/Xorg                      149MiB |
+|    0   N/A  N/A            2360      G   /usr/bin/gnome-shell                     30MiB |
+|    0   N/A  N/A            3006      G   ...exec/xdg-desktop-portal-gnome          9MiB |
+|    0   N/A  N/A           12122      G   ...rack-uuid=3190708988185955192         94MiB |
+|    0   N/A  N/A           14195      G   /usr/bin/nautilus                        13MiB |
+|    0   N/A  N/A           16662      G   ...ess --variations-seed-version         84MiB |
++-----------------------------------------------------------------------------------------+
++ /home/zhuoxun/Documents/5206_CA2/.venv/bin/python /home/zhuoxun/Documents/5206_CA2/experiments/verify_experiments.py --results /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z --output /home/zhuoxun/Documents/5206_CA2/results/runs/20261026T070351075233Z/analysis/data_audit.json
+{
+  "status": "PASS",
+  "scope": "retained full-run data audit; execution logs are separate",
+  "input_files_verified": 24,
+  "core_cases": 8,
+  "cpu_correctness_records": 16,
+  "gpu_correctness_records": 25,
+  "FP64_ID_mismatches": 0,
+  "cpu_timing_samples": 360,
+  "gpu_timing_samples": 1000,
+  "gpu_timing_groups": 50,
+  "primary_mapping": "warp_per_vector",
+  "primary_mapping_is_fastest_this_session": true,
+  "mapping_medians_ms": {
+    "thread_per_vector": 20.667504310650003,
+    "warp_per_vector": 9.272367954255
+  },
+  "gpu_variable_groups": [],
+  "cpu_variable_groups": [
+    {
+      "case": "5",
+      "route": "R1_avx2_topk_heap",
+      "group": "0",
+      "median": "0.144520977",
+      "IQR": "0.02190504775"
+    }
+  ],
+  "plots": 8,
+  "source_commit": "unavailable",
+  "artifact_sha256": {
+    "analysis/analysis.json": "1f45fb6c186975b79f4afac89dcc0c88562c300586b3b566b372af6d44166686",
+    "analysis/gpu_memory.csv": "35708dc5863cf17fe284ffada2fac1341814ac43b1b68f4e6f7057e55593f651",
+    "analysis/gpu_summary.csv": "aff59c2e853cb6f829f788f7067e30d90cabb813620648d2293ad607a2f2d0f3",
+    "analysis/unified_correctness.csv": "908fa178cdd5d45414989f9276c3b6ac4e9c73261bc5cb0d4ab59d5cbb2586fd",
+    "analysis/unified_summary.csv": "cd604cee0ab819e72719362da4f9dcf03431a1547e26b8be65e6e25798f55778",
+    "cpu_core/correctness.csv": "2fc5a1c01f8979357b7c1b3aa5801d2914251167136a22a45d1c21443696e075",
+    "cpu_core/diagnostics.csv": "6a98ce6412f7b07c00f1011985fb14650c88ca6912a259d7dd7b8da3c68c79ef",
+    "cpu_core/input_sha256.json": "afd38e881a43672d4d6b9a44b0ff35d2dbde0266baf20ebe5f99a483cec7a790",
+    "cpu_core/inputs.csv": "12ede3bf6c27c3413617fd214ead3015b15f8d764779ce43f0a436472cede43c",
+    "cpu_core/raw.csv": "2bb0c6346412e01462b83045f5c21f9dd655e2c2d6849e8c3c092a7dd2db76ae",
+    "cpu_core/run.txt": "3cdcbe8f6757fd782293e1162288f59876c72200567c31a6d0a4e77c59cb8fb4",
+    "cpu_core/summary.csv": "ef9d9e013b2e2dd197c2dab1fba70c9466315ac03407d05318c8094c91fa444c",
+    "environment.json": "085db98d7ceaaf5f126ac1404ffb913fd02e67fc3475a30c347334b61d40b6d5",
+    "gpu_core/correctness.csv": "4b0ec820798f2cf7db25aa004a9f509f5a5debacb29ac771d45ebf45bcc8bd33",
+    "gpu_core/memory.csv": "c958f9f4eebb2f363dad38a57ea1000102114b1ce9c54a9fe96a115ab35c939e",
+    "gpu_core/raw.csv": "14a4f99faae0727f2be7992d8685b324c4ee183df0e0b3dcb96e10422e41a7f6",
+    "gpu_core/run.txt": "d101ee75034acc62fa99ccdd7f1a86bf54fda37c889b3693146ac72cb33ca600",
+    "gpu_mapping_ablation/correctness.csv": "00cc7a2ab72c613a6416df1d32ae05e9807d27dcd4fbf5fcba53464b11b8f058",
+    "gpu_mapping_ablation/memory.csv": "108ba412d59d5389a35fd3e4b83fb7396033a7d2579920544c3e08c847513047",
+    "gpu_mapping_ablation/raw.csv": "1248467f00c8c5c05656c16e0167a8f633d1e0c7cec8a151d74e99953d1e80ef",
+    "gpu_mapping_ablation/run.txt": "d101ee75034acc62fa99ccdd7f1a86bf54fda37c889b3693146ac72cb33ca600",
+    "gpu_tile_ablation/correctness.csv": "02379f127db1623db95a53901ea11e429ccc68d82f35293a2749e66572425d15",
+    "gpu_tile_ablation/memory.csv": "40a3b4147591df8119fc95623f84e34e88afa7c97840b638bb18a77b2b55165b",
+    "gpu_tile_ablation/raw.csv": "ba87b30b1e6e6a165e0bfa26380750de93e5644950f8e146023fc843b0d5237e",
+    "gpu_tile_ablation/run.txt": "d101ee75034acc62fa99ccdd7f1a86bf54fda37c889b3693146ac72cb33ca600"
+  }
+}

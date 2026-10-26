@@ -1,0 +1,5 @@
+case,route,mapping,tile_size,input_bytes,output_bytes,aux_bytes,peak_device_bytes,dynamic_shared_bytes,cub_temp_bytes,distance_buffer_bytes,key_buffer_bytes,candidate_buffer_bytes,merge_levels
+0,R2_cuda_materialized_full_sort,thread_per_vector,,26004096,1920,44800323,70806339,0,12800255,6400000,25600000,0,0
+0,R3_cuda_fused_tiled_bitonic,thread_per_vector,128,26004096,1920,2001920,28007936,1024,0,0,0,2001920,10
+0,R2_cuda_materialized_full_sort,warp_per_vector,,26004096,1920,44800323,70806339,0,12800255,6400000,25600000,0,0
+0,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,26004096,1920,2001920,28007936,1024,0,0,0,2001920,10

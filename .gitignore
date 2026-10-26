@@ -29,3 +29,36 @@ build/
 *.tmp
 *.log
 ~$*
+
+# Local Python/CUDA installations and caches
+.venv/
+.tools/
+.cache/
+__pycache__/
+*.py[cod]
+
+# Rebuildable compiler output
+build*/
+CMakeFiles/
+CMakeCache.txt
+*.o
+*.a
+*.so
+CPU/artifacts/
+
+# Generated datasets: retain locally; commit manifests and hashes instead
+**/input_*.f32
+**/input_*.i32
+CPU/results/
+
+# Temporary checks; final run logs under results/runs/ remain included
+results/smoke_runs/
+results/verification/
+results/validation/
+
+# Local application/credential directories and editor lock files
+.aws/
+.codex/
+.agents/
+~$*.docx
+.DS_Store

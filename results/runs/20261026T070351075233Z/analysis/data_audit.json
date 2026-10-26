@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "scope": "retained full-run data audit; execution logs are separate",
+  "input_files_verified": 24,
+  "core_cases": 8,
+  "cpu_correctness_records": 16,
+  "gpu_correctness_records": 25,
+  "FP64_ID_mismatches": 0,
+  "cpu_timing_samples": 360,
+  "gpu_timing_samples": 1000,
+  "gpu_timing_groups": 50,
+  "primary_mapping": "warp_per_vector",
+  "primary_mapping_is_fastest_this_session": true,
+  "mapping_medians_ms": {
+    "thread_per_vector": 20.667504310650003,
+    "warp_per_vector": 9.272367954255
+  },
+  "gpu_variable_groups": [],
+  "cpu_variable_groups": [
+    {
+      "case": "5",
+      "route": "R1_avx2_topk_heap",
+      "group": "0",
+      "median": "0.144520977",
+      "IQR": "0.02190504775"
+    }
+  ],
+  "plots": 8,
+  "source_commit": "unavailable",
+  "artifact_sha256": {
+    "analysis/analysis.json": "1f45fb6c186975b79f4afac89dcc0c88562c300586b3b566b372af6d44166686",
+    "analysis/gpu_memory.csv": "35708dc5863cf17fe284ffada2fac1341814ac43b1b68f4e6f7057e55593f651",
+    "analysis/gpu_summary.csv": "aff59c2e853cb6f829f788f7067e30d90cabb813620648d2293ad607a2f2d0f3",
+    "analysis/unified_correctness.csv": "908fa178cdd5d45414989f9276c3b6ac4e9c73261bc5cb0d4ab59d5cbb2586fd",
+    "analysis/unified_summary.csv": "cd604cee0ab819e72719362da4f9dcf03431a1547e26b8be65e6e25798f55778",
+    "cpu_core/correctness.csv": "2fc5a1c01f8979357b7c1b3aa5801d2914251167136a22a45d1c21443696e075",
+    "cpu_core/diagnostics.csv": "6a98ce6412f7b07c00f1011985fb14650c88ca6912a259d7dd7b8da3c68c79ef",
+    "cpu_core/input_sha256.json": "afd38e881a43672d4d6b9a44b0ff35d2dbde0266baf20ebe5f99a483cec7a790",
+    "cpu_core/inputs.csv": "12ede3bf6c27c3413617fd214ead3015b15f8d764779ce43f0a436472cede43c",
+    "cpu_core/raw.csv": "2bb0c6346412e01462b83045f5c21f9dd655e2c2d6849e8c3c092a7dd2db76ae",
+    "cpu_core/run.txt": "3cdcbe8f6757fd782293e1162288f59876c72200567c31a6d0a4e77c59cb8fb4",
+    "cpu_core/summary.csv": "ef9d9e013b2e2dd197c2dab1fba70c9466315ac03407d05318c8094c91fa444c",
+    "environment.json": "085db98d7ceaaf5f126ac1404ffb913fd02e67fc3475a30c347334b61d40b6d5",
+    "gpu_core/correctness.csv": "4b0ec820798f2cf7db25aa004a9f509f5a5debacb29ac771d45ebf45bcc8bd33",
+    "gpu_core/memory.csv": "c958f9f4eebb2f363dad38a57ea1000102114b1ce9c54a9fe96a115ab35c939e",
+    "gpu_core/raw.csv": "14a4f99faae0727f2be7992d8685b324c4ee183df0e0b3dcb96e10422e41a7f6",
+    "gpu_core/run.txt": "d101ee75034acc62fa99ccdd7f1a86bf54fda37c889b3693146ac72cb33ca600",
+    "gpu_mapping_ablation/correctness.csv": "00cc7a2ab72c613a6416df1d32ae05e9807d27dcd4fbf5fcba53464b11b8f058",
+    "gpu_mapping_ablation/memory.csv": "108ba412d59d5389a35fd3e4b83fb7396033a7d2579920544c3e08c847513047",
+    "gpu_mapping_ablation/raw.csv": "1248467f00c8c5c05656c16e0167a8f633d1e0c7cec8a151d74e99953d1e80ef",
+    "gpu_mapping_ablation/run.txt": "d101ee75034acc62fa99ccdd7f1a86bf54fda37c889b3693146ac72cb33ca600",
+    "gpu_tile_ablation/correctness.csv": "02379f127db1623db95a53901ea11e429ccc68d82f35293a2749e66572425d15",
+    "gpu_tile_ablation/memory.csv": "40a3b4147591df8119fc95623f84e34e88afa7c97840b638bb18a77b2b55165b",
+    "gpu_tile_ablation/raw.csv": "ba87b30b1e6e6a165e0bfa26380750de93e5644950f8e146023fc843b0d5237e",
+    "gpu_tile_ablation/run.txt": "d101ee75034acc62fa99ccdd7f1a86bf54fda37c889b3693146ac72cb33ca600"
+  }
+}

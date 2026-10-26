@@ -1,6 +1,6 @@
 # Required CPU kNN Implementation
 
-This directory contains only the required CPU methods: a scalar full-sort baseline, an independent FP64 oracle, AVX2 distances with a Top-K max-heap, and a separately tested sorted-list merge method. The [CPU rules](../CPU_rules.md) define the included work; the group's shared computation contract defines common input and numerical conventions.
+This directory contains only the required CPU methods: a scalar full-sort baseline, an independent FP64 oracle, AVX2 distances with a Top-K max-heap, and a separately tested sorted-list merge method. The [experiment protocol](../docs/EXPERIMENT_PROTOCOL.md) defines the shared computation and numerical contract.
 
 ## Build and validate
 
@@ -22,7 +22,7 @@ python3 scripts/analyze.py results/reproduction
 python3 scripts/report.py results/reproduction
 ```
 
-The main experiment contains eight configurations: a baseline plus single-factor changes to N, d, q, and k. Each route receives 10 warm-ups and 20 measured calls. The benchmark records raw times, summaries, correctness, input arrays, dimensions, and hashes. See `results/main/` for the retained experiment.
+The main experiment contains eight configurations: a baseline plus single-factor changes to N, d, q, and k. Each route receives 10 warm-ups and 20 measured calls. The benchmark records raw times, summaries, correctness, input arrays, dimensions, and hashes. See [the retained full experiment](../results/README.md) for current evidence.
 
 ## Required routes
 
@@ -44,7 +44,15 @@ The FP64 oracle independently ranks actual input values. Candidate order uses as
 | `src/bench.cpp`, `src/export.cpp` | CPU benchmark and result export |
 | `tests/` | Route, oracle, heap, merge, and boundary checks |
 | `scripts/` | Input hashes, analysis plots, evidence checks, and report generation |
-| `results/main/` | Required-route records, input arrays, hashes, and plots |
-| `artifacts/` | Compiled binaries for the retained CPU implementation |
+| `../results/full/cpu_core/` | Retained CPU records, local input arrays, hashes, and plots |
 
-The CPU benchmark binds one thread to an available guest CPU and records the selected CPU. Virtual-machine timings describe the recorded guest and do not establish physical-host performance.
+The CPU benchmark binds one thread to an available CPU and records the selected CPU. Hardware and execution details are retained with the full experiment. Compiled binaries and historical imported CPU-only measurements are not included in the cleaned repository.
+
+## Candidate merge API
+
+`merge_topk(a, na, b, nb, out, k)` combines two already sorted candidate
+lists, writes at most k results and returns the output length. Output capacity
+must be at least k and must not overlap the inputs. Ordering is ascending
+distance, then ID; numerical tolerance does not participate in ordering.
+Tests cover ties, unequal and empty lists, truncation and comparison with a
+full sort of the concatenated candidates.

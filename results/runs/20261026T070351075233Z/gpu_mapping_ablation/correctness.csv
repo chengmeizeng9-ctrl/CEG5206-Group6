@@ -1,0 +1,5 @@
+case,route,mapping,tile_size,structure,labels,sorted,distance_tolerance,FP64_ID_agreement,ID_mismatches,max_abs_error,max_rel_error,deterministic,materialized_match,passed
+0,R2_cuda_materialized_full_sort,thread_per_vector,,1,1,1,1,1,0,1.01182005636e-05,4.68642186123e-07,1,1,1
+0,R3_cuda_fused_tiled_bitonic,thread_per_vector,128,1,1,1,1,1,0,1.01182005636e-05,4.68642186123e-07,1,1,1
+0,R2_cuda_materialized_full_sort,warp_per_vector,,1,1,1,1,1,0,2.30339823304e-06,1.0296234049e-07,1,1,1
+0,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,1,1,1,1,1,0,2.30339823304e-06,1.0296234049e-07,1,1,1

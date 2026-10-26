@@ -1,0 +1,21 @@
+{
+  "input_files": 24,
+  "configurations": 8,
+  "timing_records": 360,
+  "correctness_records": 16,
+  "required_correctness_checks_pass": true,
+  "FP64_ID_position_differences": 0,
+  "maximum_absolute_distance_error": 7.85854888647e-05,
+  "baseline_median_seconds": {
+    "R0_scalar_full_sort": 0.226649504,
+    "R1_avx2_topk_heap": 0.0361147325
+  },
+  "baseline_speedup_scalar_over_AVX2_heap": 6.275818435038941,
+  "variable_groups": [
+    {
+      "case": "5",
+      "route": "R1_avx2_topk_heap",
+      "group": "0"
+    }
+  ]
+}

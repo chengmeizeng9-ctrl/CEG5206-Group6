@@ -1,0 +1,17 @@
+case,route,mapping,tile_size,input_bytes,output_bytes,aux_bytes,peak_device_bytes,dynamic_shared_bytes,cub_temp_bytes,distance_buffer_bytes,key_buffer_bytes,candidate_buffer_bytes,merge_levels
+0,R2_cuda_materialized_full_sort,warp_per_vector,,26004096,1920,44800323,70806339,0,12800255,6400000,25600000,0,0
+0,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,26004096,1920,2001920,28007936,1024,0,0,0,2001920,10
+1,R2_cuda_materialized_full_sort,warp_per_vector,,2604096,1920,4480323,7086339,0,1280255,640000,2560000,0,0
+1,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,2604096,1920,202240,2808256,1024,0,0,0,202240,7
+2,R2_cuda_materialized_full_sort,warp_per_vector,,13202048,1920,44800323,58004291,0,12800255,6400000,25600000,0,0
+2,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,13202048,1920,2001920,15205888,1024,0,0,0,2001920,10
+3,R2_cuda_materialized_full_sort,warp_per_vector,,51608192,1920,44800323,96410435,0,12800255,6400000,25600000,0,0
+3,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,51608192,1920,2001920,53612032,1024,0,0,0,2001920,10
+4,R2_cuda_materialized_full_sort,warp_per_vector,,26000256,120,2800263,28800639,0,800255,400000,1600000,0,0
+4,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,26000256,120,125120,26125496,1024,0,0,0,125120,10
+5,R2_cuda_materialized_full_sort,warp_per_vector,,26016384,7680,179200515,205224579,0,51200255,25600000,102400000,0,0
+5,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,26016384,7680,8007680,34031744,1024,0,0,0,8007680,10
+6,R2_cuda_materialized_full_sort,warp_per_vector,,26004096,960,44800323,70805379,0,12800255,6400000,25600000,0,0
+6,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,26004096,960,1000960,27006016,1024,0,0,0,1000960,10
+7,R2_cuda_materialized_full_sort,warp_per_vector,,26004096,6144,44800323,70810563,0,12800255,6400000,25600000,0,0
+7,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,26004096,6144,6406144,32416384,1024,0,0,0,6406144,10

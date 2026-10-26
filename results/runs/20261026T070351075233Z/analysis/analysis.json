@@ -1,0 +1,32 @@
+{
+  "cpu_correctness_records": 16,
+  "gpu_correctness_records": 25,
+  "gpu_raw_measurements": 1000,
+  "all_required_correctness_passed": true,
+  "primary_mapping": "warp_per_vector",
+  "primary_tile": "128",
+  "variable_cpu_groups": [
+    {
+      "case": "5",
+      "route": "R1_avx2_topk_heap",
+      "group": "0",
+      "IQR_over_median": 0.1515700225995566
+    }
+  ],
+  "variable_gpu_groups": [],
+  "baseline": {
+    "R0_ms": 226.649504,
+    "R1_ms": 36.1147325,
+    "R2_resident_ms": 15.7195520401,
+    "R3_resident_ms": 9.35526371002,
+    "R2_end_to_end_ms": 18.390435500000002,
+    "R3_end_to_end_ms": 12.034423499999999
+  },
+  "speedups": {
+    "R0_over_R1": 6.275818435038941,
+    "R0_over_R2_resident": 14.418318246081405,
+    "R0_over_R3_resident": 24.22694977130853,
+    "R2_over_R3_resident": 1.6802895703798815,
+    "R2_over_R3_end_to_end": 1.5281525949290387
+  }
+}
