@@ -1,0 +1,14 @@
+cpu=1
+threads=1
+gpu=NVIDIA GeForce GTX 1050
+warmups=10
+repeats=20
+mapping=warp_per_vector
+tile=128
+chunk_size=32768
+stream_only=0
+validation_only=0
+gemm_math=pedantic_fp32_with_near_zero_direct_rechecks
+streaming_timing=end_to_end_only
+streaming_overlap=service_time_estimate_not_a_profiler_trace
+cases=0,1,2,3,4,5,6,7
