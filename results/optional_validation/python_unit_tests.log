@@ -1,0 +1,30 @@
+test_all_four_test_suites_must_execute (test_optional_workflow.OptionalWorkflowTests.test_all_four_test_suites_must_execute) ... ok
+test_all_optional_routes_audit_and_report (test_optional_workflow.OptionalWorkflowTests.test_all_optional_routes_audit_and_report) ... ok
+test_corrupt_memory_rejected (test_optional_workflow.OptionalWorkflowTests.test_corrupt_memory_rejected) ... ok
+test_fp64_id_differences_remain_visible (test_optional_workflow.OptionalWorkflowTests.test_fp64_id_differences_remain_visible) ... ok
+test_frozen_input_hashes_detect_mutation (test_optional_workflow.OptionalWorkflowTests.test_frozen_input_hashes_detect_mutation) ... ok
+test_gemm_fixed_selection_failure_rejected (test_optional_workflow.OptionalWorkflowTests.test_gemm_fixed_selection_failure_rejected) ... ok
+test_missing_round_rejected (test_optional_workflow.OptionalWorkflowTests.test_missing_round_rejected) ... ok
+test_missing_whole_route_rejected (test_optional_workflow.OptionalWorkflowTests.test_missing_whole_route_rejected) ... ok
+test_optional_preview_never_runs_a_command (test_optional_workflow.OptionalWorkflowTests.test_optional_preview_never_runs_a_command) ... ok
+test_resident_boundary_mismatch_rejected (test_optional_workflow.OptionalWorkflowTests.test_resident_boundary_mismatch_rejected) ... ok
+test_resident_streaming_rejected (test_optional_workflow.OptionalWorkflowTests.test_resident_streaming_rejected) ... ok
+test_shared_cuda_header_is_in_source_snapshot (test_optional_workflow.OptionalWorkflowTests.test_shared_cuda_header_is_in_source_snapshot) ... ok
+test_changed_audited_csv_is_not_combined (test_workflow.WorkflowTests.test_changed_audited_csv_is_not_combined) ... ok
+test_changed_inputs_are_not_combined (test_workflow.WorkflowTests.test_changed_inputs_are_not_combined) ... ok
+test_changed_mapping_is_not_combined (test_workflow.WorkflowTests.test_changed_mapping_is_not_combined) ... ok
+test_changed_source_is_not_combined (test_workflow.WorkflowTests.test_changed_source_is_not_combined) ... ok
+test_dry_run_does_not_invoke_commands_or_create_results (test_workflow.WorkflowTests.test_dry_run_does_not_invoke_commands_or_create_results) ... ok
+test_existing_results_are_preserved (test_workflow.WorkflowTests.test_existing_results_are_preserved) ... ok
+test_paired_ratios_are_not_ratio_of_pooled_medians (test_workflow.WorkflowTests.test_paired_ratios_are_not_ratio_of_pooled_medians) ... ok
+test_report_qualifies_cpu_noise_and_missing_smoke_plots (test_workflow.WorkflowTests.test_report_qualifies_cpu_noise_and_missing_smoke_plots) ... ok
+test_sanitizer_warning_blocks_gate (test_workflow.WorkflowTests.test_sanitizer_warning_blocks_gate) ... ok
+test_skipped_gpu_test_blocks_all_measurements (test_workflow.WorkflowTests.test_skipped_gpu_test_blocks_all_measurements) ... ok
+test_successful_session_freezes_metadata_before_audit (test_workflow.WorkflowTests.test_successful_session_freezes_metadata_before_audit) ... ok
+test_summary_files_are_generated_from_separate_sessions (test_workflow.WorkflowTests.test_summary_files_are_generated_from_separate_sessions) ... ok
+test_three_sessions_share_the_first_selected_mapping (test_workflow.WorkflowTests.test_three_sessions_share_the_first_selected_mapping) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.082s
+
+OK

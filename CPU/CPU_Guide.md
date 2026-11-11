@@ -1,6 +1,6 @@
 # Required CPU kNN Implementation
 
-This directory contains only the required CPU methods: a scalar full-sort baseline, an independent FP64 oracle, AVX2 distances with a Top-K max-heap, and a separately tested sorted-list merge method. The [experiment protocol](../docs/EXPERIMENT_PROTOCOL.md) defines the shared computation and numerical contract.
+This directory contains the required CPU methods: a scalar full-sort baseline, an independent FP64 oracle, AVX2 distances with a Top-K max-heap, and a separately tested sorted-list merge method. The [experiment protocol](../docs/EXPERIMENT_PROTOCOL.md) defines the shared computation and numerical contract.
 
 ## Build and validate
 
@@ -41,6 +41,7 @@ The FP64 oracle independently ranks actual input values. Candidate order uses as
 | `src/scalar.cpp`, `src/simd.cpp` | Scalar and AVX2 distance functions |
 | `src/knn.cpp` | Validation, two required routes, Top-K heap, list merge, and input generation |
 | `src/oracle.cpp` | Independent FP64 ranking and correctness checks |
+| `src/optional.cpp` | Tiled Bitonic selection, scalar early abandonment and its heap control |
 | `src/bench.cpp`, `src/export.cpp` | CPU benchmark and result export |
 | `tests/` | Route, oracle, heap, merge, and boundary checks |
 | `scripts/` | Input hashes, analysis plots, evidence checks, and report generation |
@@ -56,3 +57,22 @@ must be at least k and must not overlap the inputs. Ordering is ascending
 distance, then ID; numerical tolerance does not participate in ordering.
 Tests cover ties, unequal and empty lists, truncation and comparison with a
 full sort of the concatenated candidates.
+
+## Optional CPU routes
+
+`Route::Avx2TiledBitonic` adds power-of-two tiles 32–256, infinity padding,
+AVX2 distances, scalar local Bitonic sorting networks and packed hierarchical
+candidate merging.
+It supports every valid k up to N, including k larger than one tile.
+`Config::tile_size` defaults to 128. Its output must match the AVX2 heap
+bit-for-bit.
+
+`Route::ScalarEarlyAbandon` maintains a scalar Top-k heap and stops a
+candidate only when its partial non-negative sum is strictly above the current
+worst selected distance. `Route::ScalarTopKHeap` is the full-evaluation timing
+control using the same heap path. Both match R0's scalar distance arithmetic.
+`Diagnostics` records examined dimensions, candidates and abandoned candidates.
+The diagnostic search is outside benchmark timing.
+
+The standalone CPU CTest includes `knn_optional_tests`. The optional experiment
+command in the root README benchmarks both new routes and their controls.

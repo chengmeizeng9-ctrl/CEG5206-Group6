@@ -17,5 +17,15 @@ if [[ ! -x "$CUDACXX" || ! -x .venv/bin/python ]]; then
   exit 1
 fi
 
-exec .venv/bin/python experiments/run_full_experiment.py \
-  --repo-root "$project_root" "$@"
+entrypoint=experiments/run_full_experiment.py
+forwarded=()
+for argument in "$@"; do
+  if [[ "$argument" == --optional ]]; then
+    entrypoint=experiments/run_optional_experiment.py
+  else
+    forwarded+=("$argument")
+  fi
+done
+
+exec .venv/bin/python "$entrypoint" \
+  --repo-root "$project_root" "${forwarded[@]}"

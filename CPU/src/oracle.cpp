@@ -44,7 +44,7 @@ Verification verify(const Input &i, Config c, const Result &r,
     std::vector<Candidate> full;
     full.reserve(i.n);
     for (size_t id = 0; id < i.n; ++id) {
-      float dist = c.route == Route::Avx2TopKHeap
+      float dist = (c.route == Route::Avx2TopKHeap || c.route == Route::Avx2TiledBitonic)
                        ? simd_distance(i.queries.data() + q * i.d,
                                        i.x.data() + id * i.d, i.d)
                        : scalar_distance(i.queries.data() + q * i.d,

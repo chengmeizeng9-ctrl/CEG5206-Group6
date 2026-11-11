@@ -91,7 +91,7 @@ def source_hashes(repo: Path) -> dict[str, str]:
     for directory in ('CPU/src', 'CPU/include', 'CPU/tests', 'CPU/scripts',
                       'GPU/src', 'GPU/include', 'GPU/tests', 'experiments'):
         paths.update(p for p in (repo / directory).rglob('*')
-                     if p.is_file() and p.suffix in ('.cpp', '.cu', '.hpp', '.py'))
+                     if p.is_file() and p.suffix in ('.cpp', '.cu', '.cuh', '.hpp', '.py'))
     paths.update(repo / name for name in ('CPU/CMakeLists.txt', 'GPU/CMakeLists.txt',
                                          'run_experiment.sh', 'experiments/requirements.txt'))
     return {str(p.relative_to(repo)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -174,6 +174,7 @@ def run_session(args, repo: Path, build: Path, results: Path, nvcc_output: str,
                        '-DCMAKE_BUILD_TYPE=Release']
             if source == gpu_source:
                 command.append('-DCMAKE_CUDA_ARCHITECTURES=61')
+                command.append('-DKNN_GPU_OPTIONAL_ROUTES=OFF')
             run(command)
             command = ['cmake', '--build', str(destination), '-j', str(args.jobs)]
             if args.clean_build:
