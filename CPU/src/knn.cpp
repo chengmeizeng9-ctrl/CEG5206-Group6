@@ -35,14 +35,22 @@ Validated validate(const Input &i) {
 static void check_config(const Input &i, Config c) {
   if (!c.k || c.k > i.n)
     throw Error(ErrorCode::INVALID_ARGUMENT, "k");
-  if (c.route != Route::ScalarFullSort && c.route != Route::Avx2TopKHeap)
+  if (c.route != Route::ScalarFullSort && c.route != Route::Avx2TopKHeap &&
+      c.route != Route::Avx2TiledBitonic && c.route != Route::ScalarEarlyAbandon &&
+      c.route != Route::ScalarTopKHeap)
     throw Error(ErrorCode::INVALID_ARGUMENT, "route");
-  if (c.route == Route::Avx2TopKHeap && !__builtin_cpu_supports("avx2"))
+  if ((c.route == Route::Avx2TopKHeap || c.route == Route::Avx2TiledBitonic) &&
+      !__builtin_cpu_supports("avx2"))
     throw Error(ErrorCode::UNSUPPORTED_CONFIGURATION, "AVX2 unavailable");
   checked_product(checked_product(i.q, c.k), sizeof(float));
+  if (c.route == Route::Avx2TiledBitonic &&
+      (c.tile_size < 32 || c.tile_size > 256 || (c.tile_size & (c.tile_size - 1))))
+    throw Error(ErrorCode::INVALID_ARGUMENT, "Bitonic tile must be 32,64,128,256");
 }
 size_t Workspace::bytes() const {
-  return (all.capacity() + heap.capacity()) * sizeof(Candidate);
+  return (all.capacity() + heap.capacity() + tile.capacity() +
+          candidates_a.capacity() + candidates_b.capacity()) * sizeof(Candidate) +
+         (offsets_a.capacity() + offsets_b.capacity()) * sizeof(size_t);
 }
 void prepare(const Validated &v, Config c, Workspace &w, Result &r) {
   const auto &i = v.get();
@@ -55,6 +63,14 @@ void prepare(const Validated &v, Config c, Workspace &w, Result &r) {
     if (c.route == Route::ScalarFullSort) {
       w.all.resize(i.n);
       w.heap.clear();
+    } else if (c.route == Route::Avx2TiledBitonic) {
+      const size_t count = i.n / c.tile_size + (i.n % c.tile_size != 0);
+      const size_t capacity = checked_product(count, std::min(c.k, c.tile_size));
+      w.tile.resize(c.tile_size);
+      w.candidates_a.resize(capacity);
+      w.candidates_b.resize(capacity);
+      w.offsets_a.resize(count + 1);
+      w.offsets_b.resize(count + 1);
     } else {
       w.all.clear();
       w.heap.clear();
@@ -115,6 +131,11 @@ void search(const Validated &v, Config c, Workspace &w, Result &r,
   floating_environment();
   if (diag)
     *diag = {};
+  if (c.route == Route::Avx2TiledBitonic || c.route == Route::ScalarEarlyAbandon ||
+      c.route == Route::ScalarTopKHeap) {
+    optional_search(i, c, w, r, diag);
+    return;
+  }
   Better better;
   for (size_t qi = 0; qi < i.q; ++qi) {
     w.heap.clear();
@@ -179,6 +200,12 @@ const char *route_name(Route route) {
     return "R0_scalar_full_sort";
   case Route::Avx2TopKHeap:
     return "R1_avx2_topk_heap";
+  case Route::Avx2TiledBitonic:
+    return "O1_cpu_avx2_tiled_bitonic";
+  case Route::ScalarEarlyAbandon:
+    return "O2_cpu_scalar_early_abandon";
+  case Route::ScalarTopKHeap:
+    return "C0_cpu_scalar_topk_heap";
   }
   return "invalid";
 }

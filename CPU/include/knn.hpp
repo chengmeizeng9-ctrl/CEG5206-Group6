@@ -44,10 +44,13 @@ class Validated {
 public:
   const Input &get() const { return *input_; }
 };
-enum class Route { ScalarFullSort = 0, Avx2TopKHeap = 1 };
+enum class Route { ScalarFullSort = 0, Avx2TopKHeap = 1,
+                   Avx2TiledBitonic = 2, ScalarEarlyAbandon = 3,
+                   ScalarTopKHeap = 4 };
 struct Config {
   size_t k;
   Route route = Route::ScalarFullSort;
+  size_t tile_size = 128;
 };
 struct Result {
   std::vector<uint32_t> ids;
@@ -56,10 +59,13 @@ struct Result {
 };
 struct Workspace {
   std::vector<Candidate> all, heap;
+  std::vector<Candidate> tile, candidates_a, candidates_b;
+  std::vector<size_t> offsets_a, offsets_b;
   size_t bytes() const;
 };
 struct Diagnostics {
   uint64_t dimensions = 0, candidates = 0;
+  uint64_t abandoned_candidates = 0;
 };
 struct Oracle {
   std::vector<double> distances;
@@ -91,4 +97,6 @@ Oracle oracle(const Input &);
 Verification verify(const Input &, Config, const Result &, const Oracle &);
 Input synthetic(size_t, size_t, size_t, uint32_t = 5206);
 const char *route_name(Route);
+// Implementation helpers: all scratch is allocated by prepare().
+void optional_search(const Input &, Config, Workspace &, Result &, Diagnostics *);
 } // namespace knn

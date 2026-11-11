@@ -15,10 +15,10 @@ An independent host FP64 oracle validates numerical error and Top-k IDs. All
 routes return exactly `k` query-major `(distance, ID, label)` records ordered by
 ascending distance and then ascending ID.
 
-CPU Bitonic, custom Radix Select, GEMM-based distance, early abandonment, and
-out-of-core double buffering remain optional. They are not started until all
-four required routes pass the complete correctness gate and the final core
-experiment has been reproduced from a clean build.
+CPU Bitonic, custom Radix Select with scan compaction, GEMM-based distance,
+early abandonment, and out-of-core double buffering are optional extensions
+now implemented in a separate optional experiment. Required R0–R3 records
+retain their own schema and gates; optional results do not replace them.
 
 ## 2. Frozen inputs
 
@@ -178,3 +178,47 @@ records and complete logs accompany each session. The repeated-study root
 contains `study_summary.md`; each session's `analysis/` directory supplies its
 figures. Raw CSV files remain the authoritative timing evidence. See
 [the README](../README.md) for commands and failure recovery.
+
+## 9. Optional-route protocol
+
+Run `./run_experiment.sh --optional --inputs <CPU_RESULTS>` to build and test
+all optional routes, run sanitizer gates, verify the frozen input hashes and
+collect a separate optional study. The same arrays feed every optional route
+and its contemporaneous controls. Use default 10 warm-ups/20 repeats for final
+measurement; `--smoke` uses case 0, 1 warm-up and 3 repeats.
+CPU and GPU route order rotates between rounds, and resident/end-to-end order
+alternates for GPU routes that support both. `--validate-only` executes the
+build and correctness/sanitizer gates without warm-ups or timing samples.
+
+- CPU Bitonic uses R1 AVX2 arithmetic and is compared bitwise with R1.
+- Early abandonment uses R0 scalar arithmetic. Its performance control C0
+  performs complete scalar distances with the same heap path; this isolates
+  pruning from changing the selection algorithm. Strict partial-sum > tau
+  preserves distance/ID ties. Record mean dimensions outside timing.
+- Radix selection refines a deterministic 64-bit key threshold over eight
+  8-bit passes, then marks flags, performs a self-written hierarchical
+  exclusive scan, compacts k keys and sorts only those k. Distance, pack,
+  radix refinement, scan, compaction, final k-sort and gather are measured.
+- GEMM uses labelled cuBLAS pedantic FP32 arithmetic and a reusable workspace.
+  Database norms are prepared for resident reuse and recomputed after an
+  end-to-end database upload. Query norms, GEMM, reconstruction/near-zero
+  direct correction, packing, full sort and gather are included. Setup norms,
+  workspace and correction counts are disclosed. Selection is validated by
+  full sorting the same reconstructed distances; bitwise direct/GEMM equality
+  is not required. FP64 errors and ID differences remain visible.
+- Streaming compares one versus two bounded pinned/device chunk slots with
+  the same chunk size, mapping and tile size. Copy streams can overlap the
+  next upload with one compute stream's current selection/merge. Global IDs
+  survive chunk offsets. Labels are gathered on the host inside end-to-end
+  timing. Only end-to-end latency is valid. Record CPU staging, H2D/D2H, chunk
+  selection, global merge, pipeline time, pinned memory and peak device
+  allocation. Service-time overlap estimates are not profiler traces.
+
+The optional report retains all noise flags and controlled ratios, including
+losses. A small chunk-budget test demonstrates bounded storage, not necessarily
+a dataset exceeding physical VRAM. Stream-only mode avoids full-N GPU
+controls for genuinely oversized inputs; the input still must fit host RAM.
+Optional CUDA routes currently require k<=128 and q<=65535; streaming also
+requires k<=T. CPU Bitonic supports k=N. The user collects the new performance
+results; earlier required-run measurements are not relabelled as optional
+results or measurements of the updated source.

@@ -10,6 +10,7 @@ set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 # CUDA 13.x cannot perform offline compilation for Pascal.
 set(CMAKE_CUDA_ARCHITECTURES 61 CACHE STRING "CUDA architectures")
 option(KNN_GPU_SANITIZE_HOST "Enable host address/undefined sanitizers" OFF)
+option(KNN_GPU_OPTIONAL_ROUTES "Build radix/scan, cuBLAS and streamed optional routes" OFF)
 
 find_package(CUDAToolkit REQUIRED)
 
@@ -47,3 +48,19 @@ target_compile_options(knn_gpu_tests PRIVATE
 enable_testing()
 add_test(NAME gpu_correctness COMMAND knn_gpu_tests)
 set_tests_properties(gpu_correctness PROPERTIES SKIP_RETURN_CODE 77)
+
+if(KNN_GPU_OPTIONAL_ROUTES)
+  if(NOT TARGET CUDA::cublas)
+    message(FATAL_ERROR "Optional GEMM requires cuBLAS from the CUDA 12 toolkit")
+  endif()
+  target_sources(gpu_knn PRIVATE src/optional_gpu_knn.cu)
+  target_link_libraries(gpu_knn PUBLIC CUDA::cublas)
+  add_executable(knn_optional_gpu_tests tests/test_optional_gpu.cu)
+  target_link_libraries(knn_optional_gpu_tests PRIVATE gpu_knn)
+  add_test(NAME optional_gpu_correctness COMMAND knn_optional_gpu_tests)
+  set_tests_properties(optional_gpu_correctness PROPERTIES SKIP_RETURN_CODE 77)
+  add_subdirectory(../CPU ${CMAKE_CURRENT_BINARY_DIR}/cpu_optional)
+  add_executable(knn_optional_bench src/bench_optional.cpp)
+  target_link_libraries(knn_optional_bench PRIVATE gpu_knn knn)
+  target_compile_options(knn_optional_bench PRIVATE -Wall -Wextra -Wpedantic)
+endif()

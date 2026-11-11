@@ -1,0 +1,12 @@
+case,N,d,q,k,backend,route,mapping,tile_size,chunk_size,buffers,structure,labels,sorted,distance_tolerance,FP64_ID_agreement,ID_mismatches,max_abs_error,max_rel_error,deterministic,fixed_selection_match,exact_reference_match,reference_kind,passed
+0,257,9,3,10,CPU,R0_scalar_full_sort,scalar,,,,1,1,1,1,1,0,0,,1,1,1,arithmetic_matched_cpu_full_selection,1
+0,257,9,3,10,CPU,R1_avx2_topk_heap,avx2,,,,1,1,1,1,1,0,0,,1,1,1,arithmetic_matched_cpu_full_selection,1
+0,257,9,3,10,CPU,C0_cpu_scalar_topk_heap,scalar,,,,1,1,1,1,1,0,0,,1,1,1,arithmetic_matched_cpu_full_selection,1
+0,257,9,3,10,CPU,O1_cpu_avx2_tiled_bitonic,avx2,128,,,1,1,1,1,1,0,0,,1,1,1,arithmetic_matched_cpu_full_selection,1
+0,257,9,3,10,CPU,O2_cpu_scalar_early_abandon,scalar,,,,1,1,1,1,1,0,0,,1,1,1,arithmetic_matched_cpu_full_selection,1
+0,257,9,3,10,CUDA,R2_cuda_materialized_full_sort,warp_per_vector,,,,1,1,1,1,1,0,0,0,1,,1,materialized_same_mapping,1
+0,257,9,3,10,CUDA,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,,,1,1,1,1,1,0,0,0,1,,1,materialized_same_mapping,1
+0,257,9,3,10,CUDA,O3_cuda_radix_scan_compact,warp_per_vector,,,,1,1,1,1,1,0,0,0,1,1,1,materialized_same_mapping,1
+0,257,9,3,10,CUDA,O4_cublas_gemm_reference,cublas_fp32,,,,1,1,1,1,1,0,0,0,1,1,,own_GEMM_distances_full_sort,1
+0,257,9,3,10,CUDA,O5_cuda_stream_single,warp_per_vector,128,64,1,1,1,1,1,1,0,0,0,1,,1,materialized_same_mapping,1
+0,257,9,3,10,CUDA,O5_cuda_stream_double,warp_per_vector,128,64,2,1,1,1,1,1,0,0,0,1,,1,materialized_same_mapping,1

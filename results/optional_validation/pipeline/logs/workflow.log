@@ -1,0 +1,166 @@
++ lscpu
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           39 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  8
+On-line CPU(s) list:                     0-7
+Vendor ID:                               GenuineIntel
+Model name:                              Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+CPU family:                              6
+Model:                                   158
+Thread(s) per core:                      2
+Core(s) per socket:                      4
+Socket(s):                               1
+Stepping:                                9
+CPU(s) scaling MHz:                      83%
+CPU max MHz:                             3800.0000
+CPU min MHz:                             800.0000
+BogoMIPS:                                5599.85
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb pti ssbd ibrs ibpb stibp tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp vnmi md_clear flush_l1d arch_capabilities ibpb_exit_to_user
+Virtualization:                          VT-x
+L1d cache:                               128 KiB (4 instances)
+L1i cache:                               128 KiB (4 instances)
+L2 cache:                                1 MiB (4 instances)
+L3 cache:                                6 MiB (1 instance)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-7
+Vulnerability Gather data sampling:      Mitigation; Microcode
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             KVM: Mitigation: VMX disabled
+Vulnerability L1tf:                      Mitigation; PTE Inversion; VMX conditional cache flushes, SMT vulnerable
+Vulnerability Mds:                       Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerability Meltdown:                  Mitigation; PTI
+Vulnerability Mmio stale data:           Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerability Reg file data sampling:    Not affected
+Vulnerability Retbleed:                  Mitigation; IBRS
+Vulnerability Spec rstack overflow:      Not affected
+Vulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; IBRS; IBPB conditional; STIBP conditional; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                     Mitigation; Microcode
+Vulnerability Tsa:                       Not affected
+Vulnerability Tsx async abort:           Not affected
+Vulnerability Vmscape:                   Mitigation; IBPB before exit to userspace
++ git rev-parse HEAD
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
++ nvidia-smi
+Mon Nov  9 00:26:59 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce GTX 1050        Off |   00000000:01:00.0 Off |                  N/A |
+| N/A   58C    P8            N/A  /   30W |     181MiB /   4096MiB |     16%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            1824      G   /usr/lib/xorg/Xorg                      116MiB |
+|    0   N/A  N/A            2232      G   /usr/bin/gnome-shell                     23MiB |
+|    0   N/A  N/A           51097      G   ...rack-uuid=3190709006926792172         39MiB |
++-----------------------------------------------------------------------------------------+
++ cmake -S /home/zhuoxun/Documents/5206_CA2/GPU -B /home/zhuoxun/Documents/5206_CA2/build_optional/gpu -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=61 -DKNN_GPU_OPTIONAL_ROUTES=ON
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/zhuoxun/Documents/5206_CA2/build_optional/gpu
++ cmake --build /home/zhuoxun/Documents/5206_CA2/build_optional/gpu -j 2
+[ 19%] Built target knn
+[ 35%] Built target gpu_knn
+[ 41%] Built target knn_tests
+[ 48%] Built target knn_bench
+[ 54%] Built target knn_optional_tests
+[ 61%] Built target knn_export
+[ 70%] Built target knn_gpu_bench
+[ 80%] Built target knn_gpu_tests
+[ 90%] Built target knn_optional_gpu_tests
+[100%] Built target knn_optional_bench
++ ctest --test-dir /home/zhuoxun/Documents/5206_CA2/build_optional/gpu --verbose
+Internal ctest changing into directory: /home/zhuoxun/Documents/5206_CA2/build_optional/gpu
+UpdateCTestConfiguration  from :/home/zhuoxun/Documents/5206_CA2/build_optional/gpu/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/zhuoxun/Documents/5206_CA2/build_optional/gpu/DartConfiguration.tcl
+Test project /home/zhuoxun/Documents/5206_CA2/build_optional/gpu
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: gpu_correctness
+
+1: Test command: /home/zhuoxun/Documents/5206_CA2/build_optional/gpu/knn_gpu_tests
+1: Working Directory: /home/zhuoxun/Documents/5206_CA2/build_optional/gpu
+1: Test timeout computed to be: 10000000
+1: PASS gpu_cases=44 checks=2294 near_tie_FP64_ID_mismatches=32
+1/4 Test #1: gpu_correctness ..................   Passed    0.27 sec
+test 2
+    Start 2: optional_gpu_correctness
+
+2: Test command: /home/zhuoxun/Documents/5206_CA2/build_optional/gpu/knn_optional_gpu_tests
+2: Working Directory: /home/zhuoxun/Documents/5206_CA2/build_optional/gpu
+2: Test timeout computed to be: 10000000
+2: PASS optional_gpu_cases=17 checks=3514
+2/4 Test #2: optional_gpu_correctness .........   Passed    0.52 sec
+test 3
+    Start 3: correctness
+
+3: Test command: /home/zhuoxun/Documents/5206_CA2/build_optional/gpu/cpu_optional/knn_tests
+3: Working Directory: /home/zhuoxun/Documents/5206_CA2/build_optional/gpu/cpu_optional
+3: Test timeout computed to be: 10000000
+3: PASS cases=111 checks=1145 FP64_ID_mismatches=16
+3/4 Test #3: correctness ......................   Passed    0.01 sec
+test 4
+    Start 4: optional_cpu_correctness
+
+4: Test command: /home/zhuoxun/Documents/5206_CA2/build_optional/gpu/cpu_optional/knn_optional_tests
+4: Working Directory: /home/zhuoxun/Documents/5206_CA2/build_optional/gpu/cpu_optional
+4: Test timeout computed to be: 10000000
+4: PASS optional_cpu_cases=482 checks=5306
+4/4 Test #4: optional_cpu_correctness .........   Passed    0.12 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   0.93 sec
++ /home/zhuoxun/Documents/5206_CA2/.tools/cuda-12.8/bin/compute-sanitizer --tool memcheck --error-exitcode 1 /home/zhuoxun/Documents/5206_CA2/build_optional/gpu/knn_optional_gpu_tests
+========= COMPUTE-SANITIZER
+PASS optional_gpu_cases=17 checks=3514
+========= ERROR SUMMARY: 0 errors
++ /home/zhuoxun/Documents/5206_CA2/.tools/cuda-12.8/bin/compute-sanitizer --tool racecheck --error-exitcode 1 /home/zhuoxun/Documents/5206_CA2/build_optional/gpu/knn_optional_gpu_tests
+========= COMPUTE-SANITIZER
+PASS optional_gpu_cases=17 checks=3514
+========= RACECHECK SUMMARY: 0 hazards displayed (0 errors, 0 warnings)
++ /home/zhuoxun/Documents/5206_CA2/build_optional/gpu/knn_optional_bench --inputs /tmp/5206-optional-cli-inputs --output /home/zhuoxun/Documents/5206_CA2/results/optional_validation/pipeline/measurements --mapping warp --tile 128 --chunk-size 64 --warmups 1 --repeats 3 --smoke --validate-only
+Optional case 0 N=257 d=9 q=3 k=10
+Optional validation complete: "/home/zhuoxun/Documents/5206_CA2/results/optional_validation/pipeline/measurements"
++ nvidia-smi
+Mon Nov  9 00:30:24 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce GTX 1050        Off |   00000000:01:00.0 Off |                  N/A |
+| N/A   79C    P0            N/A  /   30W |     231MiB /   4096MiB |     12%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            1824      G   /usr/lib/xorg/Xorg                      116MiB |
+|    0   N/A  N/A            2232      G   /usr/bin/gnome-shell                     23MiB |
+|    0   N/A  N/A           51097      G   ...rack-uuid=3190709006926792172         88MiB |
++-----------------------------------------------------------------------------------------+

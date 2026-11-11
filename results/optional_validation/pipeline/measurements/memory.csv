@@ -1,0 +1,12 @@
+case,N,d,q,k,backend,route,mapping,tile_size,chunk_size,buffers,input_device_bytes,output_device_bytes,aux_bytes,peak_device_bytes,dynamic_shared_bytes,cub_temp_bytes,logical_input_bytes,pinned_host_bytes,cublas_workspace_bytes,cublas_version,setup_ms,database_norm_setup_ms,dimensions_per_candidate,abandoned_candidates
+0,257,9,3,10,CPU,R0_scalar_full_sort,scalar,,,,,,2056,,,,,,,,,,9,0
+0,257,9,3,10,CPU,R1_avx2_topk_heap,avx2,,,,,,80,,,,,,,,,,9,0
+0,257,9,3,10,CPU,C0_cpu_scalar_topk_heap,scalar,,,,,,80,,,,,,,,,,9,0
+0,257,9,3,10,CPU,O1_cpu_avx2_tiled_bitonic,avx2,128,,,,,1568,,,,,,,,,,9,0
+0,257,9,3,10,CPU,O2_cpu_scalar_early_abandon,scalar,,,,,,80,,,,,,,,,,4.81712062257,638
+0,257,9,3,10,CUDA,R2_cuda_materialized_full_sort,warp_per_vector,,,,10388,360,22091,32839,0,6655,,,,,,,,
+0,257,9,3,10,CUDA,R3_cuda_fused_tiled_bitonic,warp_per_vector,128,,,10388,360,1440,12188,1024,0,,,,,,,,
+0,257,9,3,10,CUDA,O3_cuda_radix_scan_compact,warp_per_vector,,,,10388,360,15996,26744,1024,0,10388,0,0,0,0.103996,0,,
+0,257,9,3,10,CUDA,O4_cublas_gemm_reference,cublas_fp32,,,,10388,360,4217443,4228191,0,6655,10388,0,4194304,120804,14.742756,0.0323520004749,,
+0,257,9,3,10,CUDA,O5_cuda_stream_single,warp_per_vector,128,64,1,2412,240,720,3372,1024,0,10388,2652,0,0,1.071838,0,,
+0,257,9,3,10,CUDA,O5_cuda_stream_double,warp_per_vector,128,64,2,4716,240,1200,6156,1024,0,10388,4956,0,0,0.352916,0,,

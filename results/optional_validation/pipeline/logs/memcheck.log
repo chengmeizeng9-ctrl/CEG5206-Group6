@@ -1,0 +1,3 @@
+========= COMPUTE-SANITIZER
+PASS optional_gpu_cases=17 checks=3514
+========= ERROR SUMMARY: 0 errors

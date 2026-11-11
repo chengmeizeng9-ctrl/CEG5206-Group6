@@ -1,0 +1,100 @@
+{
+  "status": "PASS",
+  "verified_at_utc": "2026-11-08T17:31:08.198431+00:00",
+  "scope": "Optional implementation correctness and integration validation; no performance experiment collected",
+  "optional_methods": [
+    "CPU AVX2 distances with tiled Bitonic selection",
+    "CUDA radix selection with hierarchical scan and compaction",
+    "cuBLAS GEMM reference with near-zero direct correction",
+    "Scalar early abandonment with full-evaluation heap control",
+    "Single/double-buffered bounded-device-memory streaming"
+  ],
+  "test_suites": {
+    "required_cpu": {
+      "cases": 111,
+      "checks": 1145
+    },
+    "required_gpu": {
+      "cases": 44,
+      "checks": 2294
+    },
+    "optional_cpu": {
+      "cases": 482,
+      "checks": 5306
+    },
+    "optional_gpu": {
+      "cases": 17,
+      "checks": 3514
+    },
+    "python_workflow": {
+      "tests": 25
+    }
+  },
+  "cpu_asan_ubsan": "PASS (both CPU suites; SANITIZE=ON)",
+  "gpu_memcheck_errors": 0,
+  "gpu_racecheck": {
+    "hazards": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "launcher_integration": {
+    "status": "PASS",
+    "configurations": 11,
+    "timing_samples": 0,
+    "input_shape": {
+      "N": 257,
+      "d": 9,
+      "q": 3,
+      "k": 10
+    },
+    "chunk_size": 64,
+    "evidence": "pipeline/validation_only.json"
+  },
+  "performance_experiment_run": false,
+  "report_generator_validation": {
+    "input": "temporary synthetic CSV fixtures, not experimental measurements",
+    "configurations": 11,
+    "timing_groups": 15,
+    "plots_generated": 4,
+    "status": "PASS"
+  },
+  "historical_required_run": {
+    "path": "../runs/20261026T070351075233Z",
+    "artifact_hashes_verified_unchanged": 25
+  },
+  "numerical_contract": "Exact selection uses declared FP32 arithmetic; FP64 near-tie ID differences are recorded separately. GEMM sorts its own reconstructed distances.",
+  "streaming_validation_scope": "Fixed-chunk buffer allocation and exact output agreement tested; no dataset larger than physical VRAM was measured.",
+  "source_snapshot": "pipeline/source_sha256.json",
+  "cuBLAS_runtime_version": "120804",
+  "documentation_sha256": {
+    "README.md": "53acdcaf8745722d6016ab7b667d0f3f41744c7b1d6fbd6c791e9f8041f3b0ba",
+    "CPU/CPU_Guide.md": "68e8ff77a4fd1b1dc4de332a4ad8b3ed56d04a436650e7f6a8278163a6bc9fd9",
+    "docs/EXPERIMENT_PROTOCOL.md": "621eccaf25a6901944e8a53c42b232215fad0ed85d666909d39853c60bab0a33"
+  },
+  "evidence_sha256": {
+    "cpu_asan_ubsan.log": "ad08abf21487a18786bc02e7c1e94a3017e1bcf89e911a03af4e6f8e3bb2dcbc",
+    "pipeline/environment.json": "7b9f8bcd04afc240f6983cd1076ad532c7f5814414e8ba781b7507e257f6e6ea",
+    "pipeline/input_sha256.json": "50f4fb328dd8956ccc5eb802e76249f3d6ec75952f7242e7a9516a6d13b15331",
+    "pipeline/logs/CMakeFiles_gpu_knn.dir_flags.make": "4c840eb4ccb228bc5e8bfc96c7784c3e0f2e7b65e203fed6ee1b114a7b606e8a",
+    "pipeline/logs/CMakeFiles_knn_gpu_bench.dir_flags.make": "1fcd50c7f6aa9ad77400eda02440c2672f2a9402a93f9cb6eb70cdd6961f9a58",
+    "pipeline/logs/CMakeFiles_knn_gpu_tests.dir_flags.make": "e41586ce9cd5ce762ea8401d4ee24ac7ac927aebe36beb3384198bdaff32aaea",
+    "pipeline/logs/CMakeFiles_knn_optional_bench.dir_flags.make": "07eb7bc486e343e6c8d0cd6ef03e77c27de3377bdd03cc2c3de5d277fb92de74",
+    "pipeline/logs/CMakeFiles_knn_optional_gpu_tests.dir_flags.make": "ad2476cdec486c9b531272b7039628dcaec0a70c3b05d6de848cd6bbf18c55dc",
+    "pipeline/logs/cpu_optional_CMakeFiles_knn.dir_flags.make": "76c2be46c1dfd59d81eae0e92434bd7be9d9f29bdba51b8c0d18e8b2a820d8f2",
+    "pipeline/logs/cpu_optional_CMakeFiles_knn_bench.dir_flags.make": "8ad844a3692e6a5f14920a6e651903102e0b63d774bcbed2e2004cdc6abfeca6",
+    "pipeline/logs/cpu_optional_CMakeFiles_knn_export.dir_flags.make": "8ad844a3692e6a5f14920a6e651903102e0b63d774bcbed2e2004cdc6abfeca6",
+    "pipeline/logs/cpu_optional_CMakeFiles_knn_optional_tests.dir_flags.make": "8ad844a3692e6a5f14920a6e651903102e0b63d774bcbed2e2004cdc6abfeca6",
+    "pipeline/logs/cpu_optional_CMakeFiles_knn_tests.dir_flags.make": "8ad844a3692e6a5f14920a6e651903102e0b63d774bcbed2e2004cdc6abfeca6",
+    "pipeline/logs/ctest.log": "37dc0485595c024abdbee7fd8877e6bc5c5f33e2613ab19deb2cae0800584851",
+    "pipeline/logs/memcheck.log": "ae6b6c2e15fadc90b3a3c3abefe7393796a454510e71d4e594f4e3fdaffbeecf",
+    "pipeline/logs/racecheck.log": "e7d7ece0e46895ca2c8d45a755e4bb1fd1c9909b98db46334db40974fcd68a7d",
+    "pipeline/logs/workflow.log": "219d7cbd31baccea21e5d6098f64d4161c02283e29fb4ac040ff1af4897f24b6",
+    "pipeline/measurements/correctness.csv": "6213f3dfe3608bd9c1e121cfc1ab289aa4db204af004bda1dc3f1af586f83a74",
+    "pipeline/measurements/memory.csv": "d36cc74e6f448f6301fe047b07f8771cae64e61dfadb686223353914544a4013",
+    "pipeline/measurements/raw.csv": "2d816f7ec22405433723819b2e4848aee688f5508ddbb51d6fbefe3e6220f886",
+    "pipeline/measurements/run.txt": "cd5c7175eb38d23ba4fd4aad760238cb67e4e2e25d4a3328ee2ac07afabc0407",
+    "pipeline/source_sha256.json": "3ecadedd09b94c1caa88fc4f2e154b30d90293cd23691f104e43730401533874",
+    "pipeline/validation_only.json": "93dae123a4ee5f2ec3e3c2c74d698f6af9f6cc1cc4cbcbabd6c8ffdd36a31530",
+    "python_unit_tests.log": "625ae598cdfc152edb42c5d71cc8e686439a2cca89336ede8081231c6526c921"
+  }
+}
