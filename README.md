@@ -2,7 +2,7 @@
 
 This project compares CPU and CUDA implementations of exact k-nearest-neighbour search. Each route searches the database and returns the nearest `k` results, ordered by squared Euclidean distance and then sample ID, with their original labels.
 
-The required and optional CPU/GPU implementations and retained experiments are on the **`full-pipeline` branch**.
+This repository contains the required and optional CPU/GPU implementations, their tests, and retained experiment records.
 
 ## Required implementations
 
@@ -21,46 +21,68 @@ scalar early abandonment, and single/double-buffered out-of-core streaming.
 They use a separate experiment so their records stay distinct from the required
 R0–R3 comparison.
 
-## Reproduce on this machine
+## Pipeline workflow
 
-The local `.venv/` and CUDA 12.8 toolkit in `.tools/cuda-12.8/` are configured.
-The wrapper selects them automatically.
+```mermaid
+flowchart LR
+    A[Shared frozen inputs] --> B[Required R0-R3]
+    A --> C[Optional O1-O5 plus fresh controls]
+    B --> D[Correctness and FP64 reference checks]
+    C --> D
+    D --> E[Warm-ups and repeated timing]
+    E --> F[Audit, plots and reports]
+```
+
+## Run the required study
+
+Complete [setup](#setup-on-another-machine) first. These Python entrypoints
+work with a configured CUDA toolkit and do not require the original machine's
+project-local toolkit directory.
 
 ```bash
 # Preview without compiling, testing or measuring.
-./run_experiment.sh --dry-run
+.venv/bin/python experiments/run_full_experiment.py --repo-root . --dry-run
 
-# Build, correctness tests, sanitizer checks and small integration experiment.
-./run_experiment.sh --smoke
+# Build, correctness tests, sanitizers and a small integration experiment.
+.venv/bin/python experiments/run_full_experiment.py --repo-root . --smoke
 
-# Reproduce one full eight-case experiment.
-./run_experiment.sh --clean-build
+# Full eight-case experiment; creates the inputs reused by the optional study.
+.venv/bin/python experiments/run_full_experiment.py --repo-root . \
+  --clean-build --results-dir results/new_required_run
 
-# Optional: three separate sessions and a combined repeatability report.
-./run_experiment.sh --sessions 3 --clean-build
+# Optional: three separate sessions and a repeatability report.
+.venv/bin/python experiments/run_full_experiment.py --repo-root . \
+  --sessions 3 --clean-build --results-dir results/new_required_study
 ```
 
 Use AC power and consistent power settings; close unrelated workloads.
-Every invocation creates a new UTC-timestamped directory. A supplied
-`--results-dir` must be new or empty; existing measurements are never erased.
-Build products are regenerated automatically.
+`--results-dir` must be new or empty. Without it, the driver creates a new
+UTC-timestamped directory. Every run retains its own records and build output
+is regenerated automatically.
 
 ## Run all optional methods
 
-Reuse the exact CPU-exported inputs from a completed required run:
+Reuse the exact CPU-exported inputs from a completed required run. For the
+full-run command above, that directory is `results/new_required_run/cpu_core`.
+The retained October run's generated arrays are not included in its Git
+snapshot, so a fresh checkout should first run the required study or retrieve
+matching arrays before using it as optional input.
 
 ```bash
 # Preview all optional routes without running them.
-./run_experiment.sh --optional --dry-run
+.venv/bin/python experiments/run_optional_experiment.py --repo-root . --dry-run
 
 # Build and validate without collecting timing samples.
-./run_experiment.sh --optional --inputs results/full/cpu_core --validate-only
+.venv/bin/python experiments/run_optional_experiment.py --repo-root . \
+  --inputs results/new_required_run/cpu_core --validate-only
 
-# Short integration measurement, including fresh correctness/sanitizer gates.
-./run_experiment.sh --optional --inputs results/full/cpu_core --smoke
+# Short integration measurement, with fresh correctness/sanitizer gates.
+.venv/bin/python experiments/run_optional_experiment.py --repo-root . \
+  --inputs results/new_required_run/cpu_core --smoke
 
-# Full optional study, with contemporaneous CPU/GPU controls.
-./run_experiment.sh --optional --inputs results/full/cpu_core --clean-build
+# Full optional study with contemporaneous CPU/GPU controls.
+.venv/bin/python experiments/run_optional_experiment.py --repo-root . \
+  --inputs results/new_required_run/cpu_core --clean-build
 ```
 
 Optional results go to `results/optional_runs/<timestamp>/`. Start with
@@ -77,8 +99,8 @@ and optional performance records are never silently combined.
 | GEMM reference | Labelled cuBLAS pedantic FP32 GEMM, separate norm/reconstruction costs and near-zero direct rechecks; full-sort validation of its own distances |
 | Out-of-core | One/two pinned host/device chunk slots, asynchronous H2D and one compute stream, global-ID candidate merging; single/double/R2 agreement |
 
-The current local toolkit includes cuBLAS 12.8.4.1. If recreating the minimal
-local toolkit, install its optional shared libraries with:
+The GEMM reference requires cuBLAS. When recreating the minimal project-local
+CUDA 12.8 toolkit, install the pinned cuBLAS 12.8.4.1 shared libraries with:
 
 ```bash
 .venv/bin/python experiments/install_optional_cublas.py
@@ -96,8 +118,8 @@ budget, while the complete input must fit host RAM. To measure inputs larger
 than available device memory, supply their input manifest and arrays and use:
 
 ```bash
-./run_experiment.sh --optional --inputs /path/to/cpu-export \
-  --stream-only --chunk-size 32768
+.venv/bin/python experiments/run_optional_experiment.py --repo-root . \
+  --inputs /path/to/cpu-export --stream-only --chunk-size 32768
 ```
 
 Stream-only mode avoids materialised full-N GPU controls. A small chunk-budget
@@ -112,24 +134,28 @@ required and optional experiments retain their own source hashes and records.
 
 ## Setup on another machine
 
-Use an x86 CPU with AVX2 and a CUDA 12.x toolkit supporting the GTX 1050
-(`sm_61`). Put `nvcc` and `compute-sanitizer` on PATH and make the CUDA runtime
-available. CUDA 13 cannot compile this Pascal target. Its version shown by
-`nvidia-smi` is driver capability, separate from the installed compiler.
+Use an x86 CPU with AVX2, a C++17 compiler, CMake 3.21 or later, Python 3,
+and a CUDA 12.x toolkit with Compute Sanitizer. The current drivers target
+the GTX 1050 (`sm_61`). CUDA 13 cannot compile this Pascal target. The CUDA
+version shown by `nvidia-smi` is driver capability, separate from the installed
+compiler.
+
+Put `nvcc` and `compute-sanitizer` on PATH and make the CUDA runtime available
+to the dynamic linker. The optional build also needs cuBLAS headers and shared
+libraries; a complete CUDA toolkit can provide them directly. Then create the
+Python environment:
 
 ```bash
 python3 -m venv .venv
 .venv/bin/python -m pip install -r experiments/requirements.txt
-.venv/bin/python experiments/run_full_experiment.py --repo-root . --smoke
-.venv/bin/python experiments/run_full_experiment.py --repo-root . --clean-build
 ```
 
-For repeated required sessions add `--sessions 3`. For optional routes use
-`.venv/bin/python experiments/run_optional_experiment.py --inputs <CPU_RESULTS>`.
-The optional build requires cuBLAS headers and shared libraries. Use the direct
-Python driver on a fresh machine; the shell wrapper expects this machine's
-local toolkit layout.
-Local dependencies and build output are excluded by `.gitignore`.
+Use the Python commands above for required and optional experiments. The
+shell wrapper `run_experiment.sh` is a convenience for a checkout with its own
+`.tools/cuda-12.8/` and `.venv/`; it selects those local dependencies. In such a
+checkout, `./run_experiment.sh --clean-build` runs the required study and
+`./run_experiment.sh --optional --inputs <CPU_RESULTS> --clean-build` runs the
+optional study. Local dependencies and rebuildable output are ignored by Git.
 
 ## Measurement and validation
 
@@ -203,10 +229,11 @@ eight plots, unified CSVs and `data_audit.json`. On failure, inspect
 `environment.json` and `logs/workflow.log`, then rerun into a new directory.
 Incomplete or incompatible sessions cannot enter the study summary.
 
-Generated binary input arrays remain locally available but are ignored by
-Git. Their shapes, generator seed and SHA-256 hashes are committed. A fresh
-checkout must regenerate or retrieve these arrays before auditing their
-hashes; reproducing the study creates them in its new results directory.
+Generated binary arrays from new required/optional runs are ignored by Git;
+their shapes, generator seed and SHA-256 hashes are retained. A fresh checkout
+must regenerate or retrieve the matching arrays before auditing their hashes.
+Reproducing the study creates arrays in its new results directory. The earlier
+CPU experiment folders separately retain historical inputs and artifacts.
 
 ```bash
 # Audit the retained local inputs and records without measuring again.
@@ -239,6 +266,11 @@ The following folders preserve earlier i7-12700H experiments separately from the
 - [Local source-build experiment](CPU_i7_12700H_LocalBuild/)
 - [Chinese comparison report for the three earlier CPU experiments](docs/CEG5206三组CPU实验区别与完整结果对比.docx)
 
+The three earlier CPU records compare execution environments and build
+provenance. They do not count as three repeated sessions of the current
+CPU/GPU study. Current CPU/GPU speedups use their recorded same-machine
+controls; the historical CPU results remain separate evidence.
+
 ## Design and reporting
 
 The [experiment protocol](docs/EXPERIMENT_PROTOCOL.md) specifies the grid,
@@ -254,3 +286,10 @@ inputs. Add the actual team names, contributions and cross-review evidence.
 The CPU source originated from team commit
 `3198b94f6cecbbfa4daaac9d9acd156a19d7eb01`; current measured source hashes and
 available Git metadata are retained with the completed run.
+
+## Collaboration workflow
+
+1. Start task branches from the latest `main`.
+2. Commit source, tests, documentation and the intended experiment evidence.
+3. Push the task branch and open a pull request targeting `main` for team review.
+4. Merge reviewed changes and keep report links and reproduction instructions current.
