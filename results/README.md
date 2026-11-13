@@ -35,7 +35,3 @@ results directory without changing this retained measurement.
 Local `.venv/` and `.tools/` installations are also ignored. See
 [the setup instructions](../README.md#setup-on-another-machine) on a fresh machine.
 
-Earlier runs, imported CPU binaries/results, duplicate source archives, old
-patch/manifests and build/cache files were moved out of this workspace to a
-local recovery directory during repository cleanup. They are not part of this
-final experiment's evidence.
