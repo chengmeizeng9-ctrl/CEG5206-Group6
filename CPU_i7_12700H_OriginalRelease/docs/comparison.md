@@ -28,4 +28,4 @@ Both complete experiments pass the required correctness checks and record zero F
 
 The original executable removes rebuilding differences. Operating systems, virtualization, dynamic libraries and physical-core mapping remain different. Host temperature, power conditions and background load were not jointly controlled.
 
-Source revision: `063769a4d6b04f6f572aa01d119c3092e4e5577d`. Member 1 data: `CPU/results/main/`; local data: `CPU_i7_12700H_OriginalRelease/results/main/`.
+Source revision: `063769a4d6b04f6f572aa01d119c3092e4e5577d`. Member 1 data: `CPU_Ultra5_125H/results/main/`; local data: `CPU_i7_12700H_OriginalRelease/results/main/`.

@@ -44,12 +44,12 @@ CMakeCache.txt
 *.o
 *.a
 *.so
-CPU/artifacts/
+CPU_Ultra5_125H/artifacts/
 
 # Generated datasets: retain locally; commit manifests and hashes instead
 **/input_*.f32
 **/input_*.i32
-CPU/results/
+CPU_Ultra5_125H/results/
 
 # Temporary checks; final run logs under results/runs/ remain included
 results/smoke_runs/

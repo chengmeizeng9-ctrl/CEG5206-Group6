@@ -5,4 +5,4 @@ One complete experiment, eight configurations, 10 warm-ups and 20 timed calls pe
 - [Experiment report](../../docs/report.md)
 - [Comparison](../../docs/comparison.md)
 - `raw.csv`, `summary.csv`, `correctness.csv`: all recorded measurements and checks.
-- `inputs.csv`, `input_sha256.json`, `input_location.json`: references to the identical shared arrays in [Member 1's dataset](../../../CPU/results/main/).
+- `inputs.csv`, `input_sha256.json`, `input_location.json`: references to the identical shared arrays in [Member 1's dataset](../../../CPU_Ultra5_125H/results/main/).

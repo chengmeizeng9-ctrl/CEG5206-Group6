@@ -20,4 +20,4 @@ The source revision and controlled compiler options match. The executables are i
 
 All main correctness checks pass on both machines. All input hashes match. Variable groups and additional groups are retained; no slower groups or individual samples are removed.
 
-Member 1 reference: `CPU/results/main/`; local data: `CPU_i7_12700H_LocalBuild/results/main/`.
+Member 1 reference: `CPU_Ultra5_125H/results/main/`; local data: `CPU_i7_12700H_LocalBuild/results/main/`.

@@ -262,7 +262,7 @@ CPU experiment folders separately retain historical inputs and artifacts.
 
 | Location | Contents |
 |---|---|
-| [CPU/](CPU/) | Required and optional CPU routes, FP64 oracle and tests |
+| [CPU_Ultra5_125H/](CPU_Ultra5_125H/) | CPU implementation, FP64 oracle, tests and historical Ultra 5 125H measurements |
 | [GPU/](GPU/) | Required/optional CUDA routes, candidate merging and tests |
 | [experiments/](experiments/) | Experiment runner, analysis, report generation and data auditing |
 | [docs/](docs/README.md) | Documentation index, English CPU comparison and proposal history |
@@ -272,8 +272,9 @@ CPU experiment folders separately retain historical inputs and artifacts.
 
 ## Earlier CPU experiments
 
-The following folders preserve earlier i7-12700H experiments separately from the current CPU/GPU comparison:
+The following records preserve the earlier CPU experiments separately from the current CPU/GPU comparison:
 
+- [Ultra 5 125H experiment](CPU_Ultra5_125H/results/main/)
 - [Original Release executable experiment](CPU_i7_12700H_OriginalRelease/)
 - [Local source-build experiment](CPU_i7_12700H_LocalBuild/)
 - [Comparison of the three earlier CPU experiments](docs/CPU_Experiment_Comparison.docx)
@@ -283,20 +284,22 @@ provenance. They do not count as three repeated sessions of the current
 CPU/GPU study. Current CPU/GPU speedups use their recorded same-machine
 controls; the historical CPU results remain separate evidence.
 
+The source directory formerly named `CPU/` is now `CPU_Ultra5_125H/`. Historical source snapshots, build logs and measurement metadata retain their recorded paths; an old `CPU/` path in those records refers to the renamed directory. The experiment drivers and current dataset-location references use the new path.
+
 `CPU_i7_12700H_LocalBuild/` preserves the source, Release binaries and results
 from **23 October 2026**, at source revision
 `063769a4d6b04f6f572aa01d119c3092e4e5577d`. Its source is kept as a complete
 historical snapshot for reproducing that local rebuild; later additions to
-the current `CPU/` module are not copied into it. Some source files therefore
+the current `CPU_Ultra5_125H/` module are not copied into it. Some source files therefore
 appear in both folders intentionally. The historical experiment reuses the
-arrays under `CPU/results/main/` through its recorded input locations and
+arrays under `CPU_Ultra5_125H/results/main/` through its recorded input locations and
 hashes. See its [snapshot notes](CPU_i7_12700H_LocalBuild/README.md#historical-experiment-snapshot).
 
 ## Design and reporting
 
 The [experiment protocol](docs/EXPERIMENT_PROTOCOL.md) specifies the grid,
 correctness gates, timing boundaries and work/storage hypotheses. The
-[CPU guide](CPU/CPU_Guide.md) describes the standalone CPU build and merge API.
+[CPU guide](CPU_Ultra5_125H/CPU_Guide.md) describes the standalone CPU build and merge API.
 Original and revised proposals are in [docs/proposals/](docs/proposals/).
 
 Use your generated report to explain complete latency, stage costs,

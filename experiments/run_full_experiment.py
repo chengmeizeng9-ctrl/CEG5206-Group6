@@ -88,11 +88,11 @@ def choose_mapping(raw_csv: Path, tile: int) -> str:
 
 def source_hashes(repo: Path) -> dict[str, str]:
     paths = set()
-    for directory in ('CPU/src', 'CPU/include', 'CPU/tests', 'CPU/scripts',
+    for directory in ('CPU_Ultra5_125H/src', 'CPU_Ultra5_125H/include', 'CPU_Ultra5_125H/tests', 'CPU_Ultra5_125H/scripts',
                       'GPU/src', 'GPU/include', 'GPU/tests', 'experiments'):
         paths.update(p for p in (repo / directory).rglob('*')
                      if p.is_file() and p.suffix in ('.cpp', '.cu', '.cuh', '.hpp', '.py'))
-    paths.update(repo / name for name in ('CPU/CMakeLists.txt', 'GPU/CMakeLists.txt',
+    paths.update(repo / name for name in ('CPU_Ultra5_125H/CMakeLists.txt', 'GPU/CMakeLists.txt',
                                          'run_experiment.sh', 'experiments/requirements.txt'))
     return {p.relative_to(repo).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
             for p in sorted(paths) if p.is_file()}
@@ -142,7 +142,7 @@ def run_session(args, repo: Path, build: Path, results: Path, nvcc_output: str,
     logs = results / 'logs'
     logs.mkdir()
     LOG_FILE = logs / 'workflow.log'
-    cpu_source, gpu_source = repo / 'CPU', repo / 'GPU'
+    cpu_source, gpu_source = repo / 'CPU_Ultra5_125H', repo / 'GPU'
     cpu_build, gpu_build = build / 'cpu', build / 'gpu'
     cpu_results = results / 'cpu_core'
     gpu_mapping, gpu_core, gpu_tile = (results / p for p in
@@ -284,14 +284,14 @@ def main() -> None:
     if args.dry_run:
         print(json.dumps({'results': str(results), 'sessions': args.sessions,
             'smoke': args.smoke, 'actions': [
-                'release CPU/GPU build', 'CPU/GPU tests (skipped GPU fails gate)',
+                'release CPU/GPU build', 'CPU_Ultra5_125H/GPU tests (skipped GPU fails gate)',
                 'memcheck and racecheck before measurements',
                 'CPU inputs and measurements', 'GPU mapping ablation and frozen mapping',
                 'GPU core and tile measurements', 'analysis, report and full-run data audit',
                 'session summary when sessions > 1'],
             'existing_results': 'preserved'}, indent=2))
         return
-    for source in ('CPU/CMakeLists.txt', 'GPU/CMakeLists.txt', 'experiments/analyze_full.py'):
+    for source in ('CPU_Ultra5_125H/CMakeLists.txt', 'GPU/CMakeLists.txt', 'experiments/analyze_full.py'):
         if not (repo / source).is_file():
             raise FileNotFoundError(repo / source)
     major, nvcc_output = nvcc_major()

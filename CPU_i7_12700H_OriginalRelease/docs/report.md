@@ -46,6 +46,6 @@ The observed scalar-full-sort to AVX2-heap median ratio is **6.254x** on this gu
 
 ## Reproduction
 
-From `CPU/`, use the original binary: `./artifacts/release/knn_bench results/new_run`. Then run `python3 scripts/analyze.py results/new_run`. Use a fresh output directory. The main data, hashes, raw timing records, correctness records, and generated plots are retained under `CPU_i7_12700H_OriginalRelease/results/main/`.
+From `CPU_Ultra5_125H/`, use the original binary: `./artifacts/release/knn_bench results/new_run`. Then run `python3 scripts/analyze.py results/new_run`. Use a fresh output directory. The main data, hashes, raw timing records, correctness records, and generated plots are retained under `CPU_i7_12700H_OriginalRelease/results/main/`.
 
-Input arrays are reused from [the existing main dataset](../../CPU/results/main/) and verified by SHA-256; see the local result directory's `input_location.json`.
+Input arrays are reused from [the existing main dataset](../../CPU_Ultra5_125H/results/main/) and verified by SHA-256; see the local result directory's `input_location.json`.

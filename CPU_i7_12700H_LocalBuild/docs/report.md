@@ -14,7 +14,7 @@ The oracle promotes the actual FP32 inputs to FP64, computes complete distances 
 
 ## Experimental setup
 
-The baseline is N=100000, d=64, q=16, k=10. The eight configurations vary N, d, q, and k one factor at a time. Inputs use synthetic-v1, MT19937 seed 5206, X followed by Q, and labels equal to ID modulo 10. Input shapes and SHA-256 hashes are retained under `results/main/`; the identical arrays are reused from [Member 1's shared dataset](../../CPU/results/main/).
+The baseline is N=100000, d=64, q=16, k=10. The eight configurations vary N, d, q, and k one factor at a time. Inputs use synthetic-v1, MT19937 seed 5206, X followed by Q, and labels equal to ID modulo 10. Input shapes and SHA-256 hashes are retained under `results/main/`; the identical arrays are reused from [Member 1's shared dataset](../../CPU_Ultra5_125H/results/main/).
 
 Each route receives 10 warm-ups and 20 timed complete-search calls per group. Timing includes per-query state reset, distance computation, candidate selection, final ordering, and label gathering. It excludes input generation, full validation, I/O, oracle work, correctness checks, and initial reusable allocation. Routes alternate order each round. The guest CPU affinity, compact environment, compiler settings, and source instructions are recorded alongside the results.
 

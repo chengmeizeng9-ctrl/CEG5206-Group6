@@ -1,7 +1,7 @@
 # Three-Member Shared Contract
 
-Version: 1.2
-Date: 2026-10-19
+Version: 1.3
+Date: 2026-11-13
 Project: Algorithmic and Memory Optimisation of Exact kNN Search on CPUs and GPUs.
 
 ## 1. Scope and Relationship to Other Documents
@@ -41,13 +41,22 @@ The required fused CUDA route includes local Bitonic selection; this does not ma
 | Labels | N signed 32-bit integers, corresponding one-to-one to database rows |
 | IDs | Unsigned 32-bit database row indices, from 0 to N−1 |
 | N, d, q | Each at least 1; check representable ranges, lengths, and resources |
-| k | 1≤k≤N; no silent truncation |
+| k | 1≤k≤N, subject to the route-specific limits below; no silent truncation |
 | T | 32, 64, 128, or 256 for blocked approaches; not applicable for non-blocked approaches |
 | Supported numerical domain | Finite FP32 components in [−1,1] |
 
 The maximum ID, 4294967295, is reserved as an invalid sentinel, so N must not exceed 4294967295; d must not exceed 2147483647. These are representation limits, not guarantees that every size can be executed. Size, index, and byte calculations must use at least 64-bit representations, with overflow checks for multiplication, addition, and conversions to third-party interface types.
 
-The proposal's main experimental parameters and reasonable size-boundary tests must be supported, especially small cases with k=N and k>T. Outside the core scope, explicit resource-exhaustion or unsupported-configuration errors are allowed, but must not be used to avoid core tasks.
+The required routes have the following supported k ranges:
+
+| Route | Supported k range | Additional limits |
+|---|---|---|
+| R0: CPU scalar full sort | 1≤k≤N | Available memory and the shared representation limits |
+| R1: CPU SIMD with a Top-K heap | 1≤k≤N | AVX2 availability, available memory and the shared representation limits |
+| R2: Materialised CUDA full sort | 1≤k≤N | Available device memory; the current CUB interfaces require N, q and qN to fit signed 32-bit integers |
+| R3: Fused tiled CUDA with local Bitonic selection | 1≤k≤min(N,T,128) | T is 32, 64, 128 or 256; available device memory and current launch/interface limits |
+
+All main experimental configurations must be supported. Boundary cases such as k=N apply within each route's declared support range. For R3, k>T and k>128 are outside the supported domain and must be explicitly rejected with a descriptive configuration error; silent truncation or an unreported fallback to another route is not allowed. Successful searches for these unsupported R3 configurations are not required. Allocation failures and other resource limits must also be explicit.
 
 Inputs are read-only. Labels do not participate in distance computation or selection, and no classification voting is added. Duplicate vectors are not deduplicated. Matrix and label lengths must match their declarations. NaN, infinity, out-of-domain values, empty inputs, and invalid parameters must be explicitly rejected.
 
@@ -85,7 +94,7 @@ Each query outputs exactly k distinct valid IDs, their corresponding FP32 distan
 
 The caller owns the inputs, outputs, and reusable workspace. Capacity and valid count are separate. Necessary state must be reset for each call, and this reset is timed; Top-k state from previous queries must not be retained. GPU interfaces must specify the device, stream, lifetime, and completion conditions. Asynchronous results must not be read before completion.
 
-For the required fused tiled CUDA route, each block retains min(k,valid sample count) candidates using local Bitonic selection. When k>T, retain all valid entries in the block. Pad the final block to T, but do not compute real distances for padding or output padding entries. T is not applicable to non-blocked CPU routes. Local selection, merging, and final sorting are all timed.
+For the required fused tiled CUDA route, use 1≤k≤min(N,T,128). Each block retains min(k,valid sample count) valid candidates using local Bitonic selection. Pad the final block to T, but do not compute real distances for padding or return padding entries in the final results. Fixed-length intermediate candidate lists may contain invalid sentinels when a block has fewer than k valid samples. Configurations with k>T or k>128 are rejected rather than processed. T is not applicable to non-blocked CPU routes. Local selection, merging, and final sorting are all timed.
 
 The CPU Top-K heap root is the worst candidate and its retained results must be sorted before output. The required merging method must preserve the shared total order, return the first min(k,total candidate count) entries, and never emit duplicate IDs for a valid complete search. If optional Radix/Scan is implemented, resolve threshold ties by ID and include refinement, flagging, exclusive scan, compaction, and final sorting in timing. If optional early abandonment is implemented, it must preserve exact selection semantics; partial distances must not be output, and the stopping rule and validation evidence must be documented.
 
@@ -101,7 +110,7 @@ Record separate checks for structure, labels, sorting, fixed-distance selection,
 
 Explained numerical limitations may be reported as research findings, with difference statistics, but must not be labeled as strict agreement. Unexplained differences and structural or selection errors cannot support credible speedup claims.
 
-Shared cases must cover at least zero/identical vectors, duplicate samples, exact/near ties, k=1, k=N, k>T, invalid k, final partial blocks, SIMD tails, multiple queries, and repeated calls. Tests specific to optional methods (including early-abandonment boundary tests) apply only when those methods are implemented. The three members must use the same basic expected results.
+Shared cases must cover at least zero/identical vectors, duplicate samples, exact/near ties, k=1, k=N within the route's supported range, invalid k, final partial blocks, SIMD tails, multiple queries, and repeated calls. R3 success cases stay within k≤min(N,T,128); k>T and k>128 are unsupported configurations, not required successful-search cases. Any reported rejection tests are assessed against these route limits. Tests specific to optional methods (including early-abandonment boundary tests) apply only when those methods are implemented. The three members must use the same basic expected results for matching inputs and computation rules.
 
 ## 6. Main Experimental Inputs and Parameters
 
@@ -155,9 +164,11 @@ Each integration proceeds in this order: fixed-distance selection validation, co
 
 Required algorithm work is limited to the five items in Section 1.1. Ablation studies and crossover analysis should compare the required routes where applicable; they do not make optional algorithms mandatory. CPU Bitonic, Radix/Scan, GEMM, early abandonment, and out-of-core double buffering remain optional. Approximate search, multiple GPUs, and training are out of scope.
 
-Final deliverables are source code, build/run instructions, fixed seeds and raw results, plotting scripts, environment information and representative reproduction commands, a technical report, a presentation, and contribution records for all three members. Member 1 has already received user authorization to enter implementation. Actual validation and experimental records are in member1/results and member1/docs.
+Final deliverables are source code, build/run instructions, fixed seeds and raw results, plotting scripts, environment information and representative reproduction commands, a technical report, a presentation, and contribution records for all three members. Member 1 has already received user authorization to enter implementation. Historical CPU validation and experimental records are in `CPU_Ultra5_125H/results/` and `CPU_Ultra5_125H/docs/`; unified CPU/GPU experiment records are indexed in `results/README.md`.
 
 ## 10. Version History
 
 2026-10-09, 1.1: Corrected the one-factor-at-a-time sweep count to 11 combinations (the baseline plus 1+2+2+2+3 variations).
 2026-10-19, 1.2: Clarified the agreed Required/Optional algorithm scope; made CPU Bitonic, Radix/Scan, GEMM, early abandonment, and out-of-core double buffering optional; retained Bitonic as required within the fused tiled CUDA route; clarified that CPU runs cover eight unique non-T configurations while the shared CUDA set includes the T sweep. Updated responsibilities and removed optional-method requirements from shared correctness criteria. Affected modules: algorithm scope, interfaces, correctness cases, main experiment interpretation, and member responsibilities. Members should use this version going forward. Existing CPU runs for the eight N/d/q/k combinations remain applicable; CUDA members must follow the required materialised and fused routes and the shared 11-combination sweep.
+
+2026-11-13, 1.3: Revised the accepted R3 support domain to 1≤k≤min(N,T,128), matching the existing implementation and documented route limits. Removed the requirement for successful R3 searches with k>T and limited k=N cases to each route's supported range. Documented R0/R1/R2 ranges, R3 intermediate padding and explicit configuration rejection. Updated the CPU record paths after renaming the module to `CPU_Ultra5_125H/`. Affected modules: supported inputs, blocking/merging semantics, correctness-case interpretation and record locations.

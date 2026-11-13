@@ -131,7 +131,7 @@ hashes; reproducing the study creates them in its new results directory.
 
 The [experiment protocol](docs/EXPERIMENT_PROTOCOL.md) specifies the grid,
 correctness gates, timing boundaries and work/storage hypotheses. The
-[CPU guide](CPU/CPU_Guide.md) describes the standalone CPU build and merge API.
+[CPU guide](CPU_Ultra5_125H/CPU_Guide.md) describes the standalone CPU build and merge API.
 Original and revised proposals are in [docs/proposals/](docs/proposals/).
 
 Use your generated report to explain complete latency, stage costs,
