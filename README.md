@@ -282,6 +282,15 @@ provenance. They do not count as three repeated sessions of the current
 CPU/GPU study. Current CPU/GPU speedups use their recorded same-machine
 controls; the historical CPU results remain separate evidence.
 
+`CPU_i7_12700H_LocalBuild/` preserves the source, Release binaries and results
+from **23 October 2026**, at source revision
+`063769a4d6b04f6f572aa01d119c3092e4e5577d`. Its source is kept as a complete
+historical snapshot for reproducing that local rebuild; later additions to
+the current `CPU/` module are not copied into it. Some source files therefore
+appear in both folders intentionally. The historical experiment reuses the
+arrays under `CPU/results/main/` through its recorded input locations and
+hashes. See its [snapshot notes](CPU_i7_12700H_LocalBuild/README.md#historical-experiment-snapshot).
+
 ## Design and reporting
 
 The [experiment protocol](docs/EXPERIMENT_PROTOCOL.md) specifies the grid,
