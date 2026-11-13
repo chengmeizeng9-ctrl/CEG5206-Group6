@@ -19,7 +19,7 @@ import generate_report as report
 
 def write_csv(path, records):
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open('w', newline='') as stream:
+    with path.open('w', newline='', encoding='utf-8') as stream:
         writer = csv.DictWriter(stream, fieldnames=list(records[0]))
         writer.writeheader()
         writer.writerows(records)
@@ -52,7 +52,7 @@ def fingerprint(path):
     audit = {'status': 'PASS', 'cpu_variable_groups': [], 'gpu_variable_groups': [],
              'artifact_sha256': {p: hashlib.sha256((path/p).read_bytes()).hexdigest()
                                  for p in ('environment.json', 'analysis/unified_summary.csv')}}
-    (path/'analysis/data_audit.json').write_text(json.dumps(audit))
+    (path/'analysis/data_audit.json').write_text(json.dumps(audit), encoding='utf-8')
 
 
 def make_session(path, cpu_time, heap_time):
@@ -61,10 +61,10 @@ def make_session(path, cpu_time, heap_time):
     (path/'environment.json').write_text(json.dumps(dict(
         status='completed', smoke=False, hostname='test-machine', primary_mapping='warp_per_vector',
         primary_tile=128, cuda_architecture=61, nvcc='CUDA 12 test fixture', warmups=10, repeats=20,
-        source_sha256={'kernel.cu': 'fixture-source-hash'})))
-    (path/'cpu_core/input_sha256.json').write_text(json.dumps({'X': 'fixture-input-hash'}))
+        source_sha256={'kernel.cu': 'fixture-source-hash'})), encoding='utf-8')
+    (path/'cpu_core/input_sha256.json').write_text(json.dumps({'X': 'fixture-input-hash'}), encoding='utf-8')
     (path/'gpu_core/run.txt').write_text('gpu_name=test-gpu\ncompute_capability=6.1\n'
-                                      'cuda_runtime_version=12080\ncuda_driver_version=13000\n')
+                                      'cuda_runtime_version=12080\ncuda_driver_version=13000\n', encoding='utf-8')
     write_csv(path/'analysis/unified_summary.csv', make_rows(cpu_time, heap_time))
     fingerprint(path)
 
@@ -80,10 +80,10 @@ class WorkflowTests(unittest.TestCase):
 
     def test_existing_results_are_preserved(self):
         marker = self.root/'raw.csv'
-        marker.write_text('retained evidence')
+        marker.write_text('retained evidence', encoding='utf-8')
         with self.assertRaises(FileExistsError):
             driver.require_new_results(self.root)
-        self.assertEqual(marker.read_text(), 'retained evidence')
+        self.assertEqual(marker.read_text(encoding='utf-8'), 'retained evidence')
 
     def test_dry_run_does_not_invoke_commands_or_create_results(self):
         destination = self.root/'not-created'
@@ -114,7 +114,7 @@ class WorkflowTests(unittest.TestCase):
                 driver.run_session(args, self.root, self.root/'build', destination,
                                    'fixture nvcc', 'auto', {'source': 'hash'}, None)
         self.assertFalse(any('knn_bench' in str(c) or 'knn_gpu_bench' in str(c) for c in commands))
-        self.assertEqual(json.loads((destination/'environment.json').read_text())['status'], 'failed')
+        self.assertEqual(json.loads((destination/'environment.json').read_text(encoding='utf-8'))['status'], 'failed')
 
     def test_sanitizer_warning_blocks_gate(self):
         output = 'PASS gpu_cases=44 checks=2294\nERROR SUMMARY: 0 errors\n'
@@ -139,7 +139,7 @@ class WorkflowTests(unittest.TestCase):
                         [('thread_per_vector', '8'), ('warp_per_vector', '4')]])
             if any(str(item).endswith('verify_experiments.py') for item in command):
                 env = destination/'environment.json'
-                self.assertEqual(json.loads(env.read_text())['status'], 'completed')
+                self.assertEqual(json.loads(env.read_text(encoding='utf-8'))['status'], 'completed')
                 audited_digest.append(hashlib.sha256(env.read_bytes()).hexdigest())
             return ''
         args = argparse.Namespace(primary_tile=128, smoke=False, warmups=10,
@@ -169,7 +169,7 @@ class WorkflowTests(unittest.TestCase):
             self.assertTrue((repo/'GPU/CMakeLists.txt').exists())
             driver.main()
         self.assertEqual([c.args[5] for c in session.call_args_list], ['auto','warp','warp'])
-        self.assertEqual(json.loads((destination/'study.json').read_text())['status'], 'completed')
+        self.assertEqual(json.loads((destination/'study.json').read_text(encoding='utf-8'))['status'], 'completed')
 
     def test_paired_ratios_are_not_ratio_of_pooled_medians(self):
         paths = [self.root/f'session_{i}' for i in range(3)]
@@ -185,7 +185,7 @@ class WorkflowTests(unittest.TestCase):
         paths = [self.root/f'session_{i}' for i in range(2)]
         for path in paths:
             make_session(path, 100, 10)
-        (paths[1]/'cpu_core/input_sha256.json').write_text('{"X": "different"}')
+        (paths[1]/'cpu_core/input_sha256.json').write_text('{"X": "different"}', encoding='utf-8')
         with self.assertRaisesRegex(ValueError, 'input hashes differ'):
             sessions.summarize(paths)
 
@@ -193,9 +193,9 @@ class WorkflowTests(unittest.TestCase):
         paths = [self.root/f'session_{i}' for i in range(2)]
         for path in paths:
             make_session(path, 100, 10)
-        env = json.loads((paths[1]/'environment.json').read_text())
+        env = json.loads((paths[1]/'environment.json').read_text(encoding='utf-8'))
         env['source_sha256'] = {'kernel.cu': 'changed'}
-        (paths[1]/'environment.json').write_text(json.dumps(env))
+        (paths[1]/'environment.json').write_text(json.dumps(env), encoding='utf-8')
         fingerprint(paths[1])
         with self.assertRaisesRegex(ValueError, 'source hashes differ'):
             sessions.summarize(paths)
@@ -205,11 +205,11 @@ class WorkflowTests(unittest.TestCase):
         for name in names:
             make_session(self.root/name, 100, 10)
         (self.root/'study.json').write_text(json.dumps(dict(status='completed',
-            sessions=names, sessions_requested=3)))
+            sessions=names, sessions_requested=3)), encoding='utf-8')
         with mock.patch.object(sys, 'argv', ['summary', '--study', str(self.root)]), \
              contextlib.redirect_stdout(io.StringIO()):
             sessions.main()
-        text = (self.root/'study_summary.md').read_text()
+        text = (self.root/'study_summary.md').read_text(encoding='utf-8')
         self.assertIn('3 separate sessions', text)
         self.assertIn('not ratios of pooled medians', text)
         self.assertEqual(len(sessions.read_csv(self.root/'paired_speedups.csv')), 7)
@@ -219,9 +219,9 @@ class WorkflowTests(unittest.TestCase):
         paths = [self.root/f'session_{i}' for i in range(2)]
         for path in paths:
             make_session(path, 100, 10)
-        env = json.loads((paths[1]/'environment.json').read_text())
+        env = json.loads((paths[1]/'environment.json').read_text(encoding='utf-8'))
         env['primary_mapping'] = 'thread_per_vector'
-        (paths[1]/'environment.json').write_text(json.dumps(env))
+        (paths[1]/'environment.json').write_text(json.dumps(env), encoding='utf-8')
         fingerprint(paths[1])
         with self.assertRaisesRegex(ValueError, 'configuration differs'):
             sessions.summarize(paths)
@@ -229,7 +229,7 @@ class WorkflowTests(unittest.TestCase):
     def test_changed_audited_csv_is_not_combined(self):
         path = self.root/'session'
         make_session(path, 100, 10)
-        with (path/'analysis/unified_summary.csv').open('a') as stream:
+        with (path/'analysis/unified_summary.csv').open('a', encoding='utf-8') as stream:
             stream.write('changed\n')
         with self.assertRaisesRegex(ValueError, 'artifact changed'):
             sessions.load_session(path)
@@ -244,12 +244,13 @@ class WorkflowTests(unittest.TestCase):
                                                          max_abs_error='0', materialized_match='')])
         (analysis/'analysis.json').write_text(json.dumps(dict(all_required_correctness_passed=True,
             variable_gpu_groups=[], speedups={'R0_over_R1': 10, 'R2_over_R3_resident': 2,
-                                             'R2_over_R3_end_to_end': 12/7})))
+                                             'R2_over_R3_end_to_end': 12/7})), encoding='utf-8')
         with mock.patch.object(sys, 'argv', ['report', '--analysis', str(analysis),
                                             '--primary-mapping', 'warp_per_vector', '--primary-tile', '128']), \
              contextlib.redirect_stdout(io.StringIO()):
             report.main()
-        text = (analysis/'final_results.md').read_text()
+        text = (analysis/'final_results.md').read_text(encoding='utf-8')
+        self.assertIn('C−1', text)
         self.assertIn('**1 CPU** and **0 GPU**', text)
         self.assertIn('20.0%', text)
         self.assertIn('universal FP64 ID equality is not implied', text)

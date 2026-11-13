@@ -24,12 +24,12 @@ R3 = "R3_cuda_fused_tiled_bitonic"
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
-    with path.open(newline="") as stream:
+    with path.open(newline="", encoding='utf-8') as stream:
         return list(csv.DictReader(stream))
 
 
 def write_csv(path: Path, rows: list[dict[str, object]], fields: list[str]) -> None:
-    with path.open("w", newline="") as stream:
+    with path.open("w", newline="", encoding='utf-8') as stream:
         writer = csv.DictWriter(stream, fieldnames=fields)
         writer.writeheader()
         writer.writerows(rows)
@@ -496,7 +496,7 @@ def main() -> None:
             "R2_over_R3_end_to_end": baseline["R2_end_to_end_ms"] / baseline["R3_end_to_end_ms"],
         },
     }
-    (args.output / "analysis.json").write_text(json.dumps(report, indent=2) + "\n")
+    (args.output / "analysis.json").write_text(json.dumps(report, indent=2) + "\n", encoding='utf-8')
     print(json.dumps(report, indent=2))
 
 

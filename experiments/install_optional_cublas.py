@@ -51,7 +51,7 @@ def main():
         license_dir=args.cuda_root/'licenses/libcublas'
         license_dir.mkdir(parents=True,exist_ok=True)
         if (source/'LICENSE').exists(): shutil.copy2(source/'LICENSE',license_dir/'LICENSE')
-        (license_dir/'redistrib.json').write_text(json.dumps({'url':BASE+ARCHIVE,'sha256':SHA256},indent=2)+'\n')
+        (license_dir/'redistrib.json').write_text(json.dumps({'url':BASE+ARCHIVE,'sha256':SHA256},indent=2)+'\n', encoding='utf-8')
     print('Installed cuBLAS in',args.cuda_root,flush=True)
 
 

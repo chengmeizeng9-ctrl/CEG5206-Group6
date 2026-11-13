@@ -18,7 +18,7 @@ import run_full_experiment as workflow
 
 
 def write(path,rows):
-    with path.open('w',newline='') as stream:
+    with path.open('w',newline='', encoding='utf-8') as stream:
         writer=csv.DictWriter(stream,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
 
 
@@ -60,7 +60,7 @@ def fixture(path):
                 sample['estimated_overlap_ratio']='0.25' if streaming else '0'
                 raw.append(sample)
     write(path/'raw.csv',raw);write(path/'correctness.csv',correct);write(path/'memory.csv',memory)
-    (path/'run.txt').write_text('warmups=1\nrepeats=3\ncases=0\nstream_only=0\n')
+    (path/'run.txt').write_text('warmups=1\nrepeats=3\ncases=0\nstream_only=0\n', encoding='utf-8')
     return raw,correct,memory
 
 
@@ -76,7 +76,7 @@ class OptionalWorkflowTests(unittest.TestCase):
         self.assertEqual(report['configurations'],11)
         self.assertEqual(report['timing_groups'],15)
         self.assertEqual(report['raw_measurements'],45)
-        text=(self.root/'analysis/optional_results.md').read_text()
+        text=(self.root/'analysis/optional_results.md').read_text(encoding='utf-8')
         self.assertIn('Streaming always transfers chunks',text)
         self.assertIn('not evidence that the tested database exceeded',text)
         self.assertIn('bitwise direct/GEMM equality is not assumed',text)
@@ -139,14 +139,14 @@ class OptionalWorkflowTests(unittest.TestCase):
         (directory/'input_0.Q.f32').write_bytes(struct.pack('<ff',0,0))
         (directory/'input_0.labels.i32').write_bytes(struct.pack('<i',7))
         hashes=runner.input_hashes(directory)
-        (directory/'input_sha256.json').write_text(json.dumps(hashes))
+        (directory/'input_sha256.json').write_text(json.dumps(hashes), encoding='utf-8')
         (directory/'input_0.X.f32').write_bytes(struct.pack('<ff',.1,.3))
         with self.assertRaisesRegex(ValueError,'frozen CPU'):runner.input_hashes(directory)
 
     def test_shared_cuda_header_is_in_source_snapshot(self):
-        path=self.root/'GPU/src/knn_kernels.cuh';path.parent.mkdir(parents=True);path.write_text('kernel v1')
+        path=self.root/'GPU/src/knn_kernels.cuh';path.parent.mkdir(parents=True);path.write_text('kernel v1', encoding='utf-8')
         first=workflow.source_hashes(self.root)
-        path.write_text('kernel v2');second=workflow.source_hashes(self.root)
+        path.write_text('kernel v2', encoding='utf-8');second=workflow.source_hashes(self.root)
         self.assertIn('GPU/src/knn_kernels.cuh',first)
         self.assertNotEqual(first,second)
 

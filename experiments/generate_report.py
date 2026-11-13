@@ -17,7 +17,7 @@ R3 = "R3_cuda_fused_tiled_bitonic"
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
-    with path.open(newline="") as stream:
+    with path.open(newline="", encoding='utf-8') as stream:
         return list(csv.DictReader(stream))
 
 
@@ -84,11 +84,11 @@ def main() -> None:
 
     rows = read_csv(args.analysis / "unified_summary.csv")
     correctness = read_csv(args.analysis / "unified_correctness.csv")
-    analysis = json.loads((args.analysis / "analysis.json").read_text())
+    analysis = json.loads((args.analysis / "analysis.json").read_text(encoding='utf-8'))
     if not analysis.get('all_required_correctness_passed'):
         raise RuntimeError('Cannot report performance before correctness passes')
     env_path = args.analysis.parent / 'environment.json'
-    environment = json.loads(env_path.read_text()) if env_path.exists() else {}
+    environment = json.loads(env_path.read_text(encoding='utf-8')) if env_path.exists() else {}
     def picture(name: str, caption: str) -> str:
         return f'![{caption}]({name})' if (args.analysis / name).exists() else f'{caption}: not collected in this run.'
 
@@ -374,7 +374,7 @@ Optional CPU Bitonic, custom Radix Select, GEMM-based L2, early abandonment and
 out-of-core double buffering should be reported only if implemented after this
 required experiment is frozen and reproduced.
 """
-    (args.analysis / "final_results.md").write_text(text)
+    (args.analysis / "final_results.md").write_text(text, encoding='utf-8')
     print(args.analysis / "final_results.md")
 
 

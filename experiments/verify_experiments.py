@@ -21,7 +21,7 @@ GRID = [(100000,64,16,10), (10000,64,16,10), (100000,32,16,10),
 
 
 def rows(path):
-    with path.open(newline='') as stream:
+    with path.open(newline='', encoding='utf-8') as stream:
         return list(csv.DictReader(stream))
 
 
@@ -47,14 +47,14 @@ def grouped(data, keys):
 def audit(root):
     if not __debug__:
         raise RuntimeError('Run the data audit without Python -O or PYTHONOPTIMIZE; its checks must stay enabled.')
-    env = json.loads((root/'environment.json').read_text())
+    env = json.loads((root/'environment.json').read_text(encoding='utf-8'))
     assert not env['smoke'] and env['warmups'] > 0 and env['repeats'] > 0
     repeats = env['repeats']
     assert env['cuda_architecture']==61
     manifest = rows(root/'cpu_core/inputs.csv')
     assert [tuple(int(row[k]) for k in ('N','d','q','k')) for row in manifest]==GRID
     assert [row['case'] for row in manifest]==list(map(str,range(8)))
-    hashes = json.loads((root/'cpu_core/input_sha256.json').read_text())
+    hashes = json.loads((root/'cpu_core/input_sha256.json').read_text(encoding='utf-8'))
     assert len(hashes)==24
     for row, (n,d,q,k) in zip(manifest, GRID):
         for suffix, size in (('.X.f32',n*d*4),('.Q.f32',q*d*4),('.labels.i32',n*4)):
@@ -121,7 +121,7 @@ def audit(root):
             shape=GRID[int(row['case'])]
             assert 0 <= int(row['ID_mismatches']) <= shape[2]*shape[3]
         gpu_correct.extend(correctness)
-        metadata=dict(line.split('=',1) for line in (root/directory/'run.txt').read_text().splitlines())
+        metadata=dict(line.split('=',1) for line in (root/directory/'run.txt').read_text(encoding='utf-8').splitlines())
         assert int(metadata['warmups'])==env['warmups'] and int(metadata['repeats'])==repeats
         assert metadata['compute_capability']=='6.1' and metadata['fmad']=='false'
         groups=grouped(data,keys+('mode',))
@@ -191,7 +191,7 @@ def audit(root):
     fastest_mapping = min(medians,key=medians.get)
     if env.get('primary_mapping_selection', 'auto') == 'auto':
         assert mapping==fastest_mapping
-    analysis=json.loads((root/'analysis/analysis.json').read_text())
+    analysis=json.loads((root/'analysis/analysis.json').read_text(encoding='utf-8'))
     assert analysis['gpu_raw_measurements']==50*repeats
     assert analysis['all_required_correctness_passed']
     assert analysis['cpu_correctness_records']==len(cpu_correct)
@@ -230,7 +230,7 @@ def audit(root):
             ('R2_over_R3_end_to_end','R2_end_to_end_ms','R3_end_to_end_ms')):
         close(analysis['speedups'][field],b[numerator]/b[denominator])
     report=root/'analysis/final_results.md'
-    for name in re.findall(r'!\[[^\]]*\]\(([^)]+)\)',report.read_text()):
+    for name in re.findall(r'!\[[^\]]*\]\(([^)]+)\)',report.read_text(encoding='utf-8')):
         assert (report.parent/name).is_file(), name
     assert len(list(report.parent.glob('*.png')))==8
     cpu_noisy=[{k:r[k] for k in ('case','route','group','median','IQR')}
@@ -258,5 +258,5 @@ if __name__=='__main__':
     args=parser.parse_args()
     result=audit(args.results)
     args.output.parent.mkdir(parents=True,exist_ok=True)
-    args.output.write_text(json.dumps(result,indent=2)+'\n')
+    args.output.write_text(json.dumps(result,indent=2)+'\n', encoding='utf-8')
     print(json.dumps(result,indent=2))

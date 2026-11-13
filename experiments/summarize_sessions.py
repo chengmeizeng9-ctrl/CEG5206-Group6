@@ -15,22 +15,22 @@ KEYS = ('case', 'N', 'd', 'q', 'k', 'backend', 'route', 'mapping', 'tile_size', 
 
 
 def read_csv(path):
-    with path.open(newline='') as stream:
+    with path.open(newline='', encoding='utf-8') as stream:
         return list(csv.DictReader(stream))
 
 
 def write_csv(path, records):
-    with path.open('w', newline='') as stream:
+    with path.open('w', newline='', encoding='utf-8') as stream:
         writer = csv.DictWriter(stream, fieldnames=list(records[0]))
         writer.writeheader()
         writer.writerows(records)
 
 
 def load_session(path):
-    env = json.loads((path / 'environment.json').read_text())
+    env = json.loads((path / 'environment.json').read_text(encoding='utf-8'))
     if env.get('status') != 'completed' or env.get('smoke'):
         raise ValueError(f'{path}: only completed full sessions may be combined')
-    audit = json.loads((path / 'analysis/data_audit.json').read_text())
+    audit = json.loads((path / 'analysis/data_audit.json').read_text(encoding='utf-8'))
     if audit['status'] != 'PASS':
         raise ValueError(f'{path}: data audit failed')
     artifacts = audit.get('artifact_sha256', {})
@@ -44,8 +44,8 @@ def load_session(path):
     sources = env.get('source_sha256')
     if not sources:
         raise ValueError(f'{path}: missing source hashes')
-    inputs = json.loads((path / 'cpu_core/input_sha256.json').read_text())
-    gpu = dict(line.split('=', 1) for line in (path / 'gpu_core/run.txt').read_text().splitlines())
+    inputs = json.loads((path / 'cpu_core/input_sha256.json').read_text(encoding='utf-8'))
+    gpu = dict(line.split('=', 1) for line in (path / 'gpu_core/run.txt').read_text(encoding='utf-8').splitlines())
     identity = {k: env[k] for k in ('hostname', 'primary_mapping', 'primary_tile',
                                    'cuda_architecture', 'nvcc', 'warmups', 'repeats')}
     identity['gpu'] = {k: gpu[k] for k in ('gpu_name', 'compute_capability',
@@ -56,7 +56,7 @@ def load_session(path):
     identity['packages'] = env.get('packages', {})
     identity['build_flags_sha256'] = env.get('build_flags_sha256', {})
     cpu_meta_path = path / 'cpu_core/run.txt'
-    cpu_meta = dict(line.split('=', 1) for line in cpu_meta_path.read_text().splitlines()) if cpu_meta_path.exists() else {}
+    cpu_meta = dict(line.split('=', 1) for line in cpu_meta_path.read_text(encoding='utf-8').splitlines()) if cpu_meta_path.exists() else {}
     identity['cpu_pin'] = cpu_meta.get('cpu', 'unavailable')
     data = [r for r in read_csv(path / 'analysis/unified_summary.csv')
             if (r['backend'] == 'CPU' and r['group'] == '0') or r['source'] == '0:gpu_core']
@@ -128,7 +128,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--study', type=Path, required=True)
     args = parser.parse_args()
-    study = json.loads((args.study / 'study.json').read_text())
+    study = json.loads((args.study / 'study.json').read_text(encoding='utf-8'))
     if len(study['sessions']) != study['sessions_requested']:
         raise ValueError('All requested sessions must finish before summarising')
     paths = [args.study / name for name in study['sessions']]
@@ -137,7 +137,7 @@ def main():
     summary, ratios, metadata = summarize(paths)
     write_csv(args.study / 'session_summary.csv', summary)
     write_csv(args.study / 'paired_speedups.csv', ratios)
-    (args.study / 'study_summary.json').write_text(json.dumps(metadata, indent=2) + '\n')
+    (args.study / 'study_summary.json').write_text(json.dumps(metadata, indent=2) + '\n', encoding='utf-8')
     baseline = [r for r in summary if r['case'] == '0']
     lines = ['# Repeated CPU/CUDA study', '',
         f"{len(paths)} separate sessions used identical input hashes, source hashes, hardware, mapping and tile size.",
@@ -165,7 +165,7 @@ def main():
         '## Session reports', '']
     for path, cpu_noise, gpu_noise in zip(paths, metadata['noisy_cpu_groups_by_session'], metadata['noisy_gpu_groups_by_session']):
         lines.append(f'- [{path.name}]({path.name}/analysis/final_results.md): {cpu_noise} noisy CPU groups, {gpu_noise} noisy GPU groups.')
-    (args.study / 'study_summary.md').write_text('\n'.join(lines) + '\n')
+    (args.study / 'study_summary.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
     print(args.study / 'study_summary.md')
 
 

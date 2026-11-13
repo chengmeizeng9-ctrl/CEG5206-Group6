@@ -5,8 +5,12 @@ oracle, R1 AVX2 distance with a Top-k heap, R2 materialised CUDA with labelled
 CUB segmented full sort, R3 fused tiled CUDA with local Bitonic selection, and
 one deterministic hierarchical candidate merge.
 
-CPU Bitonic, radix/scan, GEMM, early abandonment and out-of-core streaming are
-optional and are not claimed as implemented.
+CPU Bitonic, radix/scan, GEMM, early abandonment and single/double-buffered
+streaming are implemented as optional routes O1–O5. They use a separate
+experiment with fresh matched controls and the same frozen input arrays;
+their measurements are not combined with the earlier required-run records.
+See the [optional reproduction commands](README.md#run-all-optional-methods)
+and the [completed optional results](results/optional_runs/20261111T062816975198Z/analysis/optional_results.md).
 
 ## Reproduce on this machine
 
@@ -33,6 +37,11 @@ Every invocation creates a new UTC-timestamped directory. A supplied
 Build products are regenerated automatically.
 
 ## Setup on another machine
+
+The supported environment for building and measuring this study is Linux
+with GCC and CUDA 12.x. On Windows, use a Linux environment with working CUDA
+access; native Windows/MSVC builds are not supported by the current compiler
+flags and shell commands. Offline Python workflow tests can run on Windows.
 
 Use an x86 CPU with AVX2 and a CUDA 12.x toolkit supporting the GTX 1050
 (`sm_61`). Put `nvcc` and `compute-sanitizer` on PATH and make the CUDA runtime
@@ -93,6 +102,7 @@ New outputs are written to:
 - `results/smoke_runs/<timestamp>/`: smoke integration reports.
 - `results/runs/<timestamp>/`: one full session.
 - `results/studies/<timestamp>/`: repeated sessions and `study_summary.md`.
+- `results/optional_runs/<timestamp>/`: O1–O5 and their matched controls.
 
 Each full session contains `environment.json`, `source_sha256.json`,
 `logs/`, CPU/GPU raw-data directories, and `analysis/` with the results report,

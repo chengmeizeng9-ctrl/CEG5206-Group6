@@ -25,7 +25,7 @@ def run(command: list[str], *, cwd: Path | None = None,
     command = list(map(str, command))
     heading = '+ ' + ' '.join(command)
     print(heading, flush=True)
-    log = LOG_FILE.open('a') if LOG_FILE else None
+    log = LOG_FILE.open('a', encoding='utf-8') if LOG_FILE else None
     output = []
     try:
         if log:
@@ -72,7 +72,7 @@ def nvcc_major() -> tuple[int, str]:
 
 def choose_mapping(raw_csv: Path, tile: int) -> str:
     groups: dict[str, list[float]] = {}
-    with raw_csv.open(newline='') as stream:
+    with raw_csv.open(newline='', encoding='utf-8') as stream:
         for row in csv.DictReader(stream):
             if (row['case'] == '0' and row['route'] == 'R3_cuda_fused_tiled_bitonic'
                     and row['mode'] == 'resident' and row['tile_size'] == str(tile)):
@@ -94,7 +94,7 @@ def source_hashes(repo: Path) -> dict[str, str]:
                      if p.is_file() and p.suffix in ('.cpp', '.cu', '.cuh', '.hpp', '.py'))
     paths.update(repo / name for name in ('CPU/CMakeLists.txt', 'GPU/CMakeLists.txt',
                                          'run_experiment.sh', 'experiments/requirements.txt'))
-    return {str(p.relative_to(repo)): hashlib.sha256(p.read_bytes()).hexdigest()
+    return {p.relative_to(repo).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
             for p in sorted(paths) if p.is_file()}
 
 
@@ -118,7 +118,7 @@ def sanitizer_gate(executable: Path, logs: Path) -> dict[str, str]:
         output = run([sanitizer, '--tool', tool, '--error-exitcode', '1',
                       str(executable)], capture=True)
         path = logs / f'{tool}.log'
-        path.write_text(output)
+        path.write_text(output, encoding='utf-8')
         print(output, end='', flush=True)
         require_gpu_test_pass(output)
         if marker not in output:
@@ -128,7 +128,7 @@ def sanitizer_gate(executable: Path, logs: Path) -> dict[str, str]:
 
 
 def save_json(path: Path, data: object) -> None:
-    path.write_text(json.dumps(data, indent=2) + '\n')
+    path.write_text(json.dumps(data, indent=2) + '\n', encoding='utf-8')
 
 
 def run_session(args, repo: Path, build: Path, results: Path, nvcc_output: str,
@@ -181,7 +181,7 @@ def run_session(args, repo: Path, build: Path, results: Path, nvcc_output: str,
                 command.append('--clean-first')
             run(command)
             output = run(['ctest', '--test-dir', str(destination), '--verbose'], capture=True)
-            (logs / f'{destination.name}_ctest.log').write_text(output)
+            (logs / f'{destination.name}_ctest.log').write_text(output, encoding='utf-8')
             print(output, end='', flush=True)
             if source == gpu_source:
                 require_gpu_test_pass(output)

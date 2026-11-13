@@ -19,11 +19,11 @@ METRICS=('device_ms','h2d_ms','d2h_ms','distance_ms','pack_ms','full_sort_ms',
 
 
 def read_csv(path):
-    with path.open(newline='') as stream:return list(csv.DictReader(stream))
+    with path.open(newline='', encoding='utf-8') as stream:return list(csv.DictReader(stream))
 
 
 def write_csv(path,records):
-    with path.open('w',newline='') as stream:
+    with path.open('w',newline='', encoding='utf-8') as stream:
         writer=csv.DictWriter(stream,fieldnames=list(records[0]));writer.writeheader();writer.writerows(records)
 
 
@@ -39,7 +39,7 @@ def require(condition,message):
 def audit(results):
     raw=read_csv(results/'raw.csv');correctness=read_csv(results/'correctness.csv');memory=read_csv(results/'memory.csv')
     require(raw and correctness and memory,'Optional CSVs must be nonempty')
-    metadata=dict(line.split('=',1) for line in (results/'run.txt').read_text().splitlines())
+    metadata=dict(line.split('=',1) for line in (results/'run.txt').read_text(encoding='utf-8').splitlines())
     repeats=int(metadata['repeats']);require(repeats>0,'Invalid repetitions')
     key=lambda row:tuple(row[k] for k in IDENTITY)
     by_correct={key(r):r for r in correctness};by_memory={key(r):r for r in memory}
@@ -201,7 +201,7 @@ def generate(results,output,make_plots=True):
     if ratios:write_csv(output/'optional_controlled_speedups.csv',ratios)
     report['controlled_ratios']=ratios
     report['plots']=figure_names
-    (output/'optional_analysis.json').write_text(json.dumps(report,indent=2)+'\n')
+    (output/'optional_analysis.json').write_text(json.dumps(report,indent=2)+'\n', encoding='utf-8')
     lines=['# Optional kNN routes', '',
       'All recorded configurations passed structural, numerical, deterministic and applicable selection/reference checks.',
       f"FP64 ID-position differences: **{report['FP64_ID_position_differences']}** (reported separately from exact FP32 selection).", '',
@@ -250,7 +250,7 @@ def generate(results,output,make_plots=True):
       'The host input must fit host RAM. Actual device buffer allocation is not a DRAM-traffic measurement. '
       'All noisy groups remain retained; session repeatability and generalisation require additional evidence.', '']
     for figure in figure_names:lines.extend([f'![{figure}]({figure})',''])
-    (output/'optional_results.md').write_text('\n'.join(lines)+'\n')
+    (output/'optional_results.md').write_text('\n'.join(lines)+'\n', encoding='utf-8')
     return report
 
 

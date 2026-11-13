@@ -15,6 +15,11 @@ This repository contains the required and optional CPU/GPU implementations, thei
 
 An independent **FP64 oracle** checks numerical accuracy and neighbour IDs. Candidate merging is also tested against concatenation followed by full sorting. CUDA routes support both thread-per-vector and warp-per-vector distance mappings.
 
+R3 requires `k <= 128` and `k <= tile`, with tile sizes 32, 64, 128 or 256.
+The default tile is 128. R0/R1 support `1 <= k <= N`; R2 supports this range
+subject to its allocation and CUB size limits. These route limits are separate
+from the smaller k values used in the retained experiment grid.
+
 All five optional methods are also implemented: CPU AVX2 tiled Bitonic,
 CUDA radix selection with exclusive scan/compaction, a cuBLAS GEMM reference,
 scalar early abandonment, and single/double-buffered out-of-core streaming.
@@ -133,6 +138,12 @@ The optional implementation has build/unit/sanitizer evidence under
 required and optional experiments retain their own source hashes and records.
 
 ## Setup on another machine
+
+The supported build and measurement environment is Linux with GCC and
+CUDA 12.x. Native Windows/MSVC builds are not supported by the current
+compiler flags and shell commands. Windows users should use a Linux
+environment with working CUDA access for the full experiment; the offline
+Python workflow tests can run on Windows.
 
 Use an x86 CPU with AVX2, a C++17 compiler, CMake 3.21 or later, Python 3,
 and a CUDA 12.x toolkit with Compute Sanitizer. The current drivers target

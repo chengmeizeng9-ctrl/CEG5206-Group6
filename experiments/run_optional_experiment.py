@@ -16,7 +16,7 @@ import run_full_experiment as workflow
 
 def input_hashes(directory):
     manifest=directory/'inputs.csv'
-    with manifest.open(newline='') as stream:
+    with manifest.open(newline='', encoding='utf-8') as stream:
         reader=csv.DictReader(stream)
         if reader.fieldnames!=['case','N','d','q','k','prefix']:
             raise ValueError('Invalid inputs.csv schema')
@@ -35,7 +35,7 @@ def input_hashes(directory):
                 for chunk in iter(lambda:stream.read(4*1024*1024),b''):digest.update(chunk)
             hashes[name]=digest.hexdigest()
     expected=directory/'input_sha256.json'
-    if expected.exists() and hashes!=json.loads(expected.read_text()):
+    if expected.exists() and hashes!=json.loads(expected.read_text(encoding='utf-8')):
         raise ValueError('Inputs differ from the frozen CPU input hashes')
     return hashes
 
@@ -53,7 +53,7 @@ def sanitizer_gate(executable,logs):
     for tool,marker in (('memcheck','ERROR SUMMARY: 0 errors'),
                         ('racecheck','0 hazards displayed (0 errors, 0 warnings)')):
         output=workflow.run([sanitizer,'--tool',tool,'--error-exitcode','1',str(executable)],capture=True)
-        (logs/(tool+'.log')).write_text(output)
+        (logs/(tool+'.log')).write_text(output, encoding='utf-8')
         print(output,end='',flush=True)
         if marker not in output or not re.search(r'PASS optional_gpu_cases=\d+ checks=\d+',output):
             raise RuntimeError(tool+' did not execute clean optional GPU tests')
@@ -119,7 +119,7 @@ def main():
         if args.clean_build:command.append('--clean-first')
         workflow.run(command)
         output=workflow.run(['ctest','--test-dir',str(build),'--verbose'],capture=True)
-        (logs/'ctest.log').write_text(output);print(output,end='',flush=True);validate_test_output(output)
+        (logs/'ctest.log').write_text(output, encoding='utf-8');print(output,end='',flush=True);validate_test_output(output)
         for path in build.rglob('flags.make'):
             shutil.copy2(path,logs/('_'.join(path.relative_to(build).parts)))
         env['sanitizer_evidence_sha256']=sanitizer_gate(build/'knn_optional_gpu_tests',logs)
@@ -136,11 +136,11 @@ def main():
         if input_hashes(inputs)!=frozen_inputs:raise RuntimeError('Frozen inputs changed during the optional run')
         if workflow.source_hashes(repo)!=sources:raise RuntimeError('Source changed during optional measurement')
         if args.validate_only:
-            with (results/'measurements/correctness.csv').open(newline='') as stream:
+            with (results/'measurements/correctness.csv').open(newline='', encoding='utf-8') as stream:
                 checked=list(csv.DictReader(stream))
             if not checked or not all(r['passed']=='1' for r in checked):
                 raise RuntimeError('Optional validation-only comparisons failed')
-            with (results/'measurements/raw.csv').open(newline='') as stream:
+            with (results/'measurements/raw.csv').open(newline='', encoding='utf-8') as stream:
                 if list(csv.DictReader(stream)):raise RuntimeError('Validation-only run unexpectedly contains timing samples')
             workflow.save_json(results/'validation_only.json',{'status':'PASS','configurations':len(checked),'timing_samples':0})
         else:
