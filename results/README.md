@@ -34,4 +34,3 @@ results directory without changing this retained measurement.
 
 Local `.venv/` and `.tools/` installations are also ignored. See
 [the setup instructions](../README.md#setup-on-another-machine) on a fresh machine.
-
