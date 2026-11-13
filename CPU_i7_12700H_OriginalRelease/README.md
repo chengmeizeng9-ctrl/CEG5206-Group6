@@ -10,6 +10,6 @@ This experiment uses Member 1's original Release executable and follows the orig
 | Comparison with Member 1 | [docs/comparison.md](docs/comparison.md) |
 | Local raw data and plots | [results/main/](results/main/) |
 | Execution notes | [docs/execution_notes.md](docs/execution_notes.md) |
-| Member 1's original implementation and results | [../CPU/](../CPU/) |
+| Member 1's original implementation and results | [../CPU_Ultra5_125H/](../CPU_Ultra5_125H/) |
 
-The shared executable and input arrays remain in the original `CPU/` directory. This folder contains the local experiment records and comparison. From the repository root, run `cd CPU`, then `./artifacts/release/knn_bench results/new_run` and `python3 scripts/analyze.py results/new_run` to reproduce into a fresh directory.
+The shared executable and input arrays remain in the original `CPU_Ultra5_125H/` directory. This folder contains the local experiment records and comparison. From the repository root, run `cd CPU_Ultra5_125H`, then `./artifacts/release/knn_bench results/new_run` and `python3 scripts/analyze.py results/new_run` to reproduce into a fresh directory.

@@ -9,4 +9,4 @@ Our retained CPU work covers the scalar full-sort baseline, an independent FP64 
 | Candidate merging | `merge_topk` merges two sorted lists with deterministic ID tie-breaking; unit tests compare it with a full sort |
 | CPU evaluation | Eight single-factor configurations, raw timing repetitions, summaries, and plots |
 
-The source and artifacts describe only these CPU requirements. Shared testing and report review remain group work.
+This summary covers the required CPU work and its historical Ultra 5 125H experiment. The maintained CPU source also includes optional Bitonic and early-abandonment routes and a scalar heap control; these extensions are outside this required-work summary and the historical timing records. Shared testing and report review remain group work.

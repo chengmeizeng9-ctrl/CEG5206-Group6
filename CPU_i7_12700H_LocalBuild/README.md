@@ -12,13 +12,13 @@ to the experiment on **23 October 2026**, using source revision
 that the local rebuild can be inspected and reproduced.
 
 This is a historical source snapshot. Later algorithm additions in the
-current [CPU module](../CPU/) are not copied into it. Some files remain
+current [CPU module](../CPU_Ultra5_125H/) are not copied into it. Some files remain
 identical to the current module, but others differ; keeping this complete
 version avoids mixing source revisions when reproducing the old experiment.
 Documentation and links may still be corrected without changing the
 recorded source, binaries or measurements.
 
-The input arrays are shared with [the original CPU dataset](../CPU/results/main/);
+The input arrays are shared with [the original CPU dataset](../CPU_Ultra5_125H/results/main/);
 their locations and hashes are recorded in
 [input_location.json](results/main/input_location.json). This folder does not
 contain a second copy of those arrays.

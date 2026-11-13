@@ -1,6 +1,8 @@
-# Required CPU kNN Implementation: Results
+# Historical CPU kNN Results: Intel Core Ultra 5 125H
 
-Date: 2026-10-19. This report covers only the required CPU work: scalar full sort with an independent FP64 oracle, AVX2 distance calculation with a Top-K heap, and one candidate-list merge method. Results refer to the retained source, build flags, input hashes, and raw records.
+Report date: 2026-10-19. This report covers the historical Ultra 5 125H experiment for the required CPU work: scalar full sort with an independent FP64 oracle, AVX2 distance calculation with a Top-K heap, and one candidate-list merge method. Results refer to the recorded historical build, build flags, input hashes, and raw records.
+
+Environment: Intel Core Ultra 5 125H (guest-reported), openEuler 24.03 LTS in a VMware virtual machine, GCC 12.3.1. The guest exposes two vCPUs; the benchmark uses one compute thread pinned to guest vCPU 1. See [environment_summary.json](../results/environment_summary.json). The i7-12700H experiments are separate records under [OriginalRelease](../../CPU_i7_12700H_OriginalRelease/) and [LocalBuild](../../CPU_i7_12700H_LocalBuild/).
 
 ## Methods
 
@@ -13,6 +15,8 @@ The oracle promotes the actual FP32 inputs to FP64, computes complete distances 
 The baseline is N=100000, d=64, q=16, k=10. The eight configurations vary N, d, q, and k one factor at a time. Inputs use synthetic-v1, MT19937 seed 5206, X followed by Q, and labels equal to ID modulo 10. Input arrays and SHA-256 hashes are retained under `results/main/`.
 
 Each route receives 10 warm-ups and 20 timed complete-search calls per group. Timing includes per-query state reset, distance computation, candidate selection, final ordering, and label gathering. It excludes input generation, full validation, I/O, oracle work, correctness checks, and initial reusable allocation. Routes alternate order each round. The guest CPU affinity, compact environment, compiler settings, and source instructions are recorded alongside the results.
+
+Reported latency values and speedups use the predeclared group 0 for each configuration and route, with 20 measured calls per group. Additional groups triggered by the variability rule remain in the raw records and are not pooled into the headline results.
 
 ## Baseline performance
 

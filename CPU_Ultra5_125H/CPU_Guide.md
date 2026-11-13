@@ -1,4 +1,6 @@
-# Required CPU kNN Implementation
+# CPU Implementation and Intel Core Ultra 5 125H Experiment
+
+The historical results in `results/main/` were measured on an Intel Core Ultra 5 125H reported by an openEuler/VMware guest. This directory was previously named `CPU/`; it is now named `CPU_Ultra5_125H/` to distinguish it from the two i7-12700H experiment directories. The maintained CPU implementation is also used by the unified CPU/GPU workflow, whose separate results record their own execution environments.
 
 This directory contains the required CPU methods: a scalar full-sort baseline, an independent FP64 oracle, AVX2 distances with a Top-K max-heap, and a separately tested sorted-list merge method. The [experiment protocol](../docs/EXPERIMENT_PROTOCOL.md) defines the shared computation and numerical contract.
 
@@ -45,9 +47,14 @@ The FP64 oracle independently ranks actual input values. Candidate order uses as
 | `src/bench.cpp`, `src/export.cpp` | CPU benchmark and result export |
 | `tests/` | Route, oracle, heap, merge, and boundary checks |
 | `scripts/` | Input hashes, analysis plots, evidence checks, and report generation |
-| `../results/full/cpu_core/` | Retained CPU records, local input arrays, hashes, and plots |
+| [results/main/](results/main/) | Historical Ultra 5 125H CPU measurements, input arrays, SHA-256 hashes, correctness records and plots |
+| [results/environment_summary.json](results/environment_summary.json) | Hardware, virtual-machine environment, compiler and measurement settings for the historical CPU experiment |
+| [artifacts/](artifacts/) | Retained Release, clean-build and sanitizer executables and static libraries; see [Build_Artifacts.md](artifacts/Build_Artifacts.md) |
+| [../results/full/cpu_core/](../results/full/cpu_core/) | CPU records, input manifests, hashes and plots from the unified CPU/GPU study; generated arrays must be regenerated or retrieved if absent |
 
-The CPU benchmark binds one thread to an available CPU and records the selected CPU. Hardware and execution details are retained with the full experiment. Compiled binaries and historical imported CPU-only measurements are not included in the cleaned repository.
+The CPU benchmark binds one thread to an available CPU and records the selected CPU. Historical Ultra 5 125H measurements are retained under `results/main/`, and their original compiled targets are under `artifacts/`. Unified CPU/GPU measurements and their environment records are stored separately under the repository-level `results/` directory.
+
+The retained targets include `knn_bench`, `knn_export`, `knn_tests` and `libknn.a` under `artifacts/release/`, `artifacts/clean/` and `artifacts/sanitizer/`. They correspond to their recorded historical builds; use the build commands above for the maintained source on another machine.
 
 ## Candidate merge API
 

@@ -1,6 +1,6 @@
 # CPU Interfaces and Correctness
 
-We follow computation contract version 1.1. The required CPU implementation exposes row-contiguous FP32 inputs, signed 32-bit labels, unsigned 32-bit row IDs, and FP32 squared distances.
+We follow the [shared computation contract](../../Three-Member%20Shared%20Contract.md). The required CPU implementation exposes row-contiguous FP32 inputs, signed 32-bit labels, unsigned 32-bit row IDs, and FP32 squared distances.
 
 ## Candidate ordering and merge interface
 

@@ -20,7 +20,7 @@ configurations and both CPU methods, timing variability, correctness and
 build provenance. The English report retains the original numerical results
 and conclusions from 23 October 2026.
 
-The supporting records are in [CPU/results/main](../CPU/results/main/),
+The supporting records are in [CPU_Ultra5_125H/results/main](../CPU_Ultra5_125H/results/main/),
 [OriginalRelease](../CPU_i7_12700H_OriginalRelease/) and
 [LocalBuild](../CPU_i7_12700H_LocalBuild/).
 

@@ -1,5 +1,7 @@
 # CPU Demonstration
 
+Run the commands below from the `CPU_Ultra5_125H/` directory. The demonstration presents the required R0/R1 routes and the retained Ultra 5 125H experiment. The current build also contains tests for optional CPU routes.
+
 ## Correctness
 
 Build and run the correctness suite:
