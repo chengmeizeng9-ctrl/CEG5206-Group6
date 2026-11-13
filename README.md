@@ -265,6 +265,7 @@ CPU experiment folders separately retain historical inputs and artifacts.
 | [CPU/](CPU/) | Required and optional CPU routes, FP64 oracle and tests |
 | [GPU/](GPU/) | Required/optional CUDA routes, candidate merging and tests |
 | [experiments/](experiments/) | Experiment runner, analysis, report generation and data auditing |
+| [docs/](docs/README.md) | Documentation index, English CPU comparison and proposal history |
 | [docs/EXPERIMENT_PROTOCOL.md](docs/EXPERIMENT_PROTOCOL.md) | Workloads, correctness checks, timing boundaries and experiment design |
 | [KNN_STUDY.md](KNN_STUDY.md) | Detailed setup, reproduction and reporting instructions |
 | [results/](results/) | Required and optional experiment records and evidence |
@@ -275,7 +276,7 @@ The following folders preserve earlier i7-12700H experiments separately from the
 
 - [Original Release executable experiment](CPU_i7_12700H_OriginalRelease/)
 - [Local source-build experiment](CPU_i7_12700H_LocalBuild/)
-- [Chinese comparison report for the three earlier CPU experiments](docs/CEG5206三组CPU实验区别与完整结果对比.docx)
+- [Comparison of the three earlier CPU experiments](docs/CPU_Experiment_Comparison.docx)
 
 The three earlier CPU records compare execution environments and build
 provenance. They do not count as three repeated sessions of the current
